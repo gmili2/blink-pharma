@@ -1,0 +1,225 @@
+/*
+  This is a 
+  stock
+*/
+.section-stock .section-information h5 {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: -0.04em;
+  color: #14226a;
+  margin: 0;
+}
+
+.section-stock .section-information input[type="date"] {
+  padding: 0 0 0 10px;
+}
+
+.section-stock .section-information input[type="date"]::-webkit-calendar-picker-indicator {
+  background-color: #4172ed;
+  padding: 10px;
+  border-radius: 0px 3px 3px 0;
+}
+
+.section-stock .section-information .inventaire .form-group i {
+  color: #c5c9d8;
+  position: relative;
+  right: -22px;
+}
+
+.section-stock .section-information .inventaire .form-group input {
+  padding: 8px 35px;
+  background: #f5f6fb;
+  border-radius: 3px;
+  border: none;
+}
+
+.section-stock .section-information .inventaire .liste-filtre {
+  padding: 0;
+  margin: 0;
+  gap: 10px;
+}
+
+.section-stock .section-information .inventaire .liste-filtre li {
+  list-style: none;
+  background: #f5f6fb;
+  text-decoration: none;
+  border: 0.5px solid #4172ed;
+  color: #4172ed;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  border-radius: 8px;
+  padding: 4px 12px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.section-stock .section-information .inventaire .liste-filtre li a {
+  text-decoration: none;
+}
+
+.section-stock .section-information .inventaire .liste-filtre li a:hover {
+  color: #4172ed;
+}
+
+.section-stock .section-information .inventaire .liste-filtre li a.delete {
+  font-size: 20px;
+  margin-left: 10px;
+}
+
+.section-stock .section-information .inventaire .liste-filtre li a.delete:hover {
+  color: #4172ed;
+}
+
+.section-stock .section-information .inventaire .liste-filtre li.active {
+  background: #4172ed;
+}
+
+.section-stock .section-information .inventaire .liste-filtre li.active a {
+  color: #fff;
+}
+
+.section-stock .section-information .divider {
+  width: 97%;
+}
+
+.section-stock .section-information .dt-buttons, .section-stock .section-information .dataTables_filter, .section-stock .section-information table.dataTable thead .sorting_asc:before, .section-stock .section-information table.dataTable thead .sorting_asc:after, .section-stock .section-information table.dataTable thead .sorting:after, .section-stock .section-information table.dataTable thead .sorting:before, .section-stock .section-information .dataTables_paginate, .section-stock .section-information .dataTables_info {
+  display: none;
+}
+
+.section-stock .section-information .block-right .header ul li {
+  list-style: none;
+}
+
+.section-stock .section-information .block-right .header ul li label {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: -0.07em;
+  color: #14226a;
+}
+
+.section-stock .section-information .block-right .header ul li span {
+  background: #f5f6fb;
+  opacity: 0.91;
+  border-radius: 3px;
+  padding: 3px 7px;
+  color: #14226a;
+  font-size: 12px;
+}
+
+.section-stock .section-information .block-right .content {
+  font-family: 'Poppins';
+  font-style: normal;
+  color: #14226a;
+  letter-spacing: -0.06em;
+}
+
+.section-stock .section-information .block-right .content h3 {
+  font-size: 16px;
+  line-height: 28px;
+  font-weight: 500;
+}
+
+.section-stock .section-information .block-right .content span {
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 14px;
+}
+
+.section-stock .section-information .block-right table.dataTable > thead > tr > th:not(.sorting_disabled) {
+  padding: 0;
+  font-size: 14px;
+}
+
+.section-stock .section-information .input-group > .form-control {
+  background: #fff;
+}
+
+.section-stock .section-information .btn-secondary {
+  background: #4172ed;
+  color: #fff;
+  border: 1px solid #4172ed;
+  border-radius: 0 3px 3px 0;
+}
+
+/*this is a modal 
+*/
+.modal[aria-modal="true"] {
+  background: rgba(0, 19, 114, 0.43);
+}
+
+.modal-content {
+  min-width: 635px;
+  background: #FFFFFF;
+  -webkit-box-shadow: 0px 4px 114px rgba(0, 0, 0, 0.05);
+          box-shadow: 0px 4px 114px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.modal-content .modal-header .icon {
+  background: rgba(72, 124, 255, 0.15);
+  border-radius: 12px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  font-size: 20px;
+  color: #4172ed;
+}
+
+.modal-content .modal-body .section-information .form-select {
+  border-radius: 8px;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+  background-position: right 0.75rem center;
+  background-size: 16px 12px;
+}
+
+.modal-content .modal-body .section-information .active {
+  border: 2px solid #3A66D5;
+  border-radius: 8px;
+  outline: 4px solid rgba(58, 102, 213, 0.13);
+}
+
+.modal-content .modal-body .section-information .form-control {
+  border-radius: 8px;
+}
+
+.modal-content .modal-body .text-info {
+  background: #E3EBFF;
+  border-radius: 12px;
+  padding: 10px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.modal-content .modal-body .text-info span {
+  background: #fff;
+  border-radius: 12px;
+  margin-right: 7px;
+  display: block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.modal-content .modal-body .text-info p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 140%;
+  color: #293D48;
+  margin: 0;
+}
+/*# sourceMappingURL=stock.css.map */

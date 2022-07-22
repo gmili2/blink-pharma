@@ -1,0 +1,432 @@
+.section-achat .content-offre .offre {
+  background-color: #fff;
+  border-radius: 11px;
+  padding: 10px;
+  -webkit-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+          box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+}
+
+.section-achat .content-offre .offre .btn {
+  padding: 5px 10px;
+  font-size: 13px;
+}
+
+.section-achat .content-offre .offre img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  height: 250px;
+  border-radius: 5px 5px 0px 0px;
+}
+
+.section-achat .content-offre .offre .info-offre h3 {
+  font-size: 17px;
+  font-weight: normal;
+  width: 100%;
+  padding-right: 20px;
+  margin: 0;
+  color: #14226a;
+}
+
+.section-achat .content-offre .offre .info-offre span {
+  background-color: #FEC8C8 !important;
+  color: #DF5275;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.section-achat .content-offre .offre .author p {
+  color: #4172ed;
+}
+
+.section-achat .content-offre .offre .author p span {
+  color: rgba(20, 34, 106, 0.4);
+}
+
+.section-achat .content-offre .offre .author p a {
+  text-decoration: none;
+}
+
+.section-achat .detail-commande {
+  background: #fff;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 10px;
+  border-radius: 14px;
+}
+
+.section-achat .detail-commande .content-commande h3 {
+  color: #14226a;
+}
+
+.section-achat .detail-commande .image img {
+  width: 185px;
+  height: 150px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.section-achat .detail-commande .info-commande .d-flex p {
+  width: 270px;
+  margin: 3px 0px;
+  color: #14226a;
+}
+
+.section-achat .detail-commande .info-commande .d-flex p span {
+  background-color: #ECF1FD;
+  border-radius: 4px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  line-height: 30px;
+}
+
+.section-achat .detail-commande .info-commande .d-flex p span img {
+  width: 17px;
+  height: 17px;
+}
+
+.section-achat .detail-commande .info-commande .d-flex span {
+  color: #14226a;
+}
+
+.section-achat .detail-commande .info-commande .d-flex .result-commande {
+  margin: 7px 0;
+}
+
+.section-achat .shadow-block {
+  background-color: white;
+  border-radius: 8px;
+  -webkit-box-shadow: 0px 4px 21px rgba(0, 0, 0, 0.08);
+          box-shadow: 0px 4px 21px rgba(0, 0, 0, 0.08);
+}
+
+.section-achat .table-commande tbody tr td {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  vertical-align: middle;
+}
+
+.section-achat .table-commande tbody tr td .d-flex {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.section-achat .table-commande #table_wrapper {
+  background-color: #fff;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.section-achat .table-commande .dt-buttons {
+  display: none;
+}
+
+.section-achat .table-commande .dataTables_info {
+  display: none;
+}
+
+.section-achat .table-commande input[type=number]::-webkit-inner-spin-button,
+.section-achat .table-commande input[type=number]::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.section-achat .table-commande .qty {
+  width: 20%;
+  display: block;
+  margin: 0 auto;
+  padding: 2px 9px;
+  font-size: 13px;
+  background: #F8F8F8;
+  border: unset;
+  border-radius: 0;
+}
+
+.section-achat .table-commande .qty:focus {
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+}
+
+.section-achat .table-commande .card-total {
+  background: #3854D8;
+  border-radius: 0px 0px 4px 4px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 20px 25px;
+  color: #fff;
+  display: block;
+  margin-left: auto;
+}
+
+.section-achat .table-commande .card-total .flex-label {
+  width: 230px;
+}
+
+.section-achat .table-commande .notice-commande h4 {
+  color: #14226a;
+}
+
+.section-achat .table-commande .notice-commande p {
+  margin-bottom: 3px;
+  color: #14226a;
+}
+
+.section-achat .table-commande .qty-commande ul {
+  padding: 0;
+}
+
+.section-achat .table-commande .qty-commande ul li {
+  margin: 5px 0px;
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+  padding: 0 40px 0 0;
+  list-style: none;
+}
+
+.section-achat .table-commande .qty-commande ul li label {
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: -0.05em;
+  color: rgba(20, 34, 106, 0.4);
+  font-size: 15px;
+  display: block;
+}
+
+.section-achat .table-commande .qty-commande ul li span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 30px;
+  font-size: 15px;
+  color: #14226a;
+  border-bottom: 1px solid rgba(20, 34, 106, 0.24);
+  display: block;
+}
+
+.section-achat .table-commande .description-commande ul {
+  padding: 0;
+}
+
+.section-achat .table-commande .description-commande ul li {
+  margin: 5px 0px;
+  -ms-flex-preferred-size: 33%;
+      flex-basis: 33%;
+  padding: 0 40px 0 0;
+  list-style: none;
+}
+
+.section-achat .table-commande .description-commande ul li label {
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: -0.05em;
+  color: rgba(20, 34, 106, 0.4);
+  font-size: 15px;
+  display: block;
+  margin: 0;
+}
+
+.section-achat .table-commande .description-commande ul li span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 30px;
+  font-size: 15px;
+  color: #14226a;
+  border-bottom: 1px solid rgba(20, 34, 106, 0.24);
+  display: block;
+}
+
+.section-achat .table-commande .data-qty ul {
+  padding: 0;
+}
+
+.section-achat .table-commande .data-qty ul li {
+  margin: 5px 0px;
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+  padding: 0 40px 0 0;
+  list-style: none;
+}
+
+.section-achat .table-commande .data-qty ul li label {
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: -0.05em;
+  color: rgba(20, 34, 106, 0.4);
+  font-size: 15px;
+  display: block;
+  margin: 0;
+}
+
+.section-achat .table-commande .data-qty ul li span {
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 30px;
+  font-size: 15px;
+  color: #14226a;
+  border-bottom: 1px solid rgba(20, 34, 106, 0.24);
+  display: block;
+}
+
+.section-achat .block-right.sidebar-commande .block-header .block {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.section-achat .block-right.sidebar-commande .block-header .block .content {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-family: "Poppins";
+  font-style: normal;
+}
+
+.section-achat .block-right.sidebar-commande .block-header .block .content h3 {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 5px;
+  letter-spacing: -0.06em;
+}
+
+.section-achat .block-right.sidebar-commande .block-header .block .content span {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 14px;
+}
+
+.section-achat .block-right.sidebar-commande .block-header .block .commande-price {
+  margin-left: auto;
+}
+
+.section-achat .block-right.sidebar-commande .block-header .block .commande-price span {
+  color: #FF5574;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 28px;
+}
+
+.section-achat .block-right.sidebar-commande .block-information {
+  -webkit-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+          box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+}
+
+.section-achat .block-right.sidebar-commande .block-information div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.section-achat .block-right.sidebar-commande .block-information div .form-control {
+  background: #f5f6fb;
+  border-radius: 6px;
+  border: none;
+  padding: 10px;
+}
+
+.section-achat .block-right.sidebar-commande .block-information div .form-control::-webkit-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.06em;
+  color: rgba(20, 34, 106, 0.18);
+}
+
+.section-achat .block-right.sidebar-commande .block-information div .form-control:-ms-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.06em;
+  color: rgba(20, 34, 106, 0.18);
+}
+
+.section-achat .block-right.sidebar-commande .block-information div .form-control::-ms-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.06em;
+  color: rgba(20, 34, 106, 0.18);
+}
+
+.section-achat .block-right.sidebar-commande .block-information div .form-control::placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.06em;
+  color: rgba(20, 34, 106, 0.18);
+}
+
+.section-achat .block-right.sidebar-commande .block-information div .send-message button {
+  margin-left: -48px;
+}
+
+.section-achat .block-right.sidebar-commande .block-information div .send-message .bi-send::before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.section-aide {
+  position: relative;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+  padding-top: 10px;
+}
+
+.form-offre {
+  -webkit-box-shadow: 0px 4px 21px #00000024;
+          box-shadow: 0px 4px 21px #00000024;
+  border-radius: 8px;
+}
+
+.form-offre .label-hr span {
+  padding: 4px 15px 0 0;
+  color: #14226a;
+  font-size: 15px;
+}
+
+.form-offre .label-hr hr {
+  width: 100%;
+}
+
+.section-achat .form-check label {
+  padding: 5px 5px;
+}
+
+@media only screen and (max-width: 1440px) {
+  .section-achat .block-right.sidebar-commande .block-header .block .content {
+    padding: 0 8px !important;
+  }
+  .section-achat .block-right.sidebar-commande .block-header .block .commande-price span {
+    font-size: 15px;
+  }
+}
+/*# sourceMappingURL=achat.css.map */

@@ -1,0 +1,39 @@
+$alto: #d3d3d3;
+$white: #fff;
+$blue: #4172ed;
+$luckyPoint: #14226a;
+$shadowBlack: #00000024;
+$whisper: #e8eaf3;
+$whiteLilac: #f5f6fb;
+$blueHaze: #c5c9d8;
+$alabaster: #F8F8F8;
+$green: #57E777;
+$red: #FF5574;
+$gunPowder: #484964;
+$cadetBlue: #B0B4C3;
+$yellow: #F5C745;
+$gren:#90D4B1;
+$purple:#F92148;
+$Crimson:#CF0C2F;
+$lima:#4EB81C;
+$PictonBlue:#4399E9;
+$CeriseRed:#D62A59;
+$frost: #EEFAE9;
+$pink: #FEC8C8;
+
+.page-content{
+    .montant-recu{
+        label{
+            font-size: 17px;
+            color: $luckyPoint;
+            font-weight: 500;
+            margin: 0;
+            width: 235px;
+        }
+        span{
+            color: $luckyPoint;
+            font-weight: 500;
+        }
+    }
+}
+

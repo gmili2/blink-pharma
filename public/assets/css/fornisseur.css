@@ -1,0 +1,177 @@
+/*
+  This is a 
+  section - Information general fornisseur
+*/
+.page-content .section-information .block-info .content.block-detail {
+  width: 100%;
+  margin-top: 0;
+}
+
+.page-content .section-information .block-info .content.block-detail ul li {
+  -ms-flex-preferred-size: 50%;
+      flex-basis: 50%;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-header .block {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-header .block .content {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-family: "Poppins";
+  font-style: normal;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-header .block .content h3 {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 5px;
+  letter-spacing: -0.06em;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-header .block .content span {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 14px;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-header .block .fornisseur-price {
+  margin-left: auto;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-header .block .fornisseur-price span {
+  color: #4eb81c;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 28px;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information {
+  padding: 15px;
+  -webkit-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+          box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information h5 {
+  padding: 0;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information div .form-control {
+  background: #f5f6fb;
+  border-radius: 6px;
+  border: none;
+  padding: 10px;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information div .form-control::-webkit-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.06em;
+  color: rgba(20, 34, 106, 0.18);
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information div .form-control:-ms-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.06em;
+  color: rgba(20, 34, 106, 0.18);
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information div .form-control::-ms-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.06em;
+  color: rgba(20, 34, 106, 0.18);
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information div .form-control::placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: -0.06em;
+  color: rgba(20, 34, 106, 0.18);
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information div .send-message button {
+  margin-left: -48px;
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information div .send-message .bi-send::before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information .commentaire .header span {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.03em;
+  color: rgba(20, 34, 106, 0.4);
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information .commentaire .text {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  color: rgba(20, 34, 106, 0.98);
+}
+
+.page-content .section-information .block-right.info-fornisseur .block-information .commentaire:not(:last-child):after {
+  content: "";
+  border: 1px solid rgba(20, 34, 106, 0.1);
+  margin: inherit;
+}
+
+/*
+  This is a 
+  section - Information Add fornisseur
+*/
+.section-form-fornisseur h5 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: -0.04em;
+  color: #14226a;
+}
+
+.section-form-fornisseur .divider {
+  color: rgba(20, 34, 106, 0.24);
+  height: 1px;
+  width: 100%;
+  margin-left: 15px;
+}
+/*# sourceMappingURL=fornisseur.css.map */

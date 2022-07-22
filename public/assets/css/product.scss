@@ -1,0 +1,182 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.12,
+* Autoprefixer: v10.4.4
+* Browsers: last 4 version
+*/
+
+$alto: #d3d3d3;
+$white: #fff;
+$blue: #4172ed;
+$luckyPoint: #14226a;
+$shadowBlack: #00000024;
+$whisper: #e8eaf3;
+$whiteLilac: #f5f6fb;
+$blueHaze: #c5c9d8;
+$alabaster: #F8F8F8;
+$green: #57E777;
+$red: #FF5574;
+$gunPowder: #484964;
+$cadetBlue: #B0B4C3;
+$frost: #EEFAE9;
+$lima:#4EB81C;
+
+/*
+  This is a 
+  section - product
+*/
+
+.section-produit{
+    
+    .section-table-product{
+        background-color: $white;
+        border-radius: 9px;
+        padding: 0 20px;
+       
+        .filtre-product{
+            border-bottom: 1px solid $whiteLilac;
+            .icon-filtre{
+                a{
+                    color: $gunPowder;
+                    text-decoration: none;
+                    font-size: 15px;
+                }
+            }
+            .status-actif{
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: start;
+                    -ms-flex-align: start;
+                        align-items: start;
+                -webkit-box-pack: right;
+                    -ms-flex-pack: right;
+                        justify-content: right;
+                gap: 10px;
+            }
+        }
+        .title-p{
+            color: $luckyPoint;
+        }
+    }
+    #table_wrapper{
+        position: relative;
+        margin-top: 13px;
+    }
+}
+
+
+/*
+  This is a 
+  section - add new product
+*/
+
+ .block-form{
+     border-radius: 8px;
+    box-shadow: 0px 4px 21px $shadowBlack;
+    .upload-image{
+        .form-upload{
+            .custom-file-input::-webkit-file-upload-button {
+                visibility: hidden;
+            }
+            .custom-file-input::before {
+                content: 'Télécharger une image';
+                display: inline-block;
+                padding: 5px 5px;
+                outline: none;
+                white-space: nowrap;
+                -webkit-user-select: none;
+                cursor: pointer;
+                font-size: 11px;
+            }
+            .form-control:focus{
+                box-shadow: unset;
+            }
+            span{
+                font-size: 10px;
+            }
+        }
+        #upload{
+            height: fit-content;
+            width: 165px;
+            background-color: $blue;
+            color: $white;
+        }
+        .thumb{
+            img{
+                width: 100px;
+                height: 100px;
+                border-radius: 6px;
+                object-fit: cover;
+            }
+            &:hover::before{
+                opacity:0.6
+            }
+            &:before{
+                content:"";
+                display:block;
+                position:absolute;
+                z-index:9;
+                opacity:0;
+                transition:all 0.2s;
+                pointer-events:none
+            }
+        }
+    }
+    
+ }
+
+
+ /*
+  This is a 
+  section - Information product
+*/
+.page-wrapper {
+    .page-content{
+        .section-information {
+            .information-general{
+                .stock{
+                    label{
+                        padding: 5px;
+                        color: $cadetBlue;
+                    }
+                    .result-stock{
+                        background-color: $frost;
+                        border-radius: 3px;
+                        padding: 5px 10px;
+                        color: $lima;
+                        font-weight: 500;
+                    }
+                }
+                .block-info{
+                    .content{
+                        width: 100%;
+                        margin-top: 0 ;
+                        ul {
+                            li{
+                                margin: 5px 0px;
+                            }
+                            li.full{
+                                flex-basis: 100%; 
+                            }
+                        }
+                    }
+                    .image{
+                        img{
+                            width: 150px;
+                            height: 150px;
+                            object-fit: cover;
+                        }
+                    }
+            }
+           
+        }
+        }
+    } 
+}
+
+ 
+ 
+ 
+
+  

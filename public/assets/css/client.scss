@@ -1,0 +1,362 @@
+$alto: #d3d3d3;
+$white: #fff;
+$blue: #4172ed;
+$luckyPoint: #14226a;
+$shadowBlack: #00000024;
+$whisper: #e8eaf3;
+$whiteLilac: #f5f6fb;
+$blueHaze: #c5c9d8;
+$alabaster: #f8f8f8;
+$green: #57e777;
+$red: #ff5574;
+$gunPowder: #484964;
+$cadetBlue: #b0b4c3;
+
+$yellow: #f5c745;
+$gren: #90d4b1;
+$purple: #f92148;
+$Crimson: #cf0c2f;
+$lima: #4eb81c;
+$PictonBlue: #4399e9;
+
+/*
+information client
+*/
+.section-client {
+  .section-table-client {
+    background-color: $white;
+    border-radius: 9px;
+    padding: 0 20px;
+
+    .filtre-client {
+      border-bottom: 1px solid $whiteLilac;
+      .icon-filtre {
+        a {
+          color: $gunPowder;
+          text-decoration: none;
+          font-size: 15px;
+        }
+      }
+    }
+    .title-p {
+      color: $luckyPoint;
+    }
+  }
+  #table_wrapper {
+    position: relative;
+    margin-top: 13px;
+  }
+}
+.section-information {
+  .information-general,
+  .information-history,
+  .information-vente {
+    background: $white;
+
+    h5 {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 26px;
+      letter-spacing: -0.04em;
+      color: $luckyPoint;
+    }
+    .block-header {
+      background: rgba(213, 213, 213, 0.16);
+      border-radius: 9px;
+      padding: 5px 15px 5px 5px;
+      margin: 0 40px 0 0;
+      .content {
+        display: flex;
+        align-items: center;
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0;
+          li {
+            list-style: none;
+            flex-basis: 33%;
+            label {
+              font-family: "Poppins";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 15px;
+              line-height: 30px;
+              color: rgba(20, 34, 106, 0.4);
+            }
+            span {
+              font-family: "Poppins";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 15px;
+              line-height: 30px;
+              letter-spacing: -0.05em;
+              color: $luckyPoint;
+            }
+          }
+        }
+      }
+    }
+    .block-info {
+      .content {
+        margin-top: 15px;
+        ul {
+          display: flex;
+          flex-wrap: wrap;
+          margin: 0;
+          padding: 10px;
+          li {
+            list-style: none;
+            flex-basis: 33%;
+            display: flex;
+            flex-direction: column;
+            padding: 0 40px 0 0;
+            margin: 10px 0;
+            label {
+              font-family: "Poppins";
+              font-style: normal;
+              font-weight: 400;
+              line-height: 30px;
+              letter-spacing: -0.05em;
+              color: rgba(20, 34, 106, 0.4);
+              font-size: 15px;
+            }
+            span {
+              font-family: "Poppins";
+              font-style: normal;
+              font-weight: 500;
+              font-size: 11px;
+              line-height: 30px;
+              letter-spacing: -0.05em;
+              font-size: 15px;
+              color: $luckyPoint;
+              border-bottom: 1px solid rgba(20, 34, 106, 0.24);
+            }
+          }
+          li.full {
+            flex-basis: 66%;
+          }
+        }
+      }
+    }
+  }
+  .information-prix {
+    background: $white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 8px;
+    h5 {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 500;
+      font-size: 22px;
+      line-height: 26px;
+      letter-spacing: -0.04em;
+      color: $luckyPoint;
+      margin: 0;
+    }
+  }
+  .block-right {
+    position: fixed;
+    width: 20%;
+    .block-header {
+      display: -webkit-box;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      .block {
+        background: $white;
+        border-radius: 10px;
+        padding: 15px;
+        flex-basis: 48%;
+        flex-basis: 100%;
+        display: flex;
+        -webkit-box-align: center;
+        -ms-flex-align: center;
+        align-items: center;
+        .image {
+          width: 45px;
+          img {
+            width: 100%;
+          }
+        }
+     
+        .content {
+          flex-direction: column;
+          font-family: "Poppins";
+          font-style: normal;
+          color: $luckyPoint;
+          span{
+            font-weight: 400;
+            font-size: 11px;
+            line-height: 14px;
+          }
+          h3{
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 15px;
+            letter-spacing: -0.06em;
+            margin: 0;
+          }
+        }
+        .fornisseur-price {
+          margin-left: auto;
+          span {
+            color: $lima;
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 17px;
+            line-height: 28px;
+          }
+        }
+      }
+    }
+    .block-favori {
+      display: flex;
+      justify-content: space-between;
+      background: $white;
+      border-radius: 7px;
+      padding: 15px;
+      align-items: center;
+      margin-bottom: 4%;
+      h5 {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 21px;
+        letter-spacing: -0.04em;
+        color: $luckyPoint;
+        margin: 0;
+      }
+    }
+    .block-information {
+      background: $white;
+      box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.06);
+      border-radius: 7px;
+      padding: 15px 0;
+      h5 {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 15px;
+        line-height: 20px;
+        letter-spacing: -0.05em;
+        color: $luckyPoint;
+        padding-left: 15px;
+      }
+      ul {
+        padding: 0;
+        margin: 0;
+        li {
+          list-style: none;
+          display: flex;
+          justify-content: space-between;
+          padding: 10px 15px;
+          span {
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 13px;
+            line-height: 15px;
+            letter-spacing: -0.05em;
+            color: $luckyPoint;
+          }
+        }
+        li.bg-color {
+          background: $whiteLilac;
+        }
+      }
+    }
+
+
+  }
+}
+
+.modal[aria-modal="true"] {
+  background: rgba(0, 19, 114, 0.43);
+}
+.modal-dialog {
+  min-width: 635px;
+
+  .modal-content {
+    -webkit-box-shadow: 0px 4px 114px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 4px 114px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    .modal-header {
+      border: none;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      justify-content: center;
+      .modal-title {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 26px;
+        line-height: 39px;
+        letter-spacing: -0.06em;
+        color: $luckyPoint;
+      }
+      .btn-close {
+        margin: 0;
+        position: absolute;
+        right: 5%;
+        &:focus {
+          -webkit-box-shadow: unset;
+          box-shadow: unset;
+        }
+      }
+    }
+    .modal-body {
+      padding: 2rem;
+      .text {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 15px;
+        text-align: center;
+        color: $luckyPoint;
+        margin-top: -23px;
+      }
+      .form-control {
+        background: $whiteLilac;
+        border-radius: 5px;
+        border: none;
+        color: $luckyPoint;
+      }
+      .form-label {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 20px;
+        text-align: center;
+        letter-spacing: -0.05em;
+        color: $luckyPoint;
+      }
+      .form-control::placeholder {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 18px;
+        color: $blueHaze;
+      }
+      .buttons {
+        button {
+          border-radius: 5px;
+          &:focus {
+            box-shadow: unset;
+          }
+        }
+      }
+    }
+  }
+}

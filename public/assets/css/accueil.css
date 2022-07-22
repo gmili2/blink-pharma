@@ -1,0 +1,444 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.12,
+* Autoprefixer: v10.4.4
+* Browsers: last 4 version
+*/
+/********* GLOBAL ***********/
+.page-content {
+  padding: 7px 25px;
+}
+
+.section-accueil .liste-raccourci {
+  padding: 12px 0 0 0;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.section-accueil .liste-raccourci li {
+  list-style: none;
+  margin: 0 10px 10px 0;
+}
+
+.section-accueil .liste-raccourci li a {
+  background-color: #fff;
+  padding: 7px 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.06);
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.section-accueil .liste-raccourci li a img {
+  max-width: 100%;
+  margin-right: 12px;
+}
+
+.section-accueil .liste-raccourci li a span {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  color: #14226a;
+}
+
+.section-accueil .liste-raccourci li .active {
+  border: 2px solid #4172ed;
+  border-radius: 8px;
+  outline: 4px solid rgba(58, 102, 213, 0.13);
+}
+
+.section-accueil .liste-raccourci li a.btn-ajoute {
+  background: #e8eaf3;
+  border-radius: 5px;
+}
+
+.section-accueil .liste-raccourci li a.btn-ajoute .icon {
+  background: #f5f6fb;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  line-height: 25px;
+  margin-left: 14px;
+}
+
+.section-accueil .liste-raccourci li a.btn-ajoute .icon i {
+  color: #4172ed;
+}
+
+.section-accueil .liste-raccourci li a.btn-ajoute span {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 16px;
+  color: #4172ed;
+}
+
+.section-accueil .diviseur {
+  color: rgba(168, 168, 169, 0.15);
+}
+
+.section-accueil .section-actualite {
+  background: #fff;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.section-accueil .section-actualite .title .icon {
+  background: rgba(245, 199, 69, 0.3);
+  margin-right: 20px;
+  border-radius: 6px;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 37px;
+}
+
+.section-accueil .section-actualite .image img {
+  width: 100%;
+}
+
+.section-accueil .section-actualite .promotion {
+  margin-top: 13px;
+}
+
+.section-accueil .section-actualite .promotion p {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: -0.04em;
+  color: #FF5574;
+}
+
+.section-accueil .section-actualite .promotion span {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: -0.04em;
+  color: #c5c9d8;
+}
+
+.section-accueil .section-actualite .content {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 21px;
+  line-height: 28px;
+  letter-spacing: -0.04em;
+  color: #14226a;
+  margin-bottom: 13px;
+}
+
+.section-accueil .section-actualite .voir-plus {
+  background: #F5C745;
+  border-radius: 5px;
+  width: 100%;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 19px;
+  line-height: 20px;
+  letter-spacing: -0.04em;
+  color: #fff;
+  border: none;
+  padding: 14px;
+  border: 1px solid;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.section-accueil .section-actualite .voir-plus:focus {
+  -webkit-box-shadow: unset;
+  box-shadow: unset;
+}
+
+.section-accueil .section-actualite .voir-plus:hover {
+  background: white;
+  color: #F5C745;
+  border-color: #F5C745;
+  border: 1px solid;
+  -webkit-transition: .5s;
+  transition: .5s;
+}
+
+.section-accueil .section-statistique {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-top: 13px;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+
+.section-accueil .section-statistique .block {
+  -ms-flex-preferred-size: 49%;
+  flex-basis: 49%;
+  background: #fff;
+  border-radius: 5px;
+  padding: 8px;
+  margin: 0 0 10px 0;
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  height: min-content;
+}
+
+.section-accueil .section-statistique .block .header .icon {
+  width: 40px;
+}
+
+.section-accueil .section-statistique .block .header span {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 14px;
+  letter-spacing: -0.04em;
+  color: #c5c9d8;
+}
+
+.section-accueil .section-statistique .block .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0 0 0 10px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+}
+
+.section-accueil .section-statistique .block .content h3 {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: #14226a;
+}
+
+.section-accueil .section-statistique .block .content .nombre-total {
+  line-height: 8px;
+  font-size: 12px;
+}
+
+.section-accueil .section-statistique .block .footer .nombre-total {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 18px;
+  color: #14226a;
+}
+
+.section-accueil .section-statistique .block .footer .nombre {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 12px;
+  color: #90D4B1;
+}
+
+.section-accueil .section-statistique .block .footer .nombre i {
+  color: #90D4B1;
+}
+
+.section-accueil .section-stock a {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  background: #F92148;
+  padding: 4px;
+  border-radius: 5px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.section-accueil .section-stock a div {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.section-accueil .section-stock a div .icon {
+  background: rgba(207, 12, 47, 0.71);
+  border-radius: 6px;
+  padding: 15px;
+}
+
+.section-accueil .section-stock a div span {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 25px;
+  letter-spacing: -0.08em;
+  color: #fff;
+  margin: 0 32px;
+}
+
+.section-accueil .section-stock a i {
+  color: #fff;
+  font-size: 26px;
+  padding: 0 24px 0 0;
+}
+
+.section-accueil .section-table-home {
+  background-color: #fff;
+  border-radius: 9px;
+  padding: 0 20px;
+}
+
+.section-accueil .section-table-home .filtre-home {
+  border-bottom: 1px solid #f5f6fb;
+}
+
+.section-accueil .section-table-home .filtre-home .icon-filtre a {
+  color: #484964;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.section-accueil .section-table-home .filtre-home .status-actif {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.section-accueil .section-table-home .title-p {
+  color: #14226a;
+}
+
+.section-accueil #table_wrapper {
+  position: relative;
+  margin-top: 13px;
+}
+
+.modal-dialog {
+  min-width: 635px;
+}
+
+.modal-dialog .modal-content {
+  -webkit-box-shadow: 0px 4px 114px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 114px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.modal-dialog .modal-content .modal-header {
+  border: none;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.modal-dialog .modal-content .modal-header .modal-title {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 39px;
+  letter-spacing: -0.06em;
+  color: #14226a;
+}
+
+.modal-dialog .modal-content .modal-header .btn-close {
+  margin: 0;
+  position: absolute;
+  right: 5%;
+  background: transparent url("/assets/icons/btnclose.svg") center/3em auto no-repeat;
+  border-radius: 12px;
+  width: 25px;
+  height: 25px;
+  opacity: 1;
+  top: 14px;
+}
+
+.modal-dialog .modal-content .modal-header .btn-close:focus {
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+}
+
+.modal-dialog .modal-content .modal-body .text {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 15px;
+  text-align: center;
+  color: #14226a;
+}
+
+.modal-dialog .modal-content .modal-body .liste-raccourci {
+  height: 133px;
+  overflow: auto;
+}
+
+.modal-dialog .modal-content .modal-body .liste-raccourci li a {
+  padding: 7px 7px;
+  color: #c5c9d8;
+  -webkit-box-shadow: 0px 2px 7px #00000024;
+  box-shadow: 0px 2px 7px #00000024;
+  border: 0.5px solid #c5c9d8;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0px solid #c5c9d8;
+  opacity: 0.7;
+}
+
+.modal-dialog .modal-content .modal-body .liste-raccourci li a.active {
+  border: 2px solid #4172ed;
+  border-radius: 8px;
+  outline: 4px solid rgba(58, 102, 213, 0.13);
+  opacity: 1;
+}
+
+.modal-dialog .modal-content .modal-body .liste-raccourci::-webkit-scrollbar {
+  width: 2px;
+}
+
+.modal-dialog .modal-content .modal-body .liste-raccourci::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #4172ed;
+  box-shadow: inset 0 0 6px #4172ed;
+}
+
+.modal-dialog .modal-content .modal-body .liste-raccourci::-webkit-scrollbar-thumb {
+  border: 2px solid #4172ed;
+}
+/*# sourceMappingURL=accueil.css.map */

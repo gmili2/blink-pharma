@@ -1,0 +1,440 @@
+/*
+* Prefixed by https://autoprefixer.github.io
+* PostCSS: v8.4.12,
+* Autoprefixer: v10.4.4
+* Browsers: last 4 version
+*/
+
+
+  
+  /********* GLOBAL ***********/
+  
+  $alto: #d3d3d3;
+  $white: #fff;
+  $blue: #4172ed;
+  $luckyPoint: #14226a;
+  $shadowBlack: #00000024;
+  $whisper: #e8eaf3;
+  $whiteLilac: #f5f6fb;
+  $blueHaze: #c5c9d8;
+  $yellow: #F5C745;
+  $red:#FF5574;
+  $gren:#90D4B1;
+  $purple:#F92148;
+  $Crimson:#CF0C2F;
+  $lima:#4EB81C;
+  $PictonBlue:#4399E9;
+  $gunPowder: #484964;
+  .page-content{
+      padding: 7px 25px;
+  }
+.section-accueil{
+    .liste-raccourci{
+
+        padding: 12px 0 0 0;
+        text-align: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        li{
+            list-style: none;
+            margin: 0 10px 10px 0;
+            a{
+                background-color: $white;
+                padding: 7px 15px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                -webkit-box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.06);
+                        box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.06);
+                border-radius: 5px;
+                text-decoration: none;               
+                img{
+                    max-width: 100%;
+                    margin-right: 12px;
+                }
+                span{
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 13px;
+                    line-height: 15px;
+                    color: $luckyPoint;
+                }
+                
+            }
+            .active{
+                border: 2px solid $blue;
+                border-radius: 8px;
+                outline: 4px solid rgba(58, 102, 213, 0.13);
+            }
+            a.btn-ajoute{
+                background: $whisper;
+                border-radius: 5px;
+                .icon{
+                    background: $whiteLilac;
+                    border-radius: 50%;
+                    width: 25px;
+                    height: 25px;
+                    line-height: 25px;
+                    margin-left: 14px;
+                    i{
+                       color: $blue;
+                    }
+                }
+                span{
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 13px;
+                    line-height: 16px;
+                    color: $blue;
+
+                }
+            }
+        }
+    }
+    .diviseur{
+        color: rgba(168, 168, 169, 0.15);
+    }
+   
+    .section-actualite{
+        background: $white;
+        border-radius: 5px;
+        padding:20px;
+        .title{
+            .icon{
+                background: rgba($color: $yellow, $alpha: 0.3);
+                margin-right: 20px;
+                border-radius: 6px;
+                width: 40px;
+                height: 40px;
+                text-align: center;
+                line-height: 37px;
+            }
+        }
+        .image{
+            img{
+                width: 100%;
+            }
+        }
+        .promotion{
+            margin-top: 13px;
+            p{
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 14px;
+                letter-spacing: -0.04em;
+                color: $red;
+
+            }
+            span{
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 14px;
+                letter-spacing: -0.04em;
+                color: $blueHaze;
+            }
+        }
+        .content{
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 21px;
+            line-height: 28px;
+            letter-spacing: -0.04em;
+            color: $luckyPoint;
+            margin-bottom: 13px;
+        }
+        .voir-plus{
+            background: $yellow;
+            border-radius: 5px;
+            width: 100%;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 19px;
+            line-height: 20px;
+            letter-spacing: -0.04em;
+            color: $white;
+            border: none;
+            padding: 14px;
+            border: 1px solid;
+            transition: .5s;
+
+            &:focus{
+                -webkit-box-shadow: unset;
+                        box-shadow: unset;
+            }
+            &:hover{
+                background: white;
+                color: #F5C745;
+                border-color: #F5C745;
+                border: 1px solid;
+                transition: .5s;
+            }
+        }
+    }
+    .section-statistique{
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        margin-top: 13px;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap;
+        .block{
+             -ms-flex-preferred-size: 49%;
+                 flex-basis: 49%;
+            background: $white;
+            border-radius: 5px;
+            padding: 8px;
+            margin: 0 0 10px 0;
+            height: min-content;
+            .header{
+                .icon{
+                width: 40px;
+                
+                }
+              span{
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 14px;
+                letter-spacing: -0.04em;
+                color: $blueHaze;
+            
+              }
+            }
+            .content{
+                display: flex;
+                padding: 0 0 0 10px;
+                flex-direction: column;
+                align-items: flex-start;
+                h3{
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 12px;
+                    color: $luckyPoint;
+
+                }
+                .nombre-total{
+                    line-height: 8px;
+                    font-size: 12px;
+                }
+            }
+            .footer{
+                .nombre-total{
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 18px;
+                    line-height: 18px;
+                    color: $luckyPoint;
+                }
+
+                .nombre{
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 12px;
+                    color:$gren;
+                    i{
+                        color: $gren;
+                    }
+                }
+            }
+           
+        }
+    }
+    .section-stock{
+        a{
+            width: 100%;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: justify;
+                -ms-flex-pack: justify;
+                    justify-content: space-between;
+            background: $purple;
+            padding: 4px;
+            border-radius: 5px;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            text-decoration: none;
+            div{
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-align: center;
+                    -ms-flex-align: center;
+                        align-items: center;
+                .icon{
+                 
+                    background: rgba($color: $Crimson, $alpha: 0.71);
+                    border-radius: 6px;
+                    padding: 15px;
+                }
+                span{
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 20px;
+                    line-height: 25px;
+                    letter-spacing: -0.08em;
+                    color: $white;
+                    margin: 0 32px;
+                }
+            }
+            i{
+                color: $white;
+                font-size: 26px;
+                padding: 0 24px 0 0;
+            }
+           
+        }
+    }
+
+    .section-table-home{
+        background-color: $white;
+        border-radius: 9px;
+        padding: 0 20px;
+       
+        .filtre-home{
+            border-bottom: 1px solid $whiteLilac;
+            .icon-filtre{
+                a{
+                    color: $gunPowder;
+                    text-decoration: none;
+                    font-size: 15px;
+                }
+            }
+            .status-actif{
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: end; 
+                    -ms-flex-pack: end;
+                        justify-content: flex-end;
+                gap: 10px;
+            }
+        }
+        .title-p{
+            color: $luckyPoint;
+        }
+    }
+    #table_wrapper{
+        position: relative;
+       margin-top: 13px;
+    }
+}
+.modal-dialog{
+    min-width: 635px;
+.modal-content{
+    -webkit-box-shadow: 0px 4px 114px rgba(0 ,0 ,0,0.05);
+            box-shadow: 0px 4px 114px rgba(0 ,0 ,0,0.05);
+    border-radius: 10px;
+    .modal-header{
+        border: none;
+        -webkit-box-pack: center ;
+            -ms-flex-pack: center ;
+                justify-content: center ;
+        .modal-title{
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 600;
+            font-size: 26px;
+            line-height: 39px;
+            letter-spacing: -0.06em;
+            color: $luckyPoint;
+        }
+       .btn-close{
+            margin: 0;
+            position: absolute;
+            right: 5%;
+            background: transparent url("/assets/icons/btnclose.svg") center/3em auto no-repeat;
+            border-radius: 12px;
+            width: 25px;
+            height: 25px;
+            opacity: 1;
+            top:14px;
+            &:focus{
+                box-shadow: unset;
+
+            }
+        }
+        
+        
+    }
+    .modal-body{
+        .text{
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 15px;
+            text-align: center;
+            color: $luckyPoint;
+            
+            }
+
+            .liste-raccourci {
+                height: 133px;
+                overflow: auto;
+                li {
+                    a {
+                        padding: 7px 7px;
+
+                        color: $blueHaze;
+                        -webkit-box-shadow: 0px 2px 7px #00000024;
+                        box-shadow: 0px 2px 7px #00000024 ;
+                        border: 0.5px solid $blueHaze;
+                        -webkit-box-sizing: border-box;
+                        box-sizing: border-box;
+                        outline: 0px solid $blueHaze;
+                        opacity: 0.7 ;
+                    }
+                    a.active{
+                        border: 2px solid $blue;
+                        border-radius: 8px;
+                        outline: 4px solid rgba(58, 102, 213, 0.13);
+                        opacity: 1;
+                    }
+                }
+                &::-webkit-scrollbar {
+                    width: 2px;
+                  }
+                   
+                &::-webkit-scrollbar-track {
+                    -webkit-box-shadow: inset 0 0 6px #4172ed;
+                            box-shadow: inset 0 0 6px #4172ed;
+                  }
+                   
+                &::-webkit-scrollbar-thumb {
+                    border: 2px solid $blue;
+                }
+            }
+    }
+
+}
+}
+
+

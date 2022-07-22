@@ -1,0 +1,67 @@
+$alto: #d3d3d3;
+$white: #fff;
+$blue: #4172ed;
+$luckyPoint: #14226a;
+$shadowBlack: #00000024;
+$whisper: #e8eaf3;
+$whiteLilac: #f5f6fb;
+$blueHaze: #c5c9d8;
+$alabaster: #F8F8F8;
+$green: #57E777;
+$red: #FF5574;
+$gunPowder: #484964;
+$cadetBlue: #B0B4C3;
+$yellow: #F5C745;
+$gren:#90D4B1;
+$purple:#F92148;
+$Crimson:#CF0C2F; 
+$lima:#4EB81C;
+$PictonBlue:#4399E9;
+$CeriseRed:#D62A59;
+$frost: #EEFAE9;
+$pink: #FEC8C8;
+$black: #000000;
+
+
+
+
+
+
+.section-chart{
+    .head-chart{
+        .buttons{
+            text-align: right;
+            display: block;
+        }
+    }
+    .chart-circle{
+        .apexcharts-canvas{
+            display: block;
+            margin: 0 auto;
+        }
+        .apexcharts-legend{
+            justify-content: center;
+        }
+    }
+    .card-chart{
+        background: $white;
+        box-shadow: 0px 3px 12px #00000005;
+        border-radius: 8px;
+        .total-price{
+            p{
+                color: $luckyPoint;
+                font-size: 11px;
+                font-weight: 500;
+            }
+        }
+        .list-chart{
+            span{
+                width: 10px;
+                height: 10px;
+                display: inline-block;
+                margin-right: 5px;
+                border-radius: 50%;
+            }
+        }
+    }
+}
