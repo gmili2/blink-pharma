@@ -33,7 +33,7 @@
                                     <div class="row">
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">E-mail</label>
-                                            <input type="text" class="form-control" name="email" value="{{Auth::User()->email}}" required/>
+                                            <input type="text" class="form-control" name="email" disabled value="{{Auth::User()->email}}" required/>
                                             @error('email')
                                         
                                             <span>
@@ -228,14 +228,14 @@
               function validerpassword(){
                   var erreurmatchinput = document.getElementById("erreurmatchinput");
                         var erreurmatch = document.getElementById("erreurmatch");
-                alert(String(confime_passe.value))
+                // alert(String(confime_passe.value))
                         if(confime_passe.value==nv_passe.value){
-                            alert('jjjj')
+                            // alert('jjjj')
                             erreurmatchinput.removeAttribute('required');
                         erreurmatch.style.display='none'
                         }
                         else{
-                            alert("kkkk")
+                            // alert("kkkk")
                             
                             erreurmatch.style.display='block'
                             erreurmatchinput.setAttribute('required', '');
