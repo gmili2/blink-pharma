@@ -1,0 +1,89 @@
+$white: #fff;
+$shadowBlack: #00000024;
+$luckyPoint: #14226a;
+$blue: #4172ed;
+$green: #57E777;
+$red:#FF5574;
+$yellow: #F5C745;
+
+.buttons{
+    display: inline-block;
+
+    button{
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 0.8vw;
+    }
+    .btn-fixed {
+        position: fixed;
+        right: 32px;
+        transform: translateY(-16px);
+    }
+    .btn-hover{
+        box-shadow: 0px 2px 10px $shadowBlack;
+        border-radius: 8px;
+        padding: 10px 15px;
+        text-decoration: none;
+        border: 1px solid transparent;
+        transition: .5s;
+        font-size: 0.8vw;
+    }
+    .color-blue{
+        background-color: $blue;
+        color: $white;
+        font-size: 0.8vw;
+        &:hover{
+            background-color: $white;
+            color: $blue;
+            border: 1px solid $blue;
+            transition: .5s;
+        }
+    }
+    .color-green{
+        background-color: $green;
+        color: $white;
+        font-size: 0.8vw;
+        &:hover{
+            background-color: $white;
+            color: $green;
+            border: 1px solid $green;
+            transition: .5s;
+        }
+    }
+    .color-white{
+        background-color: $white;
+        color: $blue;
+        font-size: 0.8vw;
+        &:hover{
+            background-color: $blue;
+            color: $white;
+            border: 1px solid $blue;
+            transition: .5s;
+        }
+    }
+    .color-red{
+        background-color: $red;
+        color: $white;
+        font-size: 0.8vw;
+        &:hover{
+            background-color: $white;
+            color: $red;
+            border-color: $red;
+            border: 1px solid;
+            transition: .5s;
+        }
+    }
+    .color-yellow{
+        background-color: $yellow;
+        color: $white;
+            font-size: 0.8vw;
+        &:hover{
+            background-color: $white;
+            color: $yellow;
+            border-color: $yellow;
+            border: 1px solid;
+            transition: .5s;
+        }
+    }
+}

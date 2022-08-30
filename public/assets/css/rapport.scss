@@ -1,0 +1,96 @@
+$alto: #d3d3d3;
+$white: #fff;
+$blue: #4172ed;
+$luckyPoint: #14226a;
+$shadowBlack: #00000024;
+$whisper: #e8eaf3;
+$whiteLilac: #f5f6fb;
+$blueHaze: #c5c9d8;
+$alabaster: #F8F8F8;
+$green: #57E777;
+$red: #FF5574;
+$gunPowder: #484964;
+$cadetBlue: #B0B4C3;
+$yellow: #F5C745;
+$gren:#90D4B1;
+$purple:#F92148;
+$Crimson:#CF0C2F;
+$lima:#4EB81C;
+$PictonBlue:#4399E9;
+$CeriseRed:#D62A59;
+$frost: #EEFAE9;
+$pink: #FEC8C8;
+$Royalblue:#3854D8;
+
+.section-rapport{
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    .accordion-button{
+        background: $blue;
+        border-radius: 5px;
+        color: $white;
+        text-decoration: none;
+        padding: 10px 15px;
+        &:focus{
+            box-shadow: unset;
+        }
+        &::after {
+            background-image: url(/assets/icons/arowsupwhite.svg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 13px;
+        }
+        &:not(.collapsed)::after {
+             background-image: url("/assets/icons/arowsupwhite.svg");
+             background-size: 12px;
+             background-size: 13px;
+        }
+        label{
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 23px;
+            line-height: 34px;
+            border-right: 2.5px solid $Royalblue;
+            padding: 0 15px 0 0;
+        }
+        span{
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 20px;
+            margin-left: 20px;
+        }
+    }
+    .accordion-collapse {
+        background: $whiteLilac;
+        border-radius: 0px 0px 5px 5px;
+
+        ul{
+            padding: 10px;
+            justify-content: space-around;
+            li{
+                list-style: none;
+                flex-basis: 48%;
+                a{
+                    text-decoration: none;
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 13px;
+                    line-height: 18px;
+                    letter-spacing: -0.05em;
+                    color: $luckyPoint;
+                    width: 100% ;
+                    display: block;
+                    margin: 0 0 10px 0;
+                    background: $whisper;
+                    border-radius: 5px;
+                    padding: 10px 15px;
+                }
+            }
+        }
+    }
+}

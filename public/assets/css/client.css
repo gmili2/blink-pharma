@@ -1,0 +1,473 @@
+/*
+information client
+*/
+.section-client .section-table-client {
+  background-color: #fff;
+  border-radius: 9px;
+  padding: 0 20px;
+}
+
+.section-client .section-table-client .filtre-client {
+  border-bottom: 1px solid #f5f6fb;
+}
+
+.section-client .section-table-client .filtre-client .icon-filtre a {
+  color: #484964;
+  text-decoration: none;
+  font-size: 15px;
+}
+
+.section-client .section-table-client .title-p {
+  color: #14226a;
+}
+
+.section-client #table_wrapper {
+  position: relative;
+  margin-top: 13px;
+}
+
+.section-information .information-general,
+.section-information .information-history,
+.section-information .information-vente {
+  background: #fff;
+}
+
+.section-information .information-general h5,
+.section-information .information-history h5,
+.section-information .information-vente h5 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: -0.04em;
+  color: #14226a;
+}
+
+.section-information .information-general .block-header,
+.section-information .information-history .block-header,
+.section-information .information-vente .block-header {
+  background: rgba(213, 213, 213, 0.16);
+  border-radius: 9px;
+  padding: 5px 15px 5px 5px;
+  margin: 0 40px 0 0;
+}
+
+.section-information .information-general .block-header .content,
+.section-information .information-history .block-header .content,
+.section-information .information-vente .block-header .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.section-information .information-general .block-header .content ul,
+.section-information .information-history .block-header .content ul,
+.section-information .information-vente .block-header .content ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0;
+}
+
+.section-information .information-general .block-header .content ul li,
+.section-information .information-history .block-header .content ul li,
+.section-information .information-vente .block-header .content ul li {
+  list-style: none;
+  -ms-flex-preferred-size: 33%;
+      flex-basis: 33%;
+}
+
+.section-information .information-general .block-header .content ul li label,
+.section-information .information-history .block-header .content ul li label,
+.section-information .information-vente .block-header .content ul li label {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 30px;
+  color: rgba(20, 34, 106, 0.4);
+}
+
+.section-information .information-general .block-header .content ul li span,
+.section-information .information-history .block-header .content ul li span,
+.section-information .information-vente .block-header .content ul li span {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 30px;
+  letter-spacing: -0.05em;
+  color: #14226a;
+}
+
+.section-information .information-general .block-info .content,
+.section-information .information-history .block-info .content,
+.section-information .information-vente .block-info .content {
+  margin-top: 15px;
+}
+
+.section-information .information-general .block-info .content ul,
+.section-information .information-history .block-info .content ul,
+.section-information .information-vente .block-info .content ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin: 0;
+  padding: 10px;
+}
+
+.section-information .information-general .block-info .content ul li,
+.section-information .information-history .block-info .content ul li,
+.section-information .information-vente .block-info .content ul li {
+  list-style: none;
+  -ms-flex-preferred-size: 33%;
+      flex-basis: 33%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0 40px 0 0;
+  margin: 10px 0;
+}
+
+.section-information .information-general .block-info .content ul li label,
+.section-information .information-history .block-info .content ul li label,
+.section-information .information-vente .block-info .content ul li label {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: -0.05em;
+  color: rgba(20, 34, 106, 0.4);
+  font-size: 15px;
+}
+
+.section-information .information-general .block-info .content ul li span,
+.section-information .information-history .block-info .content ul li span,
+.section-information .information-vente .block-info .content ul li span {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11px;
+  line-height: 30px;
+  letter-spacing: -0.05em;
+  font-size: 15px;
+  color: #14226a;
+  border-bottom: 1px solid rgba(20, 34, 106, 0.24);
+}
+
+.section-information .information-general .block-info .content ul li.full,
+.section-information .information-history .block-info .content ul li.full,
+.section-information .information-vente .block-info .content ul li.full {
+  -ms-flex-preferred-size: 66%;
+      flex-basis: 66%;
+}
+
+.section-information .information-prix {
+  background: #fff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border-radius: 8px;
+}
+
+.section-information .information-prix h5 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 22px;
+  line-height: 26px;
+  letter-spacing: -0.04em;
+  color: #14226a;
+  margin: 0;
+}
+
+.section-information .block-right {
+  position: fixed;
+  width: 20%;
+}
+
+.section-information .block-right .block-header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.section-information .block-right .block-header .block {
+  background: #fff;
+  border-radius: 10px;
+  padding: 15px;
+  -ms-flex-preferred-size: 48%;
+      flex-basis: 48%;
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.section-information .block-right .block-header .block .image {
+  width: 45px;
+}
+
+.section-information .block-right .block-header .block .image img {
+  width: 100%;
+}
+
+.section-information .block-right .block-header .block .content {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-family: "Poppins";
+  font-style: normal;
+  color: #14226a;
+}
+
+.section-information .block-right .block-header .block .content span {
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 14px;
+}
+
+.section-information .block-right .block-header .block .content h3 {
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 15px;
+  letter-spacing: -0.06em;
+  margin: 0;
+}
+
+.section-information .block-right .block-header .block .fornisseur-price {
+  margin-left: auto;
+}
+
+.section-information .block-right .block-header .block .fornisseur-price span {
+  color: #4eb81c;
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 17px;
+  line-height: 28px;
+}
+
+.section-information .block-right .block-favori {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  background: #fff;
+  border-radius: 7px;
+  padding: 15px;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 4%;
+}
+
+.section-information .block-right .block-favori h5 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 21px;
+  letter-spacing: -0.04em;
+  color: #14226a;
+  margin: 0;
+}
+
+.section-information .block-right .block-information {
+  background: #fff;
+  -webkit-box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.06);
+          box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.06);
+  border-radius: 7px;
+  padding: 15px 0;
+}
+
+.section-information .block-right .block-information h5 {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 20px;
+  letter-spacing: -0.05em;
+  color: #14226a;
+  padding-left: 15px;
+}
+
+.section-information .block-right .block-information ul {
+  padding: 0;
+  margin: 0;
+}
+
+.section-information .block-right .block-information ul li {
+  list-style: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 10px 15px;
+}
+
+.section-information .block-right .block-information ul li span {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  letter-spacing: -0.05em;
+  color: #14226a;
+}
+
+.section-information .block-right .block-information ul li.bg-color {
+  background: #f5f6fb;
+}
+
+.modal[aria-modal="true"] {
+  background: rgba(0, 19, 114, 0.43);
+}
+
+.modal-dialog {
+  min-width: 635px;
+}
+
+.modal-dialog .modal-content {
+  -webkit-box-shadow: 0px 4px 114px rgba(0, 0, 0, 0.05);
+  box-shadow: 0px 4px 114px rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+}
+
+.modal-dialog .modal-content .modal-header {
+  border: none;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.modal-dialog .modal-content .modal-header .modal-title {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 26px;
+  line-height: 39px;
+  letter-spacing: -0.06em;
+  color: #14226a;
+}
+
+.modal-dialog .modal-content .modal-header .btn-close {
+  margin: 0;
+  position: absolute;
+  right: 5%;
+}
+
+.modal-dialog .modal-content .modal-header .btn-close:focus {
+  -webkit-box-shadow: unset;
+  box-shadow: unset;
+}
+
+.modal-dialog .modal-content .modal-body {
+  padding: 2rem;
+}
+
+.modal-dialog .modal-content .modal-body .text {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 15px;
+  text-align: center;
+  color: #14226a;
+  margin-top: -23px;
+}
+
+.modal-dialog .modal-content .modal-body .form-control {
+  background: #f5f6fb;
+  border-radius: 5px;
+  border: none;
+  color: #14226a;
+}
+
+.modal-dialog .modal-content .modal-body .form-label {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  letter-spacing: -0.05em;
+  color: #14226a;
+}
+
+.modal-dialog .modal-content .modal-body .form-control::-webkit-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #c5c9d8;
+}
+
+.modal-dialog .modal-content .modal-body .form-control:-ms-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #c5c9d8;
+}
+
+.modal-dialog .modal-content .modal-body .form-control::-ms-input-placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #c5c9d8;
+}
+
+.modal-dialog .modal-content .modal-body .form-control::placeholder {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #c5c9d8;
+}
+
+.modal-dialog .modal-content .modal-body .buttons button {
+  border-radius: 5px;
+}
+
+.modal-dialog .modal-content .modal-body .buttons button:focus {
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+}
+/*# sourceMappingURL=client.css.map */

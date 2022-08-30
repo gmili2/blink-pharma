@@ -1,0 +1,161 @@
+$alto: #d3d3d3;
+$white: #fff;
+$blue: #4172ed;
+$luckyPoint: #14226a;
+$shadowBlack: #00000024;
+$whisper: #e8eaf3;
+$whiteLilac: #f5f6fb;
+$blueHaze: #c5c9d8;
+$alabaster: #f8f8f8;
+$green: #57e777;
+$red: #ff5574;
+$gunPowder: #484964;
+$cadetBlue: #b0b4c3;
+
+$yellow: #f5c745;
+$gren: #90d4b1;
+$purple: #f92148;
+$Crimson: #cf0c2f;
+$lima: #4eb81c;
+$PictonBlue: #4399e9;
+$CeriseRed: #d62a59;
+$frost: #eefae9;
+$pink: #fec8c8;
+
+/*
+  This is a 
+  section - Information general fornisseur
+*/
+.page-content {
+  .section-information {
+    .block-info {
+      .content.block-detail {
+        width: 100%;
+        margin-top: 0;
+        ul {
+          li {
+            flex-basis: 50%;
+          }
+        }
+      }
+    }
+    .block-right.info-fornisseur {
+      .block-header {
+        .block {
+          flex-basis: 100%;
+          display: flex;
+          align-items: center;
+          .content {
+            flex-direction: column;
+            font-family: "Poppins";
+            font-style: normal;
+
+            h3 {
+              font-weight: 500;
+              font-size: 14px;
+              line-height: 5px;
+              letter-spacing: -0.06em;
+            }
+            span {
+              font-weight: 400;
+              font-size: 11px;
+              line-height: 14px;
+            }
+          }
+          .fornisseur-price {
+            margin-left: auto;
+            span {
+              color: $lima;
+              font-family: "Poppins";
+              font-style: normal;
+              font-weight: 500;
+              font-size: 19px;
+              line-height: 28px;
+            }
+          }
+        }
+      }
+      .block-information {
+        padding: 15px;
+        box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+        h5 {
+          padding: 0;
+        }
+        div {
+          display: flex;
+          .form-control {
+            background: #f5f6fb;
+            border-radius: 6px;
+            border: none;
+            padding: 10px;
+            &::placeholder {
+              font-family: "Poppins";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 12px;
+              line-height: 15px;
+              letter-spacing: -0.06em;
+              color: rgba($luckyPoint, 0.18);
+            }
+          }
+          .send-message {
+            button {
+              margin-left: -48px;
+            }
+            .bi-send::before {
+              transform: rotate(45deg);
+            }
+          }
+        }
+        .commentaire {
+          .header {
+            span {
+              font-family: "Poppins";
+              font-style: normal;
+              font-weight: 400;
+              font-size: 13px;
+              line-height: 15px;
+              letter-spacing: -0.03em;
+              color: rgba($luckyPoint, 0.4);
+            }
+          }
+          .text {
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 14px;
+            color: rgba($luckyPoint, 0.98);
+          }
+          &:not(:last-child):after {
+            content: "";
+            border: 1px solid rgba(20, 34, 106, 0.1);
+            margin: inherit;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+  This is a 
+  section - Information Add fornisseur
+*/
+.section-form-fornisseur {
+    h5{
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 22px;
+        line-height: 26px;
+        letter-spacing: -0.04em;
+        color: $luckyPoint;
+
+    }
+    .divider{
+        color:rgba(20, 34, 106, 0.24);
+        height: 1px;
+        width: 100%;
+        margin-left: 15px;
+    }
+}

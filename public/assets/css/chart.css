@@ -1,0 +1,37 @@
+.section-chart .head-chart .buttons {
+  text-align: right;
+  display: block;
+}
+
+.section-chart .chart-circle .apexcharts-canvas {
+  display: block;
+  margin: 0 auto;
+}
+
+.section-chart .chart-circle .apexcharts-legend {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.section-chart .card-chart {
+  background: #fff;
+  -webkit-box-shadow: 0px 3px 12px #00000005;
+          box-shadow: 0px 3px 12px #00000005;
+  border-radius: 8px;
+}
+
+.section-chart .card-chart .total-price p {
+  color: #14226a;
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.section-chart .card-chart .list-chart span {
+  width: 10px;
+  height: 10px;
+  display: inline-block;
+  margin-right: 5px;
+  border-radius: 50%;
+}
+/*# sourceMappingURL=chart.css.map */

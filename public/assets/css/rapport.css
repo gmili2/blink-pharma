@@ -1,0 +1,86 @@
+.section-rapport {
+  -webkit-box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+          box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.02);
+  border-radius: 8px;
+}
+
+.section-rapport .accordion-button {
+  background: #4172ed;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 15px;
+}
+
+.section-rapport .accordion-button:focus {
+  -webkit-box-shadow: unset;
+          box-shadow: unset;
+}
+
+.section-rapport .accordion-button::after {
+  background-image: url(/assets/icons/arowsupwhite.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 13px;
+}
+
+.section-rapport .accordion-button:not(.collapsed)::after {
+  background-image: url("/assets/icons/arowsupwhite.svg");
+  background-size: 12px;
+  background-size: 13px;
+}
+
+.section-rapport .accordion-button label {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 23px;
+  line-height: 34px;
+  border-right: 2.5px solid #3854D8;
+  padding: 0 15px 0 0;
+}
+
+.section-rapport .accordion-button span {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 20px;
+  margin-left: 20px;
+}
+
+.section-rapport .accordion-collapse {
+  background: #f5f6fb;
+  border-radius: 0px 0px 5px 5px;
+}
+
+.section-rapport .accordion-collapse ul {
+  padding: 10px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.section-rapport .accordion-collapse ul li {
+  list-style: none;
+  -ms-flex-preferred-size: 48%;
+      flex-basis: 48%;
+}
+
+.section-rapport .accordion-collapse ul li a {
+  text-decoration: none;
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: -0.05em;
+  color: #14226a;
+  width: 100%;
+  display: block;
+  margin: 0 0 10px 0;
+  background: #e8eaf3;
+  border-radius: 5px;
+  padding: 10px 15px;
+}
+/*# sourceMappingURL=rapport.css.map */
