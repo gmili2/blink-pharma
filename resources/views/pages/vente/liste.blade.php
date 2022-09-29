@@ -18,7 +18,7 @@
                                                                         </form>
                                                         </span>
                                     </div> --}}
-                                    <a href="#" class="btn-hover color-white">Ajouter aux favoris</a>
+                                    {{-- <a href="#" class="btn-hover color-white">Ajouter aux favoris</a> --}}
                                     {{-- <a href="#" class="btn-hover color-white">Historique des opérations</a> --}}
                                     <a href="addventes" class="btn-hover color-blue">Nouvelle vente</a>
                                    
@@ -58,7 +58,7 @@
                                
                                 
                             </div>
-                            <br>
+                        
                             {{-- <div class="col-md-6 mb-3">
                                 <div class="form-group d-flex align-items-center">
                                     <i class="bi bi-search"></i>
@@ -68,19 +68,19 @@
                                     name="search" />
                                   </div>
                             </div> --}}
-                            <hr class="divider" />
+          
                             <br>
                             
                             <div  id="table">
 
-                            <table  class="table table-striped"  id='tablevente' style="width: 100%;">
+                            <table  class="table table-striped selvente"  id='tablevente' style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>Livree</th>
                                         <th>Numéro de transaction</th>
                                         <th>Client</th>
                                         <th>Date de creation</th>
-                                        <th>Créer le</th>
+                                        <th>Prix</th>
                                         <th>Total</th>
                                         <th>Credit</th>
                                         <th>Statut</th>
@@ -205,7 +205,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Supprimer ce confrere</h5>
+                                <h5 class="modal-title">Supprimer ce vente</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div>
@@ -223,12 +223,12 @@
                                     @csrf
                                    <input type="text"  id="vente_id" hidden name="vente_id">
                                 <div class="row section-footer">
-                                    <div class="buttons">
-                                        <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+                                    <div class="buttons" style="margin-top:60px">
+                                        <a href="#" class="btn btn-hover color-red"  data-bs-dismiss="modal" aria-label="Close">Annuler</a>
         
-                                        <button class="btn btn-hover color-green mx-1" data-bs-dismiss="modal" 
+                                        <button class="btn btn-hover color-blue spacecenter" 
                                         
-                                        aria-label="Close">Supprimer</button>
+                         >Supprimer</button>
 
                                     </div>
                                 </div>
@@ -561,7 +561,7 @@ if(headers[data[0]]!="Actions"){
        { "data": "id" },
        { "data": "nom_client" },
        { "data": "created_at" },
-       { "data": "created_at" },
+       { "data": "montant_PPV" },
        { "data": "montant_PU" },
        { "data": "montant_credit" },
        { "data": "status" },
@@ -575,6 +575,18 @@ if(headers[data[0]]!="Actions"){
               "columnDefs": [
   
   
+                {
+         
+         "render": function ( data, type, row ) {
+             let datefinale;
+             datefinale=data.substring(8,10)+"-"+data.substring(5,7)+'-'+data.substring(0,4)+"  "+data.substring(11,16)
+             return datefinale;
+             // console.log(anyString.substring(0, 10))+;
+
+         },
+         "targets": 3       
+     
+     },
 
                 {
          

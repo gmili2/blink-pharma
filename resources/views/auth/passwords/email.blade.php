@@ -16,11 +16,11 @@
 
     <body class="p-login">
         <section class="support">
-            <a href="tel:05 30 500 500"><b>Support :</b> 05 30 500 500 <img src="assets/icons/support.svg" alt="support" /></a>
+            <a href="tel:05 30 500 500"><b>Support :</b> 05 30 500 500 <img src="../assets/icons/support.svg" alt="support" /></a>
         </section>
 
         <section class="support">
-            <a href="tel:05 30 500 500"><b>Support :</b> 05 30 500 500 <img src="assets/icons/support.svg" alt="support" /></a>
+            <a href="tel:05 30 500 500"><b>Support :</b> 05 30 500 500 <img src="../assets/icons/support.svg" alt="support" /></a>
         </section>
 
         <section class="login">
@@ -41,7 +41,7 @@
                     name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                     @error('email')
                         <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
+                            <strong>Email incorrecte !</strong>
                         </span>
                     @enderror
                 </div>
@@ -49,14 +49,14 @@
                 {{-- <div class="form-group row mb-0">
                     <div class="col-md-6 offset-md-4">
                         <button type="submit" class="btn btn-primary">
-                            {{ __('Send Password Reset Link') }}
+                            {{ __('Réinitialiser mon compte') }}
                         </button>
                     </div>
                 </div> --}}
 
                 <div class="buttons d-block">
                     <button type="submit" class="btn btn-primary">
-                            {{ __('Send Password Reset Link') }}
+                            {{ __('Réinitialiser mon compte') }}
                         </button>
                     {{-- @if (Route::has('password.request'))
                     <a class="btn btn-link" href="{{ route('password.request') }}">

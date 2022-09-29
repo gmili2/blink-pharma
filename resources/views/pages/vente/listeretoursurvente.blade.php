@@ -45,7 +45,7 @@
                             <hr class="divider" />
 
                             
-                            <table id="table" class="table table-striped" style="width: 100%;">
+                            <table id="table" class="table table-striped selvente" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         {{-- <th>Livree</th> --}}

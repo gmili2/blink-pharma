@@ -13,6 +13,12 @@ class TypeController extends Controller
     {
         $this->middleware('auth');
         echo( '
+        <script>localStorage.setItem("sousselect", "vtype");</script>
+        ');
+           echo( '
+        <script>localStorage.setItem("select2", "Type");</script>
+        ');
+        echo('
         <script>localStorage.setItem("select", "produitv");</script>
         ');
     }

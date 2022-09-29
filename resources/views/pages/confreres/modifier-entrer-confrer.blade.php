@@ -16,7 +16,7 @@
                         <div class="row">
                             <div class="col-md-12 text-end">
                                 <div class="buttons" >
-                                    <a href="add-sortieconfrre" hidden  id="creer_autrre" class="btn-hover color-green">Crerr autre</a>
+                                    <a href="add-sortieconfrre" hidden  id="creer_autrre" class="btn-hover color-green">Créer une nouvelle entrée</a>
                                     <button id="sauvgardze"
                                        onclick="ajoutervente()" 
                                      class="btn-hover color-green">Sauvgarder</button>
@@ -61,7 +61,7 @@
                                             </div>
                                         </div>
                                     <hr class="divider" />
-                                    <table id="table" class="table table-striped mb-4" style="width: 100%;">
+                                    <table id="table" class="table table-striped mb-4 selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Nom</th>
@@ -177,7 +177,7 @@
                                                 </li>
                                                 <li>
                                                     <label>Par :</label>
-                                                    <span>Dr {{Auth::User()->name}} <i class="bi bi-chevron-down ms-2"></i></span>
+                                                    <span>Dr {{Auth::User()->name}} </span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -216,7 +216,7 @@
                                         
                                         <hr class="divider mt-3" />
 
-                                        <table id="table-right" class="table table-striped mb-4" style="width: 100%;">
+                                        <table id="table-right" class="table table-striped mb-4 selvente" style="width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -282,7 +282,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <table id="table-client" class="table table-striped mb-4" style="width: 100%;">
+                                <table id="table-client" class="table table-striped mb-4 selvente" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -583,7 +583,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Vente(s) crée(s) avec succés</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title">Entrer confrère(s) Modifiée(s) avec succés</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                         
                             <div class="modal-body">
@@ -746,7 +746,7 @@ axios.post(rout, {
   .then(function (response) {
     console.log(response.data);
 if(response.data["codeEr"]==200){
-toastr.success("bien ajouter");
+toastr.success("Bien Modifié");
 
     $('#vente-cree').modal("show");
     document.getElementById("attent").hidden=true

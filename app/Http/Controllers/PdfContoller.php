@@ -12,7 +12,11 @@ class PdfContoller extends Controller
 
 
 
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
     
     public function imprimer_ticket($id){
         $ticket = DB::table('venteproduits')
@@ -51,7 +55,12 @@ class PdfContoller extends Controller
                 'facture' => $facture,
                 'date'=> $date,
                         ];
+
+                        // return view("facture",['data'=>$data]);
+                     
+          
           $pdf = PDF::loadView('facture', $data);
+          
           return $pdf->stream('document.pdf');
 
     }

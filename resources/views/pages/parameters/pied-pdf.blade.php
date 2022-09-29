@@ -1,4 +1,4 @@
-@extends('layouts.apppar')
+@extends('layouts.app')
 
 @section('content')  
                 <!-- partial -->
@@ -33,6 +33,11 @@
                                             {{-- <textarea name="terme" class="form-control" cols="30" rows="5"></textarea> --}}
                                         </div>
                                     </div>
+                                     <div class="col-md-3 mb-3">
+                                        <label class="form-label">Exemple </label>
+
+                                <a id="lien" href=" "> Télécharger un exemple  </a>
+                                                   </div>
                                 </div>
                             </div>
                         </form>

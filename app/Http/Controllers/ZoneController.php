@@ -14,8 +14,15 @@ class ZoneController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        echo( '
+        echo('
         <script>localStorage.setItem("select", "produitv");</script>
+        ');
+       
+        echo( '
+        <script>localStorage.setItem("sousselect", "vzone");</script>
+        ');
+          echo('
+        <script>localStorage.setItem("select2", "zone");</script>
         ');
     }
     public function afficherZone(){

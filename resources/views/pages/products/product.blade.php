@@ -19,8 +19,8 @@
                                                                     </form>
                                                     </span>
                                 </div> --}}
-                                <div class="buttons">
-                                    <a href="#" class="btn-hover color-white">Ajouter aux favoris</a>
+                                <div class="buttons" style="margin-top:0px">
+                                    {{-- <a href="#" class="btn-hover color-white">Ajouter aux favoris</a> --}}
                                     <a href="ajouterproduit" class="btn-hover color-blue">Ajouter un nouveau produit</a>
                                 </div>
                             </div>
@@ -43,19 +43,13 @@
                                     </div>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-6 mb-3">
-                                <div class="form-group d-flex align-items-center">
-                                    <i class="bi bi-search"></i>
-                                    <input type="text" style="    width: 205px;
-                                    margin: 17px" class="form-control" placeholder="Search" id=recherch_produit
-                                    onkeyup="recherche_produit()"
-                                    name="search" />                                                </div>
-                            </div> --}}
-                            <div id="table2">
-                                        <hr class="divider mt-3" />
+                            <br/>
+                    
+                            <div id="table2" >
+                                       
 
-                            {{-- <table id="table" class="table table-striped" style="width: 100%;"> --}}
-                                <table id="tableproduit" class="table table-striped mb-4" style="width: 100%;">
+                        
+                                    <table id="tableproduit" class="table table-striped selvente" style="width: 100%;">
 
                                 <thead>
                                     <tr>
@@ -66,6 +60,8 @@
                                         <th>PPV</th>
                                         <th>PPH</th>
                                         <th>Code barre</th>
+                                        <th>Quantite Disp</th>
+
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -122,9 +118,9 @@
                                
                           </section>
                 </div>
-                <div class="modal fade vente-succes search-client" id="search-client" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
+                <div class="modal fade vente-succes search-client" id="search-client" tabindex="-1" aria-labelledby="" aria-hidden="true" >
+                    <div class="modal-dialog modal-dialog-centered" >
+                        <div class="modal-content" >
                             <div class="modal-header">
                                 <h5 class="modal-title">Supprimer ce produit</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -136,20 +132,17 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-md-12">
-                                       </div>
+                                 
                                 </div>
                                 <form id="form1" action="supprimerproduit" method="post">
                                     @method('delete')
                                     @csrf
                                    <input type="text" hidden id="produit_id" name="produit_id">
-                                <div class="row section-footer">
-                                    <div class="buttons">
-                                        <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
-        
-                                        <button class="btn btn-hover color-green mx-1" data-bs-dismiss="modal" 
-                                        
-                                        aria-label="Close">Supprimer</button>
+                                <div class="row section-footer" >
+                                    <div class="buttons" style="margin-top:60px">
+                                        <a href="#" class="btn btn-hover color-red"  data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+                                        <button class="btn btn-hover color-blue spacecenter"
+                                        >Supprimer</button>
 
                                     </div>
                                 </div>
@@ -163,9 +156,20 @@
 
                 <script>
                     $(document).ready( function () {
-                        $('#tableproduit tbody').on( 'click', 'tr', function () {
-           var id= mydattableproduit.row( this ).data()["id"] ;
-        window.location.replace("/informationproduct"+id)
+                        $('#tableproduit tbody').on( 'click','td','tr', function () {
+        //    var id= mydattableproduit.row( this ).data()["id"] ;
+        // window.location.replace("/informationproduct"+id)
+        var data= mydattableproduit.column( this )  ;
+        var id= mydattableproduit.row( this ).data()["id"] ;
+var headers = [];
+
+   var dataTableHeaderElements = $('#tableproduit').DataTable().columns().header();
+for (var i = 0; i< dataTableHeaderElements.length; i++) {
+headers.push($(dataTableHeaderElements[i]).text())    
+}    
+if(headers[data[0]]!="Actions"){
+     window.location.replace("/informationproduct"+id)
+}
 
         } );
                         var mydattableproduit =  $('#tableproduit').DataTable({
@@ -444,6 +448,9 @@
      { "data": "PPV" },
      { "data": "PPH" },
      { "data": "code_bare" },
+
+     { "data": "quantite_disponible" },
+     
      { "data": "id" }
                
 
@@ -467,12 +474,12 @@
          
                     "render": function ( data, type, row ) {
                         if(row.active==1)
-                        return '<td><div class="dropdown section-action"><a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a><ul class="dropdown-menu"><li><a class="dropdown-item" href="informationproduct'+row.id+'">Afficher</a></li><li><a class="dropdown-item" href="modifierproduitformule'+row.id+'">Modifier</a></li><li><a class="dropdown-item" href="desactiverproduit'+row.id+'">Désactiver</a></li><li><a class="dropdown-item" onclick="charger_id_produit('+row.id+')"href="" data-bs-toggle="modal" data-bs-target="#search-client" >Supprimer</a></li></ul></div></td>'
+                        return '<td><div class="dropdown section-action"><a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a><ul class="dropdown-menu"><li><a class="dropdown-item" href="informationproduct'+row.id+'">Afficher</a></li><li><a class="dropdown-item" href="modifierproduitformule'+row.id+'">Modifier</a></li><li><a class="dropdown-item" href="desactiverproduit'+row.id+'/0">Désactiver</a></li><li><a class="dropdown-item" onclick="charger_id_produit('+row.id+')"href="" data-bs-toggle="modal" data-bs-target="#search-client" >Supprimer</a></li></ul></div></td>'
                   else 
-                  return '<td><div class="dropdown section-action"><a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a><ul class="dropdown-menu"><li><a class="dropdown-item" href="informationproduct'+row.id+'">Afficher</a></li><li><a class="dropdown-item" href="modifierproduitformule'+row.id+'">Modifier</a></li><li><a class="dropdown-item" href="avtiverproduit'+row.id+'">Activer</a></li><li><a class="dropdown-item" onclick="charger_id_produit('+row.id+')"href="" data-bs-toggle="modal" data-bs-target="#search-client" >Supprimer</a></li></ul></div></td>'
+                  return '<td><div class="dropdown section-action"><a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a><ul class="dropdown-menu"><li><a class="dropdown-item" href="informationproduct'+row.id+'">Afficher</a></li><li><a class="dropdown-item" href="modifierproduitformule'+row.id+'">Modifier</a></li><li><a class="dropdown-item" href="avtiverproduit'+row.id+'/0">Activer</a></li><li><a class="dropdown-item" onclick="charger_id_produit('+row.id+')"href="" data-bs-toggle="modal" data-bs-target="#search-client" >Supprimer</a></li></ul></div></td>'
 
                     },
-                    "targets": 7       
+                    "targets": 8       
                 
                 },
               

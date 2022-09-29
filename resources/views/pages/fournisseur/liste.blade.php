@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<br/>
+
 <div class="page-content">
                     <section class="section-client mt-3 pb-5">
                         <div class="row text-end">
@@ -18,7 +18,7 @@
                                                     </span>
                                 </div> --}}
                                 <div class="buttons">
-                                    <a href="#" class="btn-hover color-white">Ajouter aux favoris</a>
+                                    {{-- <a href="#" class="btn-hover color-white">Ajouter aux favoris</a> --}}
                                     {{-- <a href="#" class="btn-hover color-white">Historique des opérations</a> --}}
                                     <a href="{{url('addfournisseur')}}" class="btn-hover color-blue">Ajouter un nouveau fournisseur</a>
                                 </div>
@@ -41,16 +41,16 @@
                             </div> --}}
 
 
-                            <hr class="divider" />
+                             <br/>                                                  
 
                            
-                            <table id="tablefornisseur" class="table table-striped" style="width: 100%;">
+                            <table id="tablefornisseur" class="table table-striped selvente" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>Fournisseurs</th>
                                         <th>Téléphone</th>
                                         <th>Ville</th>
-                                        <th>Solde</th>
+                                        {{-- <th>Solde</th> --}}
                                         <th>Actions</th>
                                     </tr>
                                 </thead>
@@ -61,44 +61,44 @@
 
                         </div>
                     </section>
-                </div>
-                <div class="modal fade vente-succes search-client" id="search-client" tabindex="-1" aria-labelledby="" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title">Supprimer ce fournisseur</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div>
-                                <p class="text text-center mt-4">
-                                   
-                                </p>
-                            </div>
-                            <div class="modal-body">
-                                <div class="row">
-                                    <div class="col-md-12">
-                                       </div>
+                    <div class="modal fade vente-succes search-client" id="search-client" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title">Supprimer ce fournisseur</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form id="form1" action="deletefournisseur" method="post">
-                                    @method('delete')
-                                    @csrf
-                                   <input type="text"  id="fr_id" hidden name="fr_id">
-                                <div class="row section-footer">
-                                    <div class="buttons">
-                                        <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
-        
-                                        <button class="btn btn-hover color-green mx-1" data-bs-dismiss="modal" 
-                                        
-                                        aria-label="Close">Supprimer</button>
-
+                                <div>
+                                    <p class="text text-center mt-4">
+                                       
+                                    </p>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                           </div>
                                     </div>
+                                    <form id="form1" action="deletefournisseur" method="post">
+                                        @method('delete')
+                                        @csrf
+                                       <input type="text"  id="fr_id" hidden name="fr_id">
+                                    <div class="row section-footer">
+                                        <div class="buttons" style="margin-top:60px">
+                                            <a href="#" class="btn btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+            
+                                            <button type="submit" class="btn btn-hover color-blue spacecenter" 
+                                       >Supprimer</button>
+    
+                                        </div>
+                                    </div>
+                                </form>
+    
                                 </div>
-                            </form>
-
                             </div>
                         </div>
                     </div>
                 </div>
+                
                 
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
@@ -381,7 +381,6 @@
      { "data": "name" },
      { "data": "tele" },
      { "data": "ville" },
-     { "data": "ville" },
      { "data": "id" },
 
     
@@ -397,7 +396,7 @@
                       "render": function ( data, type, row ) {
                           return  ' <td><div class="dropdown section-action"><a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a><ul class="dropdown-menu"><li><a class="dropdown-item" href="showfournisseur'+row.id+'">Afficher</a></li><li><a class="dropdown-item" href="modifyfournisseur'+row.id+'}">Modifier</a></li><li><a class="dropdown-item" onclick="charger_id_produit('+row.id+')"href="" data-bs-toggle="modal" data-bs-target="#search-client" >Supprimer</a></li></ul></div></td>'
                       },
-                      "targets": 4    
+                      "targets": 3    
                   
                   },
                 

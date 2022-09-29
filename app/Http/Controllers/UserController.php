@@ -5,7 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\ModelSessions;
 use App\Models\sessions;
 use App\User;
+use App\Models\Role;
+// use App\Models\Role;
+
+
 use Exception;
+
 use Illuminate\Contracts\Session\Session ;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,6 +27,16 @@ class UserController extends Controller
         echo( '
         <script>localStorage.setItem("select", "Utilisateur");</script>
         ');
+           echo( '
+        <script>localStorage.setItem("select2", "Utilisateur");</script>
+        ');
+    }
+
+    public function  adduserpage(){
+
+            $roles=Role::all();
+            return view('pages.parameters.Users.adduser',['roles'=>$roles]);
+
     }
 
     /**
@@ -38,13 +53,22 @@ class UserController extends Controller
     // }
 
     public function AfficherUser(){
-  
+        echo( '
+        <script>localStorage.setItem("sousselect", "vaffichuser");</script>
+        ');
         $users = User::select("*")
-
         ->orderBy('last_seen', 'DESC')
-        ->paginate(10);
+        ->get();
+        // dd(Role::all());
+        return view('pages.parameters.Users.AfficherUser',
+        [
+            'users'=>$users,
+            'roles'=>Role::all(),
 
-        return view('pages.parameters.Users.AfficherUser',['users'=>$users]);
+
+    
+    
+    ]);
 
     }
     public function AjouterUser(Request $req){
@@ -86,7 +110,8 @@ return redirect('AfficherUser');
         $user->firstname=$req->first_user;
         $user->email=$req->Email_user;
         $user->Role=$req->Role;
-        $user->password=$req->pass_user;
+        $user->password=Hash::make($req->pass_user);
+
         $user->save();
         DB::commit();
 
@@ -100,11 +125,13 @@ return redirect('AfficherUser');
     }
 }
     public function DeleteUser(Request $req){
+
+        // dd($req->id);
 try {
    $user= User::find($req->id);
    $user->delete();
 
-    session()->flash('success', 'Delete Avec Success');
+    session()->flash('success', 'Supression avec Success');
 }
 catch (Exception $ex) {
     // dd($ex);

@@ -11,9 +11,9 @@
                             <div class="col-md-12">
                                 <div class="buttons">
                                     @if ($produit->active==1)
-                                    <a  href="desactiverproduit{{$produit->id}}" class="btn-hover color-red">Désactiver</a>
+                                    <a  href="desactiverproduit{{$produit->id}}/0" class="btn-hover color-red">Désactiver</a>
                                         @else
-                                    <a  href="avtiverproduit{{$produit->id}}" class="btn-hover color-green">Activer</a>
+                                    <a  href="avtiverproduit{{$produit->id}}/0" class="btn-hover color-green">Activer</a>
                                     @endif
                                     <a href="modifierproduitformule{{$produit->id}}" class="btn-hover color-green">Modifier</a>
                                 </div>
@@ -80,11 +80,11 @@
                                                 <div class="block-info">
                                                     <div class="content">
                                                         <ul>
-                                                            <li><label>PPH</label> <span>Aucun</span></li>
-                                                            <li><label>PPV</label> <span>Aucun</span></li>
-                                                            <li><label>TVA sur Achat</label> <span>Aucun</span></li>
-                                                            <li><label>Est de remboursement</label> <span>Aucun</span></li>
-                                                            <li><label>Base de remboursement</label> <span>Aucun</span></li>
+                                                            <li><label>PPH</label> <span> {{$produit->PPH}}</span></li>
+                                                            <li><label>PPV</label> <span> {{$produit->PPV}}</span></li>
+                                                            <li><label>TVA sur Achat</label> <span> {{$produit->TVA}}%</span></li>
+                                                            <li><label>Est de remboursement</label> <span> {{$produit->remboursable}}</span></li>
+                                                            <li><label>Base de remboursement</label> <span> {{$produit->image}}</span></li>
                                                             <li><label>Stock min</label> <span>Aucun</span></li>
                                                             <li><label>Stock max</label> <span>Aucun</span></li>
                                                         </ul>
@@ -309,9 +309,9 @@
                                         <div class="block-information">
                                             <h5>Informations de traçabilité</h5>
                                             <ul>
-                                                <li class="bg-color"><span>Créer par</span> <span>Dr {{Auth::User()->name}}</span></li>
+                                                <li class="bg-color"><span>Créer par</span> <span>Dr {{$creer_par->name}}</span></li>
                                                 <li><span>Créer le</span> <span>{{$produit->created_at}}</span></li>
-                                                <li class="bg-color"><span>Mise à jour par</span> <span>Dr {{Auth::User()->name}}</span></li>
+                                                <li class="bg-color"><span>Mise à jour par</span> <span>Dr {{$creer_par->name}}</span></li>
                                                 <li><span>Mise à jour le </span> <span>{{$produit->updated_at}}</span></li>
                                             </ul>
                                         </div>

@@ -3,26 +3,30 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Classe;
+use App\ContreIndication;
 use App\Type;
 use App\Form;
 use App\Dci;
 use App\Produit;
 use App\Prixproduit;
 use App\Datepremptionproduit;
+use Exception;
+use App\Zone;
+
 
 use Illuminate\Support\Facades\DB;
 use App\User;
 use Illuminate\Support\Facades\Hash;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 
 
- 
 class ProduitsController extends Controller
 {
     //
-
-    public function __construct()
+	
+	
+	   public function __construct()
     {
         $this->middleware('auth');
        
@@ -35,20 +39,21 @@ class ProduitsController extends Controller
         <script>localStorage.setItem("select", "produits");</script>
         ');
     }
-
-
     public function index(){
         // $produits=Produit::all();
-        $this->afficherheader();
+ $this->afficherheader();
+        echo( '
+        <script>localStorage.setItem("sousselect", "tousproduits");</script>
+        ');
 
         $produits= DB::table('produits')
         ->join('classes','produits.classes_id','=','classes.id')
         ->join('types','produits.types_id','=','types.id')
-        ->join('forms', 'produits.forms_id', '=', 'forms.id')   
+        ->join('forms', 'produits.forms_id', '=', 'forms.id')
         ->join('dcis', 'produits.dcis_id', '=', 'dcis.id')
         ->select('produits.*','classes.name as nameclasse','types.name as nametype','forms.name as nameform'
         ,'dcis.name as namedci')
-        // ->where('produits.creer_par',Auth::User()->id)
+        ->where('produits.creer_par',Auth::User()->id)
         ->whereNull('produits.deleted_at')
         ->paginate(4);
         return view('pages.products.product',
@@ -60,7 +65,7 @@ class ProduitsController extends Controller
         $produits= DB::table('produits')
         ->join('classes','produits.classes_id','=','classes.id')
         ->join('types','produits.types_id','=','types.id')
-        ->join('forms', 'produits.forms_id', '=', 'forms.id')   
+        ->join('forms', 'produits.forms_id', '=', 'forms.id')
         ->join('dcis', 'produits.dcis_id', '=', 'dcis.id')
         ->select('produits.*','classes.name as nameclasse','types.name as nametype','forms.name as nameform'
         ,'dcis.name as namedci')
@@ -71,8 +76,30 @@ class ProduitsController extends Controller
         return view('pages.products.table-initiale',
         ['produits' => $produits,]);
     }
+    public function get_produit_bynom($nom){
+
+        $produits= DB::table('produits')
+        ->join('classes','produits.classes_id','=','classes.id')
+        ->join('types','produits.types_id','=','types.id')
+        ->join('forms', 'produits.forms_id', '=', 'forms.id')
+        ->join('dcis', 'produits.dcis_id', '=', 'dcis.id')
+        ->select('produits.*','classes.name as nameclasse','types.name as nametype','forms.name as nameform'
+        ,'dcis.name as namedci')
+        // ->where('creer_par',Auth::User()->id)
+        ->where('produits.name', 'like', '%'.$nom.'%')
+        ->whereNull('produits.deleted_at')
+                ->where('produits.active',1)
+
+        ->get();
+        // dd( $produits);
+        return view('pages.products.table',
+        ['produits' => $produits,]);
+    }
+
 
     public function gettableproduitajax(){
+
+        // dd("lkj");
         $produits= DB::table('produits')
         ->join('classes','produits.classes_id','=','classes.id')
         ->join('types','produits.types_id','=','types.id')
@@ -85,78 +112,57 @@ class ProduitsController extends Controller
         return datatables( $produits)->make(true) ;
     }
 
-    
-    public function get_produit_bynom($nom){
-
-        $produits= DB::table('produits')
-        ->join('classes','produits.classes_id','=','classes.id')
-        ->join('types','produits.types_id','=','types.id')
-        ->join('forms', 'produits.forms_id', '=', 'forms.id')   
-        ->join('dcis', 'produits.dcis_id', '=', 'dcis.id')
-        ->select('produits.*','classes.name as nameclasse','types.name as nametype','forms.name as nameform'
-        ,'dcis.name as namedci')
-        // ->where('creer_par',Auth::User()->id)
-        ->where('produits.name', 'like', '%'.$nom.'%')
-        ->whereNull('produits.deleted_at')
-        ->get();
-        // dd( $produits);
-        return view('pages.products.table',
-        ['produits' => $produits,]);
-    }
-
 public function formuleajouterproduit(){
-    $this->afficherheader();
+ $this->afficherheader();
+        echo( '
+        <script>localStorage.setItem("sousselect", "ajouterproduit");</script>
+        ');
 
     $classes=Classe::all();
     $types=Type::all();
     $forms=Form::all();
     $dcis=Dci::all();
-    // dd($forms);
-
+    $Zone=Zone::all();
     $stocks= DB::table('inventaires')
     ->select('inventaires.*')
     ->where('creer_par',Auth::User()->id)
-    ->get(); 
-  
+    ->get();
+    $conduit=DB::table('contre_indications')->select('contre_indications.*')->whereNull('contre_indications.deleted_at')->where('Type',"conduit")->get();
+    $monograph=DB::table('contre_indications')->select('contre_indications.*')->whereNull('contre_indications.deleted_at')->where('Type',"monograph")->get();
+    $grossesse=DB::table('contre_indications')->select('contre_indications.*')->whereNull('contre_indications.deleted_at')->where('Type',"grossesse")->get();
+    $TvaAchat=DB::table('tvas')->select('tvas.*')->where('Type',"Achat")->whereNull('tvas.deleted_at')->get();
+    $TvaVente=DB::table('tvas')->select('tvas.*')->where('Type',"Vente")->whereNull('tvas.deleted_at')->get();
+
     return view('pages.products.add-product', [
         'classes' => $classes,
         'types' => $types,
         'forms' => $forms,
         'dcis' => $dcis,
         'stocks'=> $stocks,
+        'conduit'=> $conduit,
+        'monograph'=> $monograph,
+        'grossesse'=> $grossesse,
+        'TvaAchat'=> $TvaAchat,
+        'TvaVente'=> $TvaVente,
+        'Zone'=> $Zone,
+
+
     ]);
 
 }
 
 public function modifierproduitformule($id)
-{ 
-    $classes=Classe::all();
-    $this->afficherheader();
 
+       
+
+{  
+    
+ $this->afficherheader();
+ $classes=Classe::all();
     $types=Type::all();
     $forms=Form::all();
     $dcis=Dci::all();
-    $produits= DB::table('produits')
-        ->join('classes','produits.classes_id','=','classes.id')
-        ->join('types','produits.types_id','=','types.id')
-        ->join('forms', 'produits.forms_id', '=', 'forms.id')   
-        ->join('dcis', 'produits.dcis_id', '=', 'dcis.id')
-        ->select('produits.*','classes.name as nameclasse','types.name as nametype','forms.name as nameform'
-        ,'dcis.name as namedci')
-        ->where('produits.id',$id)
-        ->get(); 
-        $produit=$produits[0];
-        return view('pages.products.modifier-product',[
-        'produit' => $produit, 
-        'classes' => $classes,
-        'types' => $types,
-        'forms' => $forms,
-        'dcis' => $dcis
-    ])
-    ;}
-public function informationproduct($id)
-{
-    $this->afficherheader();
+    $zone=Zone::all();
 
     $produits= DB::table('produits')
         ->join('classes','produits.classes_id','=','classes.id')
@@ -166,22 +172,68 @@ public function informationproduct($id)
         ->select('produits.*','classes.name as nameclasse','types.name as nametype','forms.name as nameform'
         ,'dcis.name as namedci')
         ->where('produits.id',$id)
-        ->get(); 
+        ->get();
+        $produit=$produits[0];
+        $TvaAchat=DB::table('tvas')->select('tvas.*')->where('Type',"Achat")->whereNull('tvas.deleted_at')->get();
+        $TvaVente=DB::table('tvas')->select('tvas.*')->where('Type',"Vente")->whereNull('tvas.deleted_at')->get();
+        $conduit=DB::table('contre_indications')->select('contre_indications.*')->whereNull('contre_indications.deleted_at')->where('Type',"conduit")->get();
+        $monograph=DB::table('contre_indications')->select('contre_indications.*')->whereNull('contre_indications.deleted_at')->where('Type',"monograph")->get();
+        $grossesse=DB::table('contre_indications')->select('contre_indications.*')->whereNull('contre_indications.deleted_at')->where('Type',"grossesse")->get();
+        return view('pages.products.modifier-product',[
+        'produit' => $produit,
+        'classes' => $classes,
+        'types' => $types,
+        'forms' => $forms,
+        'dcis' => $dcis,
+        'conduit'=> $conduit,
+        'monograph'=> $monograph,
+        'grossesse'=> $grossesse,
+        'TvaAchat'=> $TvaAchat,
+        'TvaVente'=> $TvaVente,
+        'zone'=> $zone,
+
+        ]);
+    }
+public function informationproduct($id)
+{
+	
+	 $this->afficherheader();
+       
+
+         $produits= DB::table('produits')
+        ->join('classes','produits.classes_id','=','classes.id')
+        ->join('types','produits.types_id','=','types.id')
+        ->join('forms', 'produits.forms_id', '=', 'forms.id')
+        ->join('dcis', 'produits.dcis_id', '=', 'dcis.id')
+        ->select('produits.*','classes.name as nameclasse','types.name as nametype','forms.name as nameform'
+        ,'dcis.name as namedci')
+        ->where('produits.id',$id)
+        ->get();
+        // dd( $produits);
+
         $prixproduits= DB::table('prixproduits')
         ->select('prixproduits.*')
         ->where('prixproduits.produits_id',$id)
-        ->get(); 
+        ->get();
         $Datepremptionproduit= DB::table('datepremptionproduits')
         ->select('datepremptionproduits.*')
         ->where('datepremptionproduits.produits_id',$id)
         ->get();
+
+
         $produit=$produits[0];
+       $creer_par=User::find( $produit->creer_par);
+
         return view('pages.products.informationproduct',[
-        'produit' => $produit, 
+        'produit' => $produit,
         'prixproduits' => $prixproduits,
-        'Datepremptionproduit' => $Datepremptionproduit ])
+        'Datepremptionproduit' => $Datepremptionproduit,
+        'creer_par' => $creer_par
+      
+        ])
     ;}
     public function updateproduct(Request $request,$id){
+
         $request->validate([
             'nom' => 'required',
             // 'image' => 'required',
@@ -203,7 +255,7 @@ public function informationproduct($id)
           $image = time() . '-' . $request->nom . '.' . $request->image->extension();
           $request->image->move(public_path('images'), $image);
           $produit->image = $image;
-          } 
+          }
           $produit->classes_id=  $request->classe;
           $produit->types_id=  $request->categorie;
           $produit->forms_id=  $request->fgalenique;
@@ -219,7 +271,7 @@ public function informationproduct($id)
           $produit->prescription=  $request->prescription;
           $produit->produit_marche=  $request->produit_marche;
           $produit->PPH = $request->pph;
-          $produit->PPV = $request->ppv;  
+          $produit->PPV = $request->ppv;
           $produit->PPH_prix = $request->pph;
           $produit->PPV_prix= $request->ppv;
           $produit->TVA = $request->tva_achat;
@@ -237,21 +289,22 @@ public function informationproduct($id)
           $produit->conditionnement=  $request->conditionnement;
           $produit->monograph=  $request->description_monograph;
           $produit->description=  $request->description;
+          $produit->zone=  $request->zone;
           $produit->update();
           DB::commit();
           session()->flash('success', 'bien Modifier');
       }
-      catch(QueryException $ex){
+      catch(Exception $ex){
           DB::rollBack();
-          dd( $ex);
+          
           session()->flash('warning', 'erreur base donnée');
-          return redirect('produit');
+        //   return redirect('produit');
       }
-          return redirect("produit");  
+          return redirect("produit");
     }
 public function addproduit(Request $request){
 
-    
+
     $request->validate([
         'nom' => 'required',
         'image' => 'required',
@@ -273,7 +326,7 @@ public function addproduit(Request $request){
     $image = time() . '-' . $request->nom . '.' . $request->image->extension();
     $request->image->move(public_path('images'), $image);
     $produit->image = $image;
-    } 
+    }
     $produit->classes_id=  $request->classe;
     $produit->types_id=  $request->categorie;
     $produit->forms_id=  $request->fgalenique;
@@ -309,6 +362,9 @@ public function addproduit(Request $request){
     $produit->monograph=  $request->description_monograph;
     $produit->description=  $request->description;
     $produit->inventaires_id=$request->stock_id;
+    $produit->zone=$request->zone;
+
+    
     $produit->creer_par=Auth::User()->id;
     if($request->stock_id!=null)
     $produit->inventaires_id=$request->stock_id;
@@ -319,13 +375,13 @@ public function addproduit(Request $request){
     DB::commit();
     session()->flash('success', 'bien ajouter');
 }
-catch(QueryException $ex){
+catch(Exception $ex){
     DB::rollBack();
-    dd( $ex)
+  
 ;    session()->flash('warning', 'erreur base donnée');
     return redirect('produit');
 }
-    return redirect("produit"); 
+    return redirect("produit");
 }
 public function addprixproduits($id,Request $request){
 
@@ -343,12 +399,12 @@ public function addprixproduits($id,Request $request){
     DB::commit();
     session()->flash('success', 'prix bien ajouter');
 }
-catch(QueryException $ex){
+catch(Exception $ex){
     DB::rollBack();
     session()->flash('warning', 'erreur base donnée');
     return redirect('informationproduct'.$id);
 }
-    return redirect("informationproduct".$id); 
+    return redirect("informationproduct".$id);
 }
 
 public function add_date_peremption(Request $request){
@@ -369,12 +425,12 @@ public function add_date_peremption(Request $request){
     DB::commit();
     session()->flash('success', 'date peremption bien ajouter');
 }
-catch(QueryException $ex){
+catch(Exception $ex){
     DB::rollBack();
     session()->flash('warning', 'erreur base donnée');
     return redirect('informationproduct'.$id);
 }
-    return redirect("informationproduct".$id); 
+    return redirect("informationproduct".$id);
 }
 
 
@@ -389,12 +445,12 @@ public function modifier_date_peremption(Request $request){
     DB::commit();
     session()->flash('success', 'date peremption bien modifier');
 }
-catch(QueryException $ex){
+catch(Exception $ex){
     DB::rollBack();
     session()->flash('warning', 'erreur base donnée');
     return redirect('informationproduct'.$prixproduit->produits_id);
 }
-    return redirect("informationproduct".$prixproduit->produits_id); 
+    return redirect("informationproduct".$prixproduit->produits_id);
 }
 public function delete_date_peremption(Request $request){
 
@@ -407,18 +463,18 @@ public function delete_date_peremption(Request $request){
     DB::commit();
     session()->flash('success', 'date peremption bien supprimer');
 }
-catch(QueryException $ex){
+catch(Exception $ex){
     DB::rollBack();
     session()->flash('warning', 'erreur base donnée');
-    return redirect("informationproduct".$prixproduit->produits_id); 
+    return redirect("informationproduct".$prixproduit->produits_id);
 }
-return redirect("informationproduct".$prixproduit->produits_id); 
+return redirect("informationproduct".$prixproduit->produits_id);
 }
 
 
 
 
-public function desactiverproduit($id,Request $request){
+public function desactiverproduit($id,$etat,Request $request){
     // dd("kk");
     // $request=new Request();
     DB::beginTransaction();
@@ -429,33 +485,61 @@ public function desactiverproduit($id,Request $request){
     DB::commit();
     session()->flash('success', 'bien désactiver');
 }
-catch(QueryException $ex){
+catch(Exception $ex){
     DB::rollBack();
     session()->flash('warning', 'erreur base donnée');
-    return redirect('produit');
+    // return redirect('produit');
 }
-    return redirect("produit"); 
+
+if( $etat==0)
+return redirect("produit");
+else 
+return redirect("stock");
+    // return redirect("produit");
 }
 public function supprimerproduit(Request $request){
     // dd('lkjh');
     DB::beginTransaction();
     $id=$request->produit_id;
+       $count = DB::table('venteproduits')
+        ->where('venteproduits.produits_id' ,$id)
+        ->whereNull('venteproduits.deleted_at')
+        ->count();
+        if(( $count )!=0){
+    session()->flash('warning', 'Vous ne pouvez pas supprimer ce produit, car il est déjà vendu');
+    if( $request->etat==1)
+    return redirect("stock");
+    else 
+    return redirect("produit");
+        }
+
     try{
+
+    
+
     $produit=Produit::find($id);
     $produit->delete();
     DB::commit();
     session()->flash('success', 'bien supprimer');
-    
 }
-catch(QueryException $ex){
+catch(Exception $ex){
     DB::rollBack();
     session()->flash('warning', 'erreur base donnée');
-    return redirect('produit');
-}
-    return redirect("produit"); 
+    // return redirect('produit');
 }
 
-public function avtiverproduit($id,Request $request ){
+
+if( $request->etat==1)
+return redirect("stock");
+else 
+return redirect("produit");
+    // return redirect("produit");
+
+
+
+}
+
+public function avtiverproduit($id,$etat,Request $request ){
     DB::beginTransaction();
     try{
     $produit=Produit::find($id);
@@ -464,13 +548,17 @@ public function avtiverproduit($id,Request $request ){
     DB::commit();
     session()->flash('success', 'bien activer');
 }
-catch(QueryException $ex){
+catch(Exception $ex){
     DB::rollBack();
     session()->flash('warning', 'erreur base donnée');
-    return redirect('produit');
+    // return redirect('produit');
 }
-    return redirect("produit"); 
-}
+if( $etat==0)
+return redirect("produit");
+else 
+return redirect("stock");
+    return redirect("produit")
+;}
 
 }
 

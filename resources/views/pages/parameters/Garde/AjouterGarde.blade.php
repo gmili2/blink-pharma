@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.appr')
 
 @section('content')
 
@@ -6,7 +6,7 @@
 <div class="page-content">
 
 
-@include('layouts.navparam')
+{{-- @include('layouts.navparam') --}}
 
                     <section class="section-client mt-3 pb-5">
                         <form action="AjouterGarde" method="POST">

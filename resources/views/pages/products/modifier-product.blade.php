@@ -18,7 +18,7 @@
                                 <div class="col-md-6 text-end">
                                     <div class="buttons">
                                         {{-- <a href="#" class="btn-hover color-green btn-fixed">Sauvegarder</a> --}}
-                                        <button type="submit" class="btn-hover color-green btn-fixed"> Sauvegarder</button>
+                                        <button type="submit" class="btn-hover color-green btn-fixed" style="margin-top:15px"> Sauvegarder</button>
                                     </div>
                                 </div>
                             </div>
@@ -79,7 +79,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Catégorie</label>
                                             <select class="chosen-select form-select "  name="categorie" required>
-                                                <option  value="" selected>...</option>
+                                                <option   selected>...</option>
                                                 @foreach($types as $type)
                                                 <option  value="{{$type->id}}"  @if($produit->types_id==$type->id) selected @endif>{{$type->name}}</option>
 
@@ -96,7 +96,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Classe thérapeutique</label>
                                             <select class="chosen-select form-select "   required name="classe">
-                                                <option value=""  selected>...</option>
+                                                <option   selected>...</option>
                                                 @foreach($classes as $classe)
                                                 <option  value="{{$classe->id}}"  @if($produit->classes_id==$classe->id) selected @endif>{{$classe->name}}</option>
 
@@ -113,7 +113,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Forme galénique</label>
                                             <select  class="chosen-select form-select "   required name="fgalenique">
-                                                <option   value="" selected>...</option>
+                                                <option    selected>...</option>
                                                 @foreach($forms as $form)
                                                 <option  value="{{$form->id}}"  @if($produit->forms_id==$form->id) selected @endif>{{$form->name}}</option>
                                                 @endforeach
@@ -129,7 +129,7 @@
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">DCI</label>
                                             <select class="chosen-select form-select "    required name="dci">
-                                                <option  value=""  selected>...</option>
+                                                <option    selected>...</option>
                                                 @foreach($dcis as $dci)
                                                 <option  value="{{$dci->id}}" @if($produit->dcis_id==$dci->id) selected @endif >{{$dci->name}}</option>
                                                 @endforeach
@@ -207,7 +207,7 @@
 
 
                                         <div class="col-md-4 mb-3">
-                                            <label class="form-label">Quantite disponible</label>
+                                            <label class="form-label">Quantite </label>
                                             <input type="text" class="form-control" value="{{$produit->quantite}}" name="quantite" />
                                             @error('ppv')
                                         
@@ -218,14 +218,17 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">TVA sur achat</label>
-                                            <select class="chosen-select form-select "  required  name="tva_achat">
-                                                <option value="" selected>...</option>
-                                                <option value="1"   @if($produit->TVA=="1")  selected @endif>One</option>
-                                                <option value="2"   @if($produit->TVA=="2") selected @endif>Two</option>
-                                                <option value="3"   @if($produit->TVA=="3") selected @endif>Three</option>
+                                            <select class="chosen-select form-select "    name="tva_achat">
+                                                @foreach ($TvaAchat as $item)
+                                                  <option value="{{$item->Valeur}}"
+                                                    @if ($item->id==$produit->TVA)
+                                                    selected                                                    @endif
+                                                    >{{$item->Nom_Tva}} : {{$item->Valeur}}</option>
+                                                @endforeach
+
                                             </select>
                                             @error('tva_achat')
-                                        
+
                                             <span>
                                                 <strong style="color: red">a remplir</strong>
                                             </span>
@@ -233,18 +236,40 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">TVA sur vente</label>
-                                            <select class="chosen-select form-select "  required  name="tva_vente">
-                                                <option  value="" selected>...</option>
-                                                <option value="1"   @if($produit->TVA_vente=="1") selected @endif>One</option>
-                                                <option value="2"  @if($produit->TVA_vente=="2") selected @endif>Two</option>
-                                                <option value="3"  @if($produit->TVA_vente=="3") selected @endif>Three</option>
+
+                                            <select class="chosen-select form-select "    name="tva_vente">
+                                                {{-- <option selected>...</option> --}}
+                                                @foreach ($TvaVente as $item)
+                                                  <option value="{{$item->Valeur}}"
+                                                    @if ($item->id==$produit->TVA_vente)
+                                                        selected                                                    @endif
+                                                    >{{$item->Nom_Tva}} :  {{$item->Valeur}}</option>
+                                                @endforeach
+
                                             </select>
+
                                             @error('tva_vente')
-                                        
+
                                             <span>
                                                 <strong style="color: red">a remplir</strong>
                                             </span>
                                         @enderror
+                                        </div>
+
+
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Zone</label>
+                                            <select class="chosen-select form-select "    name="zone" required>
+                                                <option >...</option>
+                                                @foreach ($zone as $item)
+                                                  <option 
+                                                  @if ($item->id==$produit->zone)
+                                                  selected  @endif
+                                                  value="{{$item->id}}">{{$item->Nom_zone}} :  {{$item->Ref_zone}}</option>
+                                                @endforeach
+
+                                            </select>
+
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Est remboursable</label>

@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-md-12 text-end">
                                 <div class="buttons" >
-                                    <a   onclick="afficher_devis()" class="btn-hover color-green">Suivant</a>
+                                    <button   onclick="afficher_devis()" class="btn-hover color-green">Suivant</button>
                                 </div>
                             </div>
                         </div>
@@ -45,18 +45,31 @@
                                                         {{-- </h4> --}}
                                                     
                                                     </a>
-                                                    <button type="submit" class="btn-hover color-yellow"><i class="bi bi-search"></i> Recherche</button>
+                                                    <!--<button type="submit" class="btn-hover color-yellow"><i class="bi bi-search"></i> Recherche</button>-->
+                                                </div>
+
+                                                <div class="buttons">
+                                                    <a href="#" class="btn-hover color-blue" data-bs-toggle="modal" data-bs-target="#search-organisme">
+                                                        
+                                                        <i class="bi bi-plus-lg"></i> 
+                                                        <span id="choisir_organime_titre">  
+                                                            choisir un organisme</span>
+                                                       
+                                                    
+                                                    </a>
+                                                    {{-- <button type="submit" class="btn-hover color-yellow"><i class="bi bi-search"></i> Recherche</button> --}}
                                                 </div>
                                             </div>
 
                                             <div class="col-md-10 mb-3">
-                                                <h4>selectionner les produits</h4>
+                                                <h4>Selectionner les produits
+                                                </h4>
                                             
                                             </div>
                                         </div>
                                     {{-- </form> --}}
                                     <hr class="divider" />
-                                    <table id="table" class="table table-striped mb-4" style="width: 100%;">
+                                    <table id="table" class="table table-striped mb-4 selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Nom</th>
@@ -174,13 +187,13 @@
                                                 </li>
                                                 <li>
                                                     <label>Par :</label>
-                                                    <span>Dr {{Auth::User()->name}} <i class="bi bi-chevron-down ms-2"></i></span>
+                                                    <span>Dr {{Auth::User()->name}}</span>
                                                 </li>
                                             </ul>
                                         </div>
                                         <div class="content d-flex justify-content-between">
                                             <div>
-                                                <h3 class="m-0">Total à payer</h3>
+                                                <h3 class="m-0">Total à payer HT</h3>
                                                 @foreach ($produits as $item)
                                                 <div 
                                                 @if ((in_array($item->id, $ids)))
@@ -204,13 +217,34 @@
                                         </div>
                                         <div class="content d-flex justify-content-between">
                                             <div>
+                                                <h3 class="m-0">Total à payer TTC</h3>
+                                                @foreach ($produits as $item)
+                                                <div hidden id='div_quantite{{$item->id}}'>
+                                                    <span>Quantité totale de produit {{$item->name}}: 
+                                                        <span id="quatitevalue{{$item->id}}">1</span> </span>
+                                                </div>
+                                                @endforeach
+                                            </div>
+                                            <div>
+                                                <h3 id="total_apayettc"></h3>
+                                            </div>
+                                        </div>
+                                      
+                                        <div class="content d-flex justify-content-between">
+                                            <div>
                                                 <h3 class="m-0">Client</h3>
-                                                <span>nom client : <span id='nomclientselected'> </span></span>
+                                                <span>nom de client : <span id='nomclientselected'> </span></span>
                                             </div>
 
-                                            {{-- <div>
-                                                <h3>0.00 Dhs</h3>
-                                            </div> --}}
+                                            
+                                        </div>
+                                        <div class="content d-flex justify-content-between">
+                                            <div  id="nomorganismeselected3"  >
+                                                <h3 class="m-0">Organisme</h3>
+                                                <span>nom d'organisme : <span id='nomorganismeselected'> </span></span>
+                                            </div>
+
+                                     
                                         </div>
 
                                         <div class="content d-flex justify-content-between">
@@ -223,7 +257,7 @@
                                         
                                         <hr class="divider mt-3" />
 
-                                        <table id="table-right" class="table table-striped mb-4" style="width: 100%;">
+                                        <table id="table-right" class="table table-striped mb-4 selvente" style="width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -254,14 +288,19 @@
                                                     data-bs-target="#collapseOne"
                                                      aria-expanded="true" aria-controls="collapseOne">
                                                     <td>  
-                                                    <input type="checkbox"  
+                                                    <input type="checkbox"  hidden 
                                                     @if ((in_array($pr->id, $ids)))
                                                     checked
                                                     @else
-                                                     
                                                     @endif  
                                                     name="pr_select[]" value="{{$pr->id}}"
                                                      id="pr_select{{$pr->id}}">
+                                                     <input type="text"  hidden id="tva_produit{{$pr->id}}" value="{{$pr->TVA}}">
+                                                       <input type="text" hidden id="quantitedisponible{{$pr->id}}" value="{{$pr->quantite_disponible}}">
+
+
+
+
                                                     </td>
                                                     <td id='tableproduitselectname'>{{$pr->name}}</td>
                                                     <td id="Prix_unitaire_table{{$pr->id}}">
@@ -304,7 +343,102 @@
                         </div>
                     </section>
                 {{-- </form> --}}
-                
+                <div class="modal fade vente-succes search-client" id="search-organisme" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Choisir un organisme</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div>
+                                <p class="text text-center mt-4">
+                                    Cette fonction vous facilitera l’accès aux fonctionnalités de votre choix,<br />
+                                    d’une façon rapide, efficace et efficiente;
+                                </p>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <table id="tableorganisme" class="table table-striped mb-4 selvente" style="width: 100%;">
+                                            <thead>
+                                                <tr>
+                                                    <th></th>
+                                                    <th>Nom</th>
+                                                    <th>Teléphone</th>
+                                                    <th>Email</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+        
+                                                <tr>
+                                                    <td>
+                                                        <div class="status"><input class="form-check-input" type="radio"
+                                                            name="organismeselecte" id="organismeselecte"  
+                                                            @if ($produitsdejaselected[0]->organisme==null)
+                                                            checked
+                                                                
+                                                            @endif
+                                                              {{-- onclick="selectionnerorganisme()"  --}}
+                                                               value="null" 
+                                                         /></div>
+                                                    </td>
+                                                    <td>Auncun </td>
+                                                    <td>Auncun</td>
+                                                    <td>Auncun</td>
+        
+                                                   
+                                                    <input   hidden value='Client' id='clientnamenull'>
+                                                    <input  hidden value='Client' id='teleclientnull'>
+                                                    <input  hidden value='Client' id='emailclientnull'>
+                                                    
+                                                </tr>
+                                                @foreach ($organismes as $org)
+                                                
+                                                <tr>
+                                                    <td>
+                                                        <div class="status"><input class="form-check-input" type="radio"
+                                                            name="organismeselecte" id="organismeselecte"  
+
+                                                            @if ($produitsdejaselected[0]->organisme==$org->id)
+                                                            checked
+                                                        @endif
+                                                        
+                                                              {{-- onclick="selectionnerorganisme()"  --}}
+                                                               value="{{$org->id}}" 
+                                                         /></div>
+                                                    </td>
+                                                    <td>{{$org->nom}} </td>
+                                                    <td>{{$org->tele}}</td>
+                                                    <td>{{$org->email}}</td>
+        
+                                                   
+                                                    <input  hidden value='{{$org->nom}}' id='organismename{{$org->id}}'>
+                                                    <input  hidden value='{{$org->tele}}' id='teleorganisme{{$org->id}}'>
+                                                    <input  hidden value='{{$org->email}}' id='emailorganisme{{$org->id}}'>
+                                                    
+                                                </tr>
+                                                @endforeach
+                                            
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+
+                                <div class="row section-footer">
+                                    <div class="buttons">
+                                        <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+        
+                                        <a  class="btn btn-hover color-green mx-1" data-bs-dismiss="modal" onclick="selectionnerorganisme()"
+                                        
+                                        aria-label="Close">Valider</a>
+        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         <div class="modal fade vente-succes search-client" id="search-client" tabindex="-1" aria-labelledby="" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
@@ -321,7 +455,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <table id="table-client" class="table table-striped mb-4" style="width: 100%;">
+                                <table id="tableclient" class="table table-striped mb-4 selvente" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -573,8 +707,8 @@
                                     <a onclick="afficher_vente()" 
                                     id="Retourner" 
                                     class="btn-hover color-blue">Retourner</a>
-                                    <a   class="btn-hover color-green" id="bien_ajouter" hidden>bien modier </a>
-                                    <a   onclick="ajoutervente()" class="btn-hover color-green" id="approuver2">Modifier (F12)</a>
+                                    <button   class="btn-hover color-green" id="bien_ajouter" hidden>Bien modifier </button>
+                                    <button   href='' onclick="ajoutervente()" class="btn-hover color-green" id="approuver2">Modifier</button>
                                </div>
                             </div>
                         </div>
@@ -679,35 +813,35 @@ change_livree()
                                                                 <ul class="liste-raccourci">
                                                                     <li>
                                                                        <a role="button" class="active" id='espece' onclick="activeespece()">
-                                                                          <div class="img"> <i class="bi bi-wallet2"></i> </div>
+                                                                          <div class="img" style="    padding-top: 6px;"> <i class="bi bi-wallet2"></i> </div>
                                                                           <span>Espéces</span>
                                                                        </a>
                                                                     </li>
     
                                                                     <li>
                                                                         <a id="cheque" onclick="activecheque()" role="button" >
-                                                                           <div class="img"> <i class="bi bi-credit-card-2-front"></i> </div>
+                                                                           <div class="img" style="    padding-top: 6px;"> <i class="bi bi-credit-card-2-front"></i> </div>
                                                                            <span>Chéque</span>
                                                                         </a>
                                                                     </li>
     
                                                                     <li>
                                                                         <a  role="button" id="cartebancaire" onclick="activecartebancaire()">
-                                                                           <div class="img"> <i class="bi bi-credit-card"></i> </div>
+                                                                           <div class="img" style="    padding-top: 6px;"> <i class="bi bi-credit-card"></i> </div>
                                                                            <span>Carte bancaire </span>
                                                                         </a>
                                                                     </li>
     
                                                                     <li>
                                                                         <a id="lettre" onclick="activelettre()" role="button">
-                                                                           <div class="img"> <i class="bi bi-file-earmark-text"></i> </div>
+                                                                           <div class="img" style="    padding-top: 6px;"> <i class="bi bi-file-earmark-text"></i> </div>
                                                                            <span>Lettre de change</span>
                                                                         </a>
                                                                     </li>
     
                                                                     <li>
                                                                         <a id="autre" onclick="activeautre()" role="button">
-                                                                           <div class="img"> <i class="bi bi-exclamation-triangle"></i> </div>
+                                                                           <div class="img" style="    padding-top: 6px;"> <i class="bi bi-exclamation-triangle"></i> </div>
                                                                            <span>Autre</span>
                                                                         </a>
                                                                     </li>
@@ -717,10 +851,10 @@ change_livree()
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
-    
-                                    <div class="row">
+                                                <br>
+                                                <br>
+
+                                <div class="row">
     
                                         <div class="col-md-6 offset-6">
                                             <div class="card-total">
@@ -739,6 +873,7 @@ change_livree()
                                                         Total à payer :
                                                     </div>
                                                     <input type="text"  hidden id="montant_total">
+                                                    <input hidden type="text" id="montant_totalTVA">
                                                     <input type="text" hidden id="montant_PPV">
                                                     <input type="text" hidden id="montant_rendre">
                                                     <input type="text" hidden id="montant_credit">
@@ -747,12 +882,23 @@ change_livree()
                                                     </div>
                                                 </div>
             
-                                                <div class="d-flex mb-2">
+                                                {{-- <div class="d-flex mb-2">
                                                     <div class="flex-shrink-0 flex-label">
                                                         Total à payer par l’organisme :
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
                                                         11.21
+                                                    </div>
+                                                </div> --}}
+                                                <div class="d-flex mb-2">
+                                                    <div class="flex-shrink-0 flex-label h5">
+                                                        Total à payer TTC :
+                                                    </div>
+                                                   
+        
+                                                    
+                                                    <div class="flex-grow-1 ms-3 h5" id="total_apaye2ttc">
+                                                        
                                                     </div>
                                                 </div>
     
@@ -768,9 +914,13 @@ change_livree()
                                             </div>
                                         </div>
                                     </div>
+                                            </div>
+                                        </div>
+    
+                                  
                                 </div>
                             </div>
-                      }
+                      
                            
     
     
@@ -838,10 +988,44 @@ change_livree()
                         </div>
                     </div>
                 </div>
+                <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
 
         <script>
 
+var globalorfanisme;
+
+$(document).ready(function () {
+   
+           selectionnerorganisme();
+})
+function selectionnerorganisme(){
+
+// <input  hidden value='{{$org->nom}}' id='organismename{{$org->id}}'>
+//                                 <input  hidden value='{{$org->tele}}' id='teleorganisme{{$org->id}}'>
+//                                 <input  hidden value='{{$org->email}}' id='emailorganisme{{$org->id}}'>
+var  clientid= document.querySelector('input[name="organismeselecte"]:checked').value;
+if(clientid=='null'){
+document.getElementById("choisir_organime_titre").innerHTML="Choisir un organisme"
+document.getElementById("nomorganismeselected").innerHTML='Choisir un organisme'
+document.getElementById("nomorganismeselected3").hidden=true
+ globalorfanisme=null;
+}
+else
+{
+    var clientname=document.getElementById("organismename"+clientid).value
+document.getElementById("choisir_organime_titre").innerHTML=clientname
+document.getElementById("nomorganismeselected").innerHTML=clientname
+document.getElementById("nomorganismeselected3").hidden=false
+ var clientname=document.getElementById("organismename"+clientid).value
+ var teleclient=document.getElementById("teleorganisme"+clientid).value
+ globalorfanisme=clientid;
+}
+
+// alert("pppp");
+
+//  calcule_total();
+}
 
 var glbalidclient;
             var quatite_total=0;
@@ -863,8 +1047,8 @@ var glbalidclient;
             function recherche_produit(){
             var res=document.getElementById('recherch_produit').value;
             rout="produit_table"+res
-if(res=="")
-rout="produit_ttable"
+        if(res=="")
+        rout="produit_ttable"
             axios.get(rout)
      .then(function (response) {
         document.getElementById("table").innerHTML= response.data;
@@ -872,7 +1056,6 @@ rout="produit_ttable"
        
      })
      .catch(function (error) {
-         // handle error
          console.log(error);
      });
             
@@ -884,6 +1067,8 @@ js_arr.forEach(element => {
     selectproduit_initial(element);
 });
 slectclient();
+
+
           
 var livree=1;
 function change_livree(){
@@ -894,7 +1079,7 @@ function change_nonlivree(){
 }
     function calcule_montant_rendre(){
               var montant_recu=  document.getElementById("montant").value;
-              var montant_rendre=parseInt(montant_recu)-parseInt(document.getElementById("montant_total").value)
+              var montant_rendre=parseInt(montant_recu)-parseInt(document.getElementById("montant_totalTVA").value)
               document.getElementById("monnaie").innerHTML= montant_rendre+"Dh";
               if(montant_rendre>0){
                 document.getElementById("montant_rendre").value=montant_rendre;
@@ -925,7 +1110,6 @@ function selectmodepayment(){
 function selectmodepayment_initial(){
  var oldmodpayment=
  document.getElementById("mode_paymentold").value;
- alert
  if(oldmodpayment==1)
 activeespece()
 if(oldmodpayment==2)
@@ -965,6 +1149,8 @@ if(document.getElementById("status").value==1 && document.getElementById("montan
 toastr.error("saisir un montant");
 else{
 var rout="modifier_produit_client"
+if(globalorfanisme=='null')
+globalorfanisme=null
 axios.post(rout, {
        qty: qty,
        qtyinitiale:qtyinitiale,
@@ -972,12 +1158,13 @@ axios.post(rout, {
        p_unitaire:p_unitaire,
        remboursement:remboursement,
        remise:remise,
+       organisme:globalorfanisme,
        id:document.getElementById("id").value,
        type_remise:	typeremise,
        mode_payment:document.getElementById("mode_payment").value,
        montant_recu:document.getElementById("montant").value,
        montant_PPV:document.getElementById("montant_PPV").value,
-       montant_PU:document.getElementById("montant_total").value,
+       montant_PU:document.getElementById("montant_totalTVA").value,
        montant_rendre:document.getElementById("montant_rendre").value,
        montant_credit:document.getElementById("montant_credit").value,
        client_idsuivant:document.getElementById("client_idsuivant").value,
@@ -1019,6 +1206,9 @@ document.getElementById("facture_lien").href="facture"+response.data["id_vente"]
             function changequantite22(id){
                 quatite_total=0;
                var quatite=document.getElementById("changequantite"+id).value
+var quantitedisponible=document.getElementById("quantitedisponible"+id).value ;
+if(parseInt(quantitedisponible)<parseInt(quatite)){
+toastr.warning("Vous avez dépassé la quantité disponible pour ce produit");}
                document.getElementById("quatitevalue"+id).innerHTML=quatite
                quatite_total = parseInt(quatite_total)+parseInt(quatite)
                quatite= document.getElementById("changequantite"+id).value;
@@ -1048,41 +1238,47 @@ document.getElementById("facture_lien").href="facture"+response.data["id_vente"]
             function afficher_devis(){
                 if(pr_select.length==0){
                     toastr.error("selectionner au moin un produit");
-                    
                 }
                 else{
                 document.getElementById("page_devis").hidden=false
                 document.getElementById("page_vente").hidden=true
                 }
-
-
             }
             function afficher_vente(){
                 document.getElementById("page_devis").hidden=true
                 document.getElementById("page_vente").hidden=false
-
-
             }
             function calcule_total(){
                 total_apaye=0;
                 quantite=0;
                 montant_PPV=0;
+                total_apayetva=0;
                 pr_select.forEach(id => {
+                var tvaproduit=document.getElementById("tva_produit"+id);
+                var prix_unitaire_table=document.getElementById("Prix_unitaire_table"+id);
+                var prix_un=document.getElementById("p_unitaire"+id);
                     document.getElementById("Prix_unitaire_table"+id).innerHTML=
-document.getElementById("p_unitaire"+id).value;
-                    document.getElementById("tableproduitselectTotal"+id).innerHTML=parseInt( document.getElementById("p_unitaire"+id).value)
+                    document.getElementById("p_unitaire"+id).value;
+                    document.getElementById("tableproduitselectTotal"+id).innerHTML=
+                    parseInt( document.getElementById("p_unitaire"+id).value)
                     *parseInt(document.getElementById("changequantite"+id).value);
                     quantite=quantite+parseInt(document.getElementById("changequantite"+id).value)
-                    total_apaye=parseInt(total_apaye)+(parseInt(document.getElementById("p_unitaire"+id).value)*parseInt(document.getElementById("changequantite"+id).value));
-                    montant_PPV=parseInt(montant_PPV)+(parseInt(document.getElementById("PPV"+id).value)*parseInt(document.getElementById("changequantite"+id).value));
+                    total_apaye=parseInt(total_apaye)+(parseInt(document.getElementById("p_unitaire"+id).value)*
+                    parseInt(document.getElementById("changequantite"+id).value));
+                    total_apayetva=((tvaproduit.value/100)*prix_un.value*
+                    parseInt(document.getElementById("changequantite"+id).value))+total_apaye;
+                    montant_PPV=parseInt(montant_PPV)+(parseInt(document.getElementById("PPV"+id).value)
+                    *parseInt(document.getElementById("changequantite"+id).value));
                 })
                 document.getElementById("quatite_total").innerHTML=quantite
                 document.getElementById("quatite_total2").innerHTML=quantite
                 document.getElementById("total_apaye").innerHTML=parseInt(total_apaye)+" Dhs";
                 document.getElementById("montant_total").value=parseInt(total_apaye);
                 document.getElementById("total_apaye2").innerHTML=parseInt(total_apaye)+" Dhs";
+                document.getElementById("total_apaye2ttc").innerHTML=(total_apayetva)+"Dhs";
+                document.getElementById("total_apayettc").innerHTML=(total_apayetva)+"Dhs";
+                document.getElementById("montant_totalTVA").value=parseInt(total_apayetva);
                 document.getElementById("montant_PPV").value=parseInt(montant_PPV);
-
 
             }
             
@@ -1133,31 +1329,13 @@ document.getElementById("p_unitaire"+id).value;
 
                     pr_select.push(id);
 }
-// alert(pr_select)
-// alert(id)
+
             calcule_remise(id)
                
 calcule_total();
 
                         }
-//             function selectproduit(id){
-//                 alert('lkjh')
-// //                 document.getElementById("pr_select"+id).checked=true
-// //                 document.getElementById("tr_produit"+id).hidden=false
-// //                 document.getElementById("div_quantite"+id).hidden=false
-// //                 quatite= document.getElementById("changequantite"+id).value;
-// //                 quatite=parseInt(quatite)+1;
-// //                 document.getElementById("changequantite"+id).value=parseInt(quatite);
-// //                 document.getElementById("quatitevalue"+id).innerHTML=quatite
-// //                quatite_total=quatite_total+quatite
-               
-// //                 if (!pr_select.includes(id)) {
-// //                     pr_select.push(id);
-// // }
-               
-// // calcule_total();
 
-//                         }
 
             function selectproduit(id){
                 document.getElementById("pr_select"+id).checked=true
@@ -1165,6 +1343,11 @@ calcule_total();
                 document.getElementById("div_quantite"+id).hidden=false
                 quatite= document.getElementById("changequantite"+id).value;
                 quatite=parseInt(quatite)+1;
+                
+                var quantitedisponible=document.getElementById("quantitedisponible"+id).value ;
+if(parseInt(quantitedisponible)<parseInt(quatite)){
+toastr.warning("Vous avez dépassé la quantité disponible pour ce produit");
+}
                 document.getElementById("changequantite"+id).value=parseInt(quatite);
                 document.getElementById("quatitevalue"+id).innerHTML=quatite
                quatite_total=quatite_total+quatite
@@ -1248,4 +1431,815 @@ calcule_total();
         // selectmodepayment_initial();
             calcule_montant_rendre();
         </script>
+        
+          <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+
+          <script>
+          
+          
+        //   $(document).ready(function () {
+
+
+
+            $(document).ready(function () {
+
+                
+                $('#tableorganisme').DataTable({
+                dom: 'Bfrtip',
+                columnDefs: [
+                    {
+                        targets: 1,
+                        className: 'noVis'
+                    }
+                ],
+                buttons: [
+                 'excel', 'print',
+                    {
+                    extend: 'colvis',
+                    collectionLayout: 'fixed columns',
+                    collectionTitle: '<h5>Titre</h5>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.'
+                    }
+                ],
+                language: {
+                   search: '', searchPlaceholder: "Recherche...",
+                    "emptyTable": "Aucune donnée disponible dans le tableau",
+                    "loadingRecords": "Chargement...",
+                    "processing": "Traitement...",
+                    "aria": {
+                        "sortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "%d lignes sélectionnées",
+                            "1": "1 ligne sélectionnée"
+                        },
+                        "cells": {
+                            "1": "1 cellule sélectionnée",
+                            "_": "%d cellules sélectionnées"
+                        },
+                        "columns": {
+                            "1": "1 colonne sélectionnée",
+                            "_": "%d colonnes sélectionnées"
+                        }
+                    },
+                    "autoFill": {
+                        "cancel": "Annuler",
+                        "fill": "Remplir toutes les cellules avec <i>%d<\/i>",
+                        "fillHorizontal": "Remplir les cellules horizontalement",
+                        "fillVertical": "Remplir les cellules verticalement"
+                    },
+                    "searchBuilder": {
+                        "conditions": {
+                            "date": {
+                                "after": "Après le",
+                                "before": "Avant le",
+                                "between": "Entre",
+                                "empty": "Vide",
+                                "not": "Différent de",
+                                "notBetween": "Pas entre",
+                                "notEmpty": "Non vide",
+                                "equals": "Égal à"
+                            },
+                            "number": {
+                                "between": "Entre",
+                                "empty": "Vide",
+                                "gt": "Supérieur à",
+                                "gte": "Supérieur ou égal à",
+                                "lt": "Inférieur à",
+                                "lte": "Inférieur ou égal à",
+                                "not": "Différent de",
+                                "notBetween": "Pas entre",
+                                "notEmpty": "Non vide",
+                                "equals": "Égal à"
+                            },
+                            "string": {
+                                "contains": "Contient",
+                                "empty": "Vide",
+                                "endsWith": "Se termine par",
+                                "not": "Différent de",
+                                "notEmpty": "Non vide",
+                                "startsWith": "Commence par",
+                                "equals": "Égal à",
+                                "notContains": "Ne contient pas",
+                                "notEnds": "Ne termine pas par",
+                                "notStarts": "Ne commence pas par"
+                            },
+                            "array": {
+                                "empty": "Vide",
+                                "contains": "Contient",
+                                "not": "Différent de",
+                                "notEmpty": "Non vide",
+                                "without": "Sans",
+                                "equals": "Égal à"
+                            }
+                        },
+                        "add": "Ajouter une condition",
+                        "button": {
+                            "0": "Recherche avancée",
+                            "_": "Recherche avancée (%d)"
+                        },
+                        "clearAll": "Effacer tout",
+                        "condition": "Condition",
+                        "data": "Donnée",
+                        "deleteTitle": "Supprimer la règle de filtrage",
+                        "logicAnd": "Et",
+                        "logicOr": "Ou",
+                        "title": {
+                            "0": "Recherche avancée",
+                            "_": "Recherche avancée (%d)"
+                        },
+                        "value": "Valeur"
+                    },
+                    "searchPanes": {
+                        "clearMessage": "Effacer tout",
+                        "count": "{total}",
+                        "title": "Filtres actifs - %d",
+                        "collapse": {
+                            "0": "Volet de recherche",
+                            "_": "Volet de recherche (%d)"
+                        },
+                        "countFiltered": "{shown} ({total})",
+                        "emptyPanes": "Pas de volet de recherche",
+                        "loadMessage": "Chargement du volet de recherche...",
+                        "collapseMessage": "Réduire tout",
+                        "showMessage": "Montrer tout"
+                    },
+                    "buttons": {
+                        "collection": "Collection",
+                        "colvis": "<i class='bi bi-layout-three-columns'></i>",
+                        "colvisRestore": "Rétablir visibilité",
+                        "copy": "Copier",
+                        "copySuccess": {
+                            "1": "1 ligne copiée dans le presse-papier",
+                            "_": "%ds lignes copiées dans le presse-papier"
+                        },
+                        "copyTitle": "Copier dans le presse-papier",
+                        "csv": "CSV",
+                        "excel": "Excel",
+                        "pageLength": {
+                            "-1": "Afficher toutes les lignes",
+                            "_": "Afficher %d lignes"
+                        },
+                        "pdf": "PDF",
+                        "print": "Imprimer",
+                        "copyKeys": "Appuyez sur ctrl ou u2318 + C pour copier les données du tableau dans votre presse-papier.",
+                        "createState": "Créer un état",
+                        "removeAllStates": "Supprimer tous les états",
+                        "removeState": "Supprimer",
+                        "renameState": "Renommer",
+                        "savedStates": "États sauvegardés",
+                        "stateRestore": "État %d",
+                        "updateState": "Mettre à jour"
+                    },
+                    "decimal": ",",
+                    "search": "Rechercher:",
+                    "datetime": {
+                        "previous": "Précédent",
+                        "next": "Suivant",
+                        "hours": "Heures",
+                        "minutes": "Minutes",
+                        "seconds": "Secondes",
+                        "unknown": "-",
+                        "amPm": [
+                            "am",
+                            "pm"
+                        ],
+                        "months": {
+                            "0": "Janvier",
+                            "2": "Mars",
+                            "3": "Avril",
+                            "4": "Mai",
+                            "5": "Juin",
+                            "6": "Juillet",
+                            "8": "Septembre",
+                            "9": "Octobre",
+                            "10": "Novembre",
+                            "1": "Février",
+                            "11": "Décembre",
+                            "7": "Août"
+                        },
+                        "weekdays": [
+                            "Dim",
+                            "Lun",
+                            "Mar",
+                            "Mer",
+                            "Jeu",
+                            "Ven",
+                            "Sam"
+                        ]
+                    },
+                    "editor": {
+                        "close": "Fermer",
+                        "create": {
+                            "title": "Créer une nouvelle entrée",
+                            "button": "Nouveau",
+                            "submit": "Créer"
+                        },
+                        "edit": {
+                            "button": "Editer",
+                            "title": "Editer Entrée",
+                            "submit": "Mettre à jour"
+                        },
+                        "remove": {
+                            "button": "Supprimer",
+                            "title": "Supprimer",
+                            "submit": "Supprimer",
+                            "confirm": {
+                                "_": "Êtes-vous sûr de vouloir supprimer %d lignes ?",
+                                "1": "Êtes-vous sûr de vouloir supprimer 1 ligne ?"
+                            }
+                        },
+                        "multi": {
+                            "title": "Valeurs multiples",
+                            "info": "Les éléments sélectionnés contiennent différentes valeurs pour cette entrée. Pour modifier et définir tous les éléments de cette entrée à la même valeur, cliquez ou tapez ici, sinon ils conserveront leurs valeurs individuelles.",
+                            "restore": "Annuler les modifications",
+                            "noMulti": "Ce champ peut être modifié individuellement, mais ne fait pas partie d'un groupe. "
+                        },
+                        "error": {
+                            "system": "Une erreur système s'est produite (<a target=\"\\\" rel=\"nofollow\" href=\"\\\">Plus d'information<\/a>)."
+                        }
+                    },
+                    "stateRestore": {
+                        "removeSubmit": "Supprimer",
+                        "creationModal": {
+                            "button": "Créer",
+                            "order": "Tri",
+                            "paging": "Pagination",
+                            "scroller": "Position du défilement",
+                            "search": "Recherche",
+                            "select": "Sélection",
+                            "columns": {
+                                "search": "Recherche par colonne",
+                                "visible": "Visibilité des colonnes"
+                            },
+                            "name": "Nom :",
+                            "searchBuilder": "Recherche avancée",
+                            "title": "Créer un nouvel état",
+                            "toggleLabel": "Inclus :"
+                        },
+                        "renameButton": "Renommer",
+                        "duplicateError": "Il existe déjà un état avec ce nom.",
+                        "emptyError": "Le nom ne peut pas être vide.",
+                        "emptyStates": "Aucun état sauvegardé",
+                        "removeConfirm": "Voulez vous vraiment supprimer %s ?",
+                        "removeError": "Échec de la suppression de l'état.",
+                        "removeJoiner": "et",
+                        "removeTitle": "Supprimer l'état",
+                        "renameLabel": "Nouveau nom pour %s :",
+                        "renameTitle": "Renommer l'état"
+                    },
+                    "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 entrées",
+                    "infoFiltered": "(filtrées depuis un total de _MAX_ entrées)",
+                    "lengthMenu": "Afficher _MENU_ entrées",
+                    "paginate": {
+                        "first": "Première",
+                        "last": "Dernière",
+                        "next": "<i class='bi bi-chevron-right'></i>",
+                        "previous": "<i class='bi bi-chevron-left'></i>"
+                    },
+                    "zeroRecords": "Aucune entrée correspondante trouvée",
+                    "thousands": " "
+               
+                },
+                initComplete: function() {
+                 $('.buttons-excel').html('<i class="bi bi-arrow-down"></i>')
+                 $('.buttons-print').html('<i class="bi bi-printer"></i>')
+                }
+                
+              });
+              $('#tableclient').DataTable({
+                dom: 'Bfrtip',
+                columnDefs: [
+                    {
+                        targets: 1,
+                        className: 'noVis'
+                    }
+                ],
+                buttons: [
+                 'excel', 'print',
+                    {
+                    extend: 'colvis',
+                    collectionLayout: 'fixed columns',
+                    collectionTitle: '<h5>Titre</h5>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.'
+                    }
+                ],
+                language: {
+                   search: '', searchPlaceholder: "Recherche...",
+                    "emptyTable": "Aucune donnée disponible dans le tableau",
+                    "loadingRecords": "Chargement...",
+                    "processing": "Traitement...",
+                    "aria": {
+                        "sortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "%d lignes sélectionnées",
+                            "1": "1 ligne sélectionnée"
+                        },
+                        "cells": {
+                            "1": "1 cellule sélectionnée",
+                            "_": "%d cellules sélectionnées"
+                        },
+                        "columns": {
+                            "1": "1 colonne sélectionnée",
+                            "_": "%d colonnes sélectionnées"
+                        }
+                    },
+                    "autoFill": {
+                        "cancel": "Annuler",
+                        "fill": "Remplir toutes les cellules avec <i>%d<\/i>",
+                        "fillHorizontal": "Remplir les cellules horizontalement",
+                        "fillVertical": "Remplir les cellules verticalement"
+                    },
+                    "searchBuilder": {
+                        "conditions": {
+                            "date": {
+                                "after": "Après le",
+                                "before": "Avant le",
+                                "between": "Entre",
+                                "empty": "Vide",
+                                "not": "Différent de",
+                                "notBetween": "Pas entre",
+                                "notEmpty": "Non vide",
+                                "equals": "Égal à"
+                            },
+                            "number": {
+                                "between": "Entre",
+                                "empty": "Vide",
+                                "gt": "Supérieur à",
+                                "gte": "Supérieur ou égal à",
+                                "lt": "Inférieur à",
+                                "lte": "Inférieur ou égal à",
+                                "not": "Différent de",
+                                "notBetween": "Pas entre",
+                                "notEmpty": "Non vide",
+                                "equals": "Égal à"
+                            },
+                            "string": {
+                                "contains": "Contient",
+                                "empty": "Vide",
+                                "endsWith": "Se termine par",
+                                "not": "Différent de",
+                                "notEmpty": "Non vide",
+                                "startsWith": "Commence par",
+                                "equals": "Égal à",
+                                "notContains": "Ne contient pas",
+                                "notEnds": "Ne termine pas par",
+                                "notStarts": "Ne commence pas par"
+                            },
+                            "array": {
+                                "empty": "Vide",
+                                "contains": "Contient",
+                                "not": "Différent de",
+                                "notEmpty": "Non vide",
+                                "without": "Sans",
+                                "equals": "Égal à"
+                            }
+                        },
+                        "add": "Ajouter une condition",
+                        "button": {
+                            "0": "Recherche avancée",
+                            "_": "Recherche avancée (%d)"
+                        },
+                        "clearAll": "Effacer tout",
+                        "condition": "Condition",
+                        "data": "Donnée",
+                        "deleteTitle": "Supprimer la règle de filtrage",
+                        "logicAnd": "Et",
+                        "logicOr": "Ou",
+                        "title": {
+                            "0": "Recherche avancée",
+                            "_": "Recherche avancée (%d)"
+                        },
+                        "value": "Valeur"
+                    },
+                    "searchPanes": {
+                        "clearMessage": "Effacer tout",
+                        "count": "{total}",
+                        "title": "Filtres actifs - %d",
+                        "collapse": {
+                            "0": "Volet de recherche",
+                            "_": "Volet de recherche (%d)"
+                        },
+                        "countFiltered": "{shown} ({total})",
+                        "emptyPanes": "Pas de volet de recherche",
+                        "loadMessage": "Chargement du volet de recherche...",
+                        "collapseMessage": "Réduire tout",
+                        "showMessage": "Montrer tout"
+                    },
+                    "buttons": {
+                        "collection": "Collection",
+                        "colvis": "<i class='bi bi-layout-three-columns'></i>",
+                        "colvisRestore": "Rétablir visibilité",
+                        "copy": "Copier",
+                        "copySuccess": {
+                            "1": "1 ligne copiée dans le presse-papier",
+                            "_": "%ds lignes copiées dans le presse-papier"
+                        },
+                        "copyTitle": "Copier dans le presse-papier",
+                        "csv": "CSV",
+                        "excel": "Excel",
+                        "pageLength": {
+                            "-1": "Afficher toutes les lignes",
+                            "_": "Afficher %d lignes"
+                        },
+                        "pdf": "PDF",
+                        "print": "Imprimer",
+                        "copyKeys": "Appuyez sur ctrl ou u2318 + C pour copier les données du tableau dans votre presse-papier.",
+                        "createState": "Créer un état",
+                        "removeAllStates": "Supprimer tous les états",
+                        "removeState": "Supprimer",
+                        "renameState": "Renommer",
+                        "savedStates": "États sauvegardés",
+                        "stateRestore": "État %d",
+                        "updateState": "Mettre à jour"
+                    },
+                    "decimal": ",",
+                    "search": "Rechercher:",
+                    "datetime": {
+                        "previous": "Précédent",
+                        "next": "Suivant",
+                        "hours": "Heures",
+                        "minutes": "Minutes",
+                        "seconds": "Secondes",
+                        "unknown": "-",
+                        "amPm": [
+                            "am",
+                            "pm"
+                        ],
+                        "months": {
+                            "0": "Janvier",
+                            "2": "Mars",
+                            "3": "Avril",
+                            "4": "Mai",
+                            "5": "Juin",
+                            "6": "Juillet",
+                            "8": "Septembre",
+                            "9": "Octobre",
+                            "10": "Novembre",
+                            "1": "Février",
+                            "11": "Décembre",
+                            "7": "Août"
+                        },
+                        "weekdays": [
+                            "Dim",
+                            "Lun",
+                            "Mar",
+                            "Mer",
+                            "Jeu",
+                            "Ven",
+                            "Sam"
+                        ]
+                    },
+                    "editor": {
+                        "close": "Fermer",
+                        "create": {
+                            "title": "Créer une nouvelle entrée",
+                            "button": "Nouveau",
+                            "submit": "Créer"
+                        },
+                        "edit": {
+                            "button": "Editer",
+                            "title": "Editer Entrée",
+                            "submit": "Mettre à jour"
+                        },
+                        "remove": {
+                            "button": "Supprimer",
+                            "title": "Supprimer",
+                            "submit": "Supprimer",
+                            "confirm": {
+                                "_": "Êtes-vous sûr de vouloir supprimer %d lignes ?",
+                                "1": "Êtes-vous sûr de vouloir supprimer 1 ligne ?"
+                            }
+                        },
+                        "multi": {
+                            "title": "Valeurs multiples",
+                            "info": "Les éléments sélectionnés contiennent différentes valeurs pour cette entrée. Pour modifier et définir tous les éléments de cette entrée à la même valeur, cliquez ou tapez ici, sinon ils conserveront leurs valeurs individuelles.",
+                            "restore": "Annuler les modifications",
+                            "noMulti": "Ce champ peut être modifié individuellement, mais ne fait pas partie d'un groupe. "
+                        },
+                        "error": {
+                            "system": "Une erreur système s'est produite (<a target=\"\\\" rel=\"nofollow\" href=\"\\\">Plus d'information<\/a>)."
+                        }
+                    },
+                    "stateRestore": {
+                        "removeSubmit": "Supprimer",
+                        "creationModal": {
+                            "button": "Créer",
+                            "order": "Tri",
+                            "paging": "Pagination",
+                            "scroller": "Position du défilement",
+                            "search": "Recherche",
+                            "select": "Sélection",
+                            "columns": {
+                                "search": "Recherche par colonne",
+                                "visible": "Visibilité des colonnes"
+                            },
+                            "name": "Nom :",
+                            "searchBuilder": "Recherche avancée",
+                            "title": "Créer un nouvel état",
+                            "toggleLabel": "Inclus :"
+                        },
+                        "renameButton": "Renommer",
+                        "duplicateError": "Il existe déjà un état avec ce nom.",
+                        "emptyError": "Le nom ne peut pas être vide.",
+                        "emptyStates": "Aucun état sauvegardé",
+                        "removeConfirm": "Voulez vous vraiment supprimer %s ?",
+                        "removeError": "Échec de la suppression de l'état.",
+                        "removeJoiner": "et",
+                        "removeTitle": "Supprimer l'état",
+                        "renameLabel": "Nouveau nom pour %s :",
+                        "renameTitle": "Renommer l'état"
+                    },
+                    "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 entrées",
+                    "infoFiltered": "(filtrées depuis un total de _MAX_ entrées)",
+                    "lengthMenu": "Afficher _MENU_ entrées",
+                    "paginate": {
+                        "first": "Première",
+                        "last": "Dernière",
+                        "next": "<i class='bi bi-chevron-right'></i>",
+                        "previous": "<i class='bi bi-chevron-left'></i>"
+                    },
+                    "zeroRecords": "Aucune entrée correspondante trouvée",
+                    "thousands": " "
+               
+                },
+                initComplete: function() {
+                 $('.buttons-excel').html('<i class="bi bi-arrow-down"></i>')
+                 $('.buttons-print').html('<i class="bi bi-printer"></i>')
+                }
+                
+              });
+              $('#listeproduitvente').DataTable({
+                dom: 'Bfrtip',
+                columnDefs: [
+                    {
+                        targets: 1,
+                        className: 'noVis'
+                    }
+                ],
+                buttons: [
+                 'excel', 'print',
+                    {
+                    extend: 'colvis',
+                    collectionLayout: 'fixed columns',
+                    collectionTitle: '<h5>Titre</h5>Le Lorem Ipsum est simplement du faux texte employé dans la composition et la mise en page avant impression.'
+                    }
+                ],
+                language: {
+                   search: '', searchPlaceholder: "Recherche...",
+                    "emptyTable": "Aucune donnée disponible dans le tableau",
+                    "loadingRecords": "Chargement...",
+                    "processing": "Traitement...",
+                    "aria": {
+                        "sortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "%d lignes sélectionnées",
+                            "1": "1 ligne sélectionnée"
+                        },
+                        "cells": {
+                            "1": "1 cellule sélectionnée",
+                            "_": "%d cellules sélectionnées"
+                        },
+                        "columns": {
+                            "1": "1 colonne sélectionnée",
+                            "_": "%d colonnes sélectionnées"
+                        }
+                    },
+                    "autoFill": {
+                        "cancel": "Annuler",
+                        "fill": "Remplir toutes les cellules avec <i>%d<\/i>",
+                        "fillHorizontal": "Remplir les cellules horizontalement",
+                        "fillVertical": "Remplir les cellules verticalement"
+                    },
+                    "searchBuilder": {
+                        "conditions": {
+                            "date": {
+                                "after": "Après le",
+                                "before": "Avant le",
+                                "between": "Entre",
+                                "empty": "Vide",
+                                "not": "Différent de",
+                                "notBetween": "Pas entre",
+                                "notEmpty": "Non vide",
+                                "equals": "Égal à"
+                            },
+                            "number": {
+                                "between": "Entre",
+                                "empty": "Vide",
+                                "gt": "Supérieur à",
+                                "gte": "Supérieur ou égal à",
+                                "lt": "Inférieur à",
+                                "lte": "Inférieur ou égal à",
+                                "not": "Différent de",
+                                "notBetween": "Pas entre",
+                                "notEmpty": "Non vide",
+                                "equals": "Égal à"
+                            },
+                            "string": {
+                                "contains": "Contient",
+                                "empty": "Vide",
+                                "endsWith": "Se termine par",
+                                "not": "Différent de",
+                                "notEmpty": "Non vide",
+                                "startsWith": "Commence par",
+                                "equals": "Égal à",
+                                "notContains": "Ne contient pas",
+                                "notEnds": "Ne termine pas par",
+                                "notStarts": "Ne commence pas par"
+                            },
+                            "array": {
+                                "empty": "Vide",
+                                "contains": "Contient",
+                                "not": "Différent de",
+                                "notEmpty": "Non vide",
+                                "without": "Sans",
+                                "equals": "Égal à"
+                            }
+                        },
+                        "add": "Ajouter une condition",
+                        "button": {
+                            "0": "Recherche avancée",
+                            "_": "Recherche avancée (%d)"
+                        },
+                        "clearAll": "Effacer tout",
+                        "condition": "Condition",
+                        "data": "Donnée",
+                        "deleteTitle": "Supprimer la règle de filtrage",
+                        "logicAnd": "Et",
+                        "logicOr": "Ou",
+                        "title": {
+                            "0": "Recherche avancée",
+                            "_": "Recherche avancée (%d)"
+                        },
+                        "value": "Valeur"
+                    },
+                    "searchPanes": {
+                        "clearMessage": "Effacer tout",
+                        "count": "{total}",
+                        "title": "Filtres actifs - %d",
+                        "collapse": {
+                            "0": "Volet de recherche",
+                            "_": "Volet de recherche (%d)"
+                        },
+                        "countFiltered": "{shown} ({total})",
+                        "emptyPanes": "Pas de volet de recherche",
+                        "loadMessage": "Chargement du volet de recherche...",
+                        "collapseMessage": "Réduire tout",
+                        "showMessage": "Montrer tout"
+                    },
+                    "buttons": {
+                        "collection": "Collection",
+                        "colvis": "<i class='bi bi-layout-three-columns'></i>",
+                        "colvisRestore": "Rétablir visibilité",
+                        "copy": "Copier",
+                        "copySuccess": {
+                            "1": "1 ligne copiée dans le presse-papier",
+                            "_": "%ds lignes copiées dans le presse-papier"
+                        },
+                        "copyTitle": "Copier dans le presse-papier",
+                        "csv": "CSV",
+                        "excel": "Excel",
+                        "pageLength": {
+                            "-1": "Afficher toutes les lignes",
+                            "_": "Afficher %d lignes"
+                        },
+                        "pdf": "PDF",
+                        "print": "Imprimer",
+                        "copyKeys": "Appuyez sur ctrl ou u2318 + C pour copier les données du tableau dans votre presse-papier.",
+                        "createState": "Créer un état",
+                        "removeAllStates": "Supprimer tous les états",
+                        "removeState": "Supprimer",
+                        "renameState": "Renommer",
+                        "savedStates": "États sauvegardés",
+                        "stateRestore": "État %d",
+                        "updateState": "Mettre à jour"
+                    },
+                    "decimal": ",",
+                    "search": "Rechercher:",
+                    "datetime": {
+                        "previous": "Précédent",
+                        "next": "Suivant",
+                        "hours": "Heures",
+                        "minutes": "Minutes",
+                        "seconds": "Secondes",
+                        "unknown": "-",
+                        "amPm": [
+                            "am",
+                            "pm"
+                        ],
+                        "months": {
+                            "0": "Janvier",
+                            "2": "Mars",
+                            "3": "Avril",
+                            "4": "Mai",
+                            "5": "Juin",
+                            "6": "Juillet",
+                            "8": "Septembre",
+                            "9": "Octobre",
+                            "10": "Novembre",
+                            "1": "Février",
+                            "11": "Décembre",
+                            "7": "Août"
+                        },
+                        "weekdays": [
+                            "Dim",
+                            "Lun",
+                            "Mar",
+                            "Mer",
+                            "Jeu",
+                            "Ven",
+                            "Sam"
+                        ]
+                    },
+                    "editor": {
+                        "close": "Fermer",
+                        "create": {
+                            "title": "Créer une nouvelle entrée",
+                            "button": "Nouveau",
+                            "submit": "Créer"
+                        },
+                        "edit": {
+                            "button": "Editer",
+                            "title": "Editer Entrée",
+                            "submit": "Mettre à jour"
+                        },
+                        "remove": {
+                            "button": "Supprimer",
+                            "title": "Supprimer",
+                            "submit": "Supprimer",
+                            "confirm": {
+                                "_": "Êtes-vous sûr de vouloir supprimer %d lignes ?",
+                                "1": "Êtes-vous sûr de vouloir supprimer 1 ligne ?"
+                            }
+                        },
+                        "multi": {
+                            "title": "Valeurs multiples",
+                            "info": "Les éléments sélectionnés contiennent différentes valeurs pour cette entrée. Pour modifier et définir tous les éléments de cette entrée à la même valeur, cliquez ou tapez ici, sinon ils conserveront leurs valeurs individuelles.",
+                            "restore": "Annuler les modifications",
+                            "noMulti": "Ce champ peut être modifié individuellement, mais ne fait pas partie d'un groupe. "
+                        },
+                        "error": {
+                            "system": "Une erreur système s'est produite (<a target=\"\\\" rel=\"nofollow\" href=\"\\\">Plus d'information<\/a>)."
+                        }
+                    },
+                    "stateRestore": {
+                        "removeSubmit": "Supprimer",
+                        "creationModal": {
+                            "button": "Créer",
+                            "order": "Tri",
+                            "paging": "Pagination",
+                            "scroller": "Position du défilement",
+                            "search": "Recherche",
+                            "select": "Sélection",
+                            "columns": {
+                                "search": "Recherche par colonne",
+                                "visible": "Visibilité des colonnes"
+                            },
+                            "name": "Nom :",
+                            "searchBuilder": "Recherche avancée",
+                            "title": "Créer un nouvel état",
+                            "toggleLabel": "Inclus :"
+                        },
+                        "renameButton": "Renommer",
+                        "duplicateError": "Il existe déjà un état avec ce nom.",
+                        "emptyError": "Le nom ne peut pas être vide.",
+                        "emptyStates": "Aucun état sauvegardé",
+                        "removeConfirm": "Voulez vous vraiment supprimer %s ?",
+                        "removeError": "Échec de la suppression de l'état.",
+                        "removeJoiner": "et",
+                        "removeTitle": "Supprimer l'état",
+                        "renameLabel": "Nouveau nom pour %s :",
+                        "renameTitle": "Renommer l'état"
+                    },
+                    "info": "Affichage de _START_ à _END_ sur _TOTAL_ entrées",
+                    "infoEmpty": "Affichage de 0 à 0 sur 0 entrées",
+                    "infoFiltered": "(filtrées depuis un total de _MAX_ entrées)",
+                    "lengthMenu": "Afficher _MENU_ entrées",
+                    "paginate": {
+                        "first": "Première",
+                        "last": "Dernière",
+                        "next": "<i class='bi bi-chevron-right'></i>",
+                        "previous": "<i class='bi bi-chevron-left'></i>"
+                    },
+                    "zeroRecords": "Aucune entrée correspondante trouvée",
+                    "thousands": " "
+               
+                },
+                initComplete: function() {
+                 $('.buttons-excel').html('<i class="bi bi-arrow-down"></i>')
+                 $('.buttons-print').html('<i class="bi bi-printer"></i>')
+                }
+                
+              });
+          }); 
+          
+          </script>
           @endsection

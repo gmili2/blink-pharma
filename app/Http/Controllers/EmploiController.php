@@ -16,6 +16,9 @@ class EmploiController extends Controller
       echo( '
       <script>localStorage.setItem("select", "Horaire");</script>
       ');
+        echo( '
+      <script>localStorage.setItem("select2", "Horaire");</script>
+      ');
   }
 
   /**
@@ -31,6 +34,9 @@ class EmploiController extends Controller
    
   }
       public function AfficherEmploi(){
+        echo( '
+        <script>localStorage.setItem("sousselect", "vheur");</script>
+        ');
         $data=Emploidetemp::all();
         return view('pages.parameters.horaire',['data'=>$data]);
       }

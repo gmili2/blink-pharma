@@ -77,7 +77,7 @@
                                         </ul>
                                     </div>
 
-                                    <table id="table-bon-de-commande" class="table table-striped mb-4" style="width: 100%;">
+                                    <table id="table-bon-de-commande" class="table table-striped mb-4 selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Produit</th>
@@ -177,7 +177,7 @@
                                         </div>
                                     </div> --}}
 
-                                    <table id="table" class="table table-striped mb-4 dataTable" style="width: 100%;">
+                                    <table id="table" class="table table-striped mb-4 dataTable selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 {{-- <th>Statut</th> --}}
@@ -319,7 +319,7 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <table id="table-poduct" class="table table-striped mb-4 dataTable" style="width: 100%;">
+                                            <table id="table-poduct" class="table table-striped mb-4 dataTable selvente" style="width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>Produit</th>

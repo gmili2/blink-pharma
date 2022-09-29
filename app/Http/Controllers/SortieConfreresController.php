@@ -8,15 +8,27 @@ use Illuminate\Support\Facades\DB;
 use Auth;
 use App\Sortieconfrere;
 use App\Produit;
+use App\User;
 
 use App\Produitssortieconfrere;
 
 
 class SortieConfreresController extends Controller
 {
+
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
     //
     public function index()
     {
+
+        echo( '
+        <script>localStorage.setItem("sousselect", "sconfrere");</script>
+        ');
         // $confreres = Confrere::all();
         $sortieconfreres= DB::table('sortieconfreres')
         ->select('sortieconfreres.*','confreres.name as confrere_name')
@@ -90,13 +102,19 @@ class SortieConfreresController extends Controller
     ->whereNull('sortieconfreres.deleted_at')
     ->whereNull('produitssortieconfreres.deleted_at')
     ->select('sortieconfreres.*',"produits.*","produitssortieconfreres.*",'confreres.name as nom_client')
-    ->get(); ; 
+    ->get(); 
+    $creer_par=User::find(   $facture[0]->creer_par);
+
         $sortie=1;
         // dd($facture);
         return view('pages/confreres/sortie-confrere-detail',
-        
-        compact('facture'),
-        compact('sortie'));
+        ['facture'=>$facture,
+        'sortie'=>$sortie,
+        'creer_par'=>$creer_par,
+    
+    
+    ]);
+       
     }
 
     public function indexentrer()
@@ -124,7 +142,6 @@ public function add_sentrerconfrrepage()
     // ->where('confreres.creer_par',Auth::User()->id)
     ->whereNull('confreres.deleted_at')
     ->get(); 
-
     $produits= DB::table('produits')
         ->join('classes','produits.classes_id','=','classes.id')
         ->join('types','produits.types_id','=','types.id')
@@ -134,6 +151,8 @@ public function add_sentrerconfrrepage()
         ,'dcis.name as namedci')
         // ->where('creer_par',Auth::User()->id)
         ->whereNull('produits.deleted_at')
+        ->where('produits.active',1)
+
         ->get();
 
 
@@ -204,6 +223,8 @@ public function add_sortieconfrrepage()
         ,'dcis.name as namedci')
         // ->where('creer_par',Auth::User()->id)
         ->whereNull('produits.deleted_at')
+        ->where('produits.active',1)
+
         ->get();
 
 

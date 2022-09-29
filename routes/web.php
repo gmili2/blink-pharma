@@ -30,7 +30,7 @@ Route::get('deconnexion',function ()
     return redirect('login');
 });
 
-
+Route::post('Addcalendar','App\Http\Controllers\HomeController@Addcalendar');
 
 Route::get('ajouterclient', function () {
     return view('pages.client.addclient');
@@ -45,32 +45,37 @@ Route::get('informationclient{id}', function () {
     return view('pages.client.informationclient');
 });
 //produit start
-Route::get('produit','App\Http\Controllers\produitsController@index');
-Route::get('ajouterproduit', 'App\Http\Controllers\produitsController@formuleajouterproduit');
-Route::post('addproduit', 'App\Http\Controllers\produitsController@addproduit');
-Route::post('add_date_peremption', 'App\Http\Controllers\produitsController@add_date_peremption');
-Route::post('modifier_date_peremption', 'App\Http\Controllers\produitsController@modifier_date_peremption');
-Route::delete('delete_date_peremption', 'App\Http\Controllers\produitsController@delete_date_peremption');
+Route::get('produit','App\Http\Controllers\ProduitsController@index');
+Route::get('gettableproduitajax','App\Http\Controllers\ProduitsController@gettableproduitajax');
 
 
-Route::get('gett_produit', 'App\Http\Controllers\produitsController@get_produit')->name('get_produit');
-Route::get('gettableproduitajax', 'App\Http\Controllers\produitsController@gettableproduitajax')->name('gettableproduitajax');
+// Route::get('', [App\Http\Controllers\ProduitsController::class,'gettableproduitajax']);
+
+Route::get('ajouterproduit', 'App\Http\Controllers\ProduitsController@formuleajouterproduit');
+Route::post('addproduit', 'App\Http\Controllers\ProduitsController@addproduit');
+Route::post('add_date_peremption', 'App\Http\Controllers\ProduitsController@add_date_peremption');
+Route::post('modifier_date_peremption', 'App\Http\Controllers\ProduitsController@modifier_date_peremption');
+Route::delete('delete_date_peremption', 'App\Http\Controllers\ProduitsController@delete_date_peremption');
 
 
-Route::get('get_produit{nom}', 'App\Http\Controllers\produitsController@get_produit_bynom')->name('get_produit_bynom');
+Route::get('gett_produit', 'App\Http\Controllers\ProduitsController@get_produit')->name('get_produit');
+// Route::get('gettableproduitajax', 'App\Http\Controllers\ProduitsController@gettableproduitajax')->name('gettableproduitajax');
+
+
+Route::get('get_produit{nom}', 'App\Http\Controllers\ProduitsController@get_produit_bynom')->name('get_produit_bynom');
 
 Route::get('modifierproduit', function () {return view('pages.products.add-product');});
 Route::get('supprimerproduit', function () {return view('pages.products.add-product');});
-Route::get('informationproduct{id}',  'App\Http\Controllers\produitsController@informationproduct' );
-Route::get('modifierproduitformule{id}',  'App\Http\Controllers\produitsController@modifierproduitformule' );
-Route::get('desactiverproduit{id}',  'App\Http\Controllers\produitsController@desactiverproduit' );
-Route::get('avtiverproduit{id}',  'App\Http\Controllers\produitsController@avtiverproduit' );
-Route::delete('supprimerproduit',  'App\Http\Controllers\produitsController@supprimerproduit' );
-Route::put('updateproduct{id}',  'App\Http\Controllers\produitsController@updateproduct' );
+Route::get('informationproduct{id}',  'App\Http\Controllers\ProduitsController@informationproduct' );
+Route::get('modifierproduitformule{id}',  'App\Http\Controllers\ProduitsController@modifierproduitformule' );
+Route::get('desactiverproduit{id}/{etat}',  'App\Http\Controllers\ProduitsController@desactiverproduit' );
+Route::get('avtiverproduit{id}/{etat}',  'App\Http\Controllers\ProduitsController@avtiverproduit' );
+Route::delete('supprimerproduit',  'App\Http\Controllers\ProduitsController@supprimerproduit' );
+Route::put('updateproduct{id}',  'App\Http\Controllers\ProduitsController@updateproduct' );
 
 
-Route::post('addprixproduits{id}',  'App\Http\Controllers\produitsController@addprixproduits' );
-Route::put('updateprixproduit{id}',  'App\Http\Controllers\produitsController@updateprixproduit' );
+Route::post('addprixproduits{id}',  'App\Http\Controllers\ProduitsController@addprixproduits' );
+Route::put('updateprixproduit{id}',  'App\Http\Controllers\ProduitsController@updateprixproduit' );
 
 
 
@@ -95,6 +100,7 @@ Route::get('modifyclient{id}', 'App\Http\Controllers\ClientsController@modifycli
 Route::put('updateClient{id}','App\Http\Controllers\ClientsController@update');
 Route::delete('deleteclient','App\Http\Controllers\ClientsController@delete')->name('deleteclient');;
 
+Route::post('updatefavoris','App\Http\Controllers\ProfileController@updatefavoris');
 
 //End clients
 
@@ -169,10 +175,23 @@ Route::get('ticket_sortie_confrere{id}', 'App\Http\Controllers\PdfContoller@tick
 
 //parametre
 Route::get('logo', function () {
+    // echo( '
+    // <script>localStorage.setItem("sousselect", "vlogo");</script>
+    // ');
     return view('pages.parameters.logo');
 });
 
 Route::get('codesecuritechage', function () {
+     echo( '
+    <script>localStorage.setItem("select", "vcodesecuritechage");</script>
+    ');
+    
+     echo( '
+    <script>localStorage.setItem("select2", "code de securite");</script>
+    ');
+    echo( '
+    <script>localStorage.setItem("sousselect", "vcodesecuritechage");</script>
+    ');
     return view('pages.parameters.codesecurite');
 });
 
@@ -252,6 +271,11 @@ Route::delete('deletesurvente','App\Http\Controllers\VenteController@deletesurve
 
 
 Route::get('gettableventeajax','App\Http\Controllers\VenteController@gettableventeajax')->name('gettableventeajax');
+Route::get('gettableventeorganismeajax','App\Http\Controllers\VenteController@gettableventeorganismeajax')->
+name('gettableventeorganismeajax');
+
+
+
 Route::get('gettablee_vente','App\Http\Controllers\VenteController@get_tablevente')->name('get_tablevente');
 
 
@@ -298,6 +322,9 @@ Route::get('devis', function () {
 });
 //achatt
 Route::get('achat', function () {
+    echo( '
+    <script>localStorage.setItem("select", "achats");</script>
+    ');
     return view('pages.achat.achat');
 });
 
@@ -440,8 +467,16 @@ Route::get('parametre', function () {
     return view('pages.parameters.cadeau');
 });
 Route::get('entet-pdf', function () {
+
+    echo( '
+    <script>localStorage.setItem("sousselect", "ventet");</script>
+    ');
     return view('pages.parameters.entet-pdf');
-});Route::get('pied-pdf', function () {
+});
+Route::get('pied-pdf', function () {
+    echo( '
+    <script>localStorage.setItem("sousselect", "vpied");</script>
+    ');
     return view('pages.parameters.pied-pdf');
 });
 
@@ -632,9 +667,12 @@ Route::post('AjouterVille', [App\Http\Controllers\VillesController::class,'Ajout
 
 
 Route::get('online-user',  [App\Http\Controllers\UserController::class,'AfficherUser']);
-Route::get('adduser',  function () {
-    return view('pages.parameters.Users.adduser');
-});
+Route::get('adduser',  [App\Http\Controllers\UserController::class,'adduserpage']); 
+
+
+// function () {
+//     return view('pages.parameters.Users.adduser');
+// });
 
 Route::post('ModifierVille', [App\Http\Controllers\VillesController::class,'ModifierVille']);
 
@@ -672,8 +710,75 @@ Route::get('ModifierModelEmai',  [App\Http\Controllers\ModelEmailController::cla
 
 
 Route::get('getVilles{id}','App\Http\Controllers\FournisseursController@getVilles');
+Route::get('getVilles{id}/{ville}','App\Http\Controllers\FournisseursController@getVillesselect');
+
+
 Route::get('getVillesProfile{id}','App\Http\Controllers\ProfileControllerr@getvillesProfile');
 
+Route::get('testcode{code}',[App\Http\Controllers\ProfileController::class,'testcode']);
 
+
+
+Route::get('AfficherTva', [App\Http\Controllers\TvaController::class,'afficherTva']);
+
+Route::post('AjouterTva', [App\Http\Controllers\TvaController::class,'AjouterTva']);
+
+Route::post('DeleteTva', [App\Http\Controllers\TvaController::class,'DeleteTva']);
+
+Route::post('ModifierTva', [App\Http\Controllers\TvaController::class,'ModifierTva']);
+
+Route::get('AfficherRemise', [App\Http\Controllers\RemiseController::class,'afficherRemise']);
+
+Route::post('AjouterRemise', [App\Http\Controllers\RemiseController::class,'AjouterRemise']);
+
+Route::post('DeleteRemise', [App\Http\Controllers\RemiseController::class,'DeleteRemise']);
+
+Route::post('ModifierRemise', [App\Http\Controllers\RemiseController::class,'ModifierRemise']);
 
 Route::get('gettableajax',[App\Http\Controllers\HomeController::class,'gettableajax']);
+
+
+ 
+
+Route::get('AfficherContreIndication', [App\Http\Controllers\ContreIndicationController::class,'afficherContreIndication']);
+
+Route::post('AjouterContreIndication', [App\Http\Controllers\ContreIndicationController::class,'AjouterContreIndication']);
+
+Route::post('DeleteContreIndication', [App\Http\Controllers\ContreIndicationController::class,'DeleteContreIndication']);
+
+Route::post('ModifierContreIndication', [App\Http\Controllers\ContreIndicationController::class,'ModifierContreIndication']);
+
+
+
+//Organisme
+
+Route::get('organisme', [App\Http\Controllers\OrganismeController::class,'index']);
+Route::get('addorganismepage', [App\Http\Controllers\OrganismeController::class,'addorganismepage']);
+Route::get('afficherorganisme{id}', [App\Http\Controllers\OrganismeController::class,'afficherorganisme']);
+Route::get('modifierorganismepage{id}', [App\Http\Controllers\OrganismeController::class,'modifierorganismepage']);
+Route::post('modifierorganisme', [App\Http\Controllers\OrganismeController::class,'modifierorganisme']);
+Route::delete('deleteorganisme', [App\Http\Controllers\OrganismeController::class,'deleteorganisme']);
+Route::get('indexvente', [App\Http\Controllers\OrganismeController::class,'indexvente']);
+
+
+
+// Route::get('addorganismepage{id}', [App\Http\Controllers\OrganismeController::class,'addorganismepage']);
+
+Route::post('addorganisme', [App\Http\Controllers\OrganismeController::class,'addorganisme']);
+Route::get('editorganismepage', [App\Http\Controllers\OrganismeController::class,'index']);
+Route::post('deleteorganisme', [App\Http\Controllers\OrganismeController::class,'index']);
+//
+//role 
+Route::get('role', [App\Http\Controllers\RoleController::class,'index']);
+
+Route::post('addrole', [App\Http\Controllers\RoleController::class,'addrole']);
+Route::get('listerole', [App\Http\Controllers\RoleController::class,'listerole']);
+Route::delete('deletrole', [App\Http\Controllers\RoleController::class,'deletrole']);
+
+
+Route::get('detailrole{id}', [App\Http\Controllers\RoleController::class,'detailrole']);
+Route::post('modifierrole', [App\Http\Controllers\RoleController::class,'modifierrole']);
+
+
+
+

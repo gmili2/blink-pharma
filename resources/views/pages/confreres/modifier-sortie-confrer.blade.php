@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-md-12 text-end">
                                 <div class="buttons" >
-                                    <a href="add-sortieconfrre" hidden  id="creer_autrre" class="btn-hover color-green">Crerr autre</a>
+                                    <a href="add-sortieconfrre" hidden  id="creer_autrre" class="btn-hover color-green">Créer une nouvelle sortie</a>
                                     {{-- <a  onclick="afficher_devisprecedent()" class="btn-hover color-green"
                                     
                                     id="approuver2"
@@ -36,7 +36,7 @@
                                             <div class="status-vente mt-5">
                                                 <div class="row" style="    margin-top: -39px;
                                                 margin-left: -6px;">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-8">
                                                         <input type="text" hidden  id="mode_payment" name="mode_payment" value="1">
                                                       
                                                         <div class="mb-3 row">
@@ -67,12 +67,12 @@
                                                         
                                                         <i class="bi bi-plus-lg"></i> 
                                                         <span id="choisir_client_titre">  
-                                                            choisir un confreres</span>
+                                                            Choisir un confrère</span>
                                                            
 
                                                     
                                                     </a>
-                                                    <button type="submit" class="btn-hover color-yellow"><i class="bi bi-search"></i> Recherche</button>
+                                                    <!--<button type="submit" class="btn-hover color-yellow"><i class="bi bi-search"></i> Recherche</button>-->
                                                 </div>
                                             </div>
 
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
                                     <hr class="divider" />
-                                    <table id="listeproduitvente2" class="table table-striped mb-4" style="width: 100%;">
+                                    <table id="listeproduitvente2" class="table table-striped mb-4 selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Nom</th>
@@ -190,7 +190,10 @@
                                     </div>
                                 </div>
                                 <div class="col-md-5">
-                                    <div class="block-right pt-4 pb-4 ps-2 px-2 bg-white" style="width:33%">
+                                    <div class="block-right pt-4 pb-4 ps-2 px-2 bg-white" style="width:33% ;
+                                        max-height: 500px;
+    overflow-y: auto;
+                                    ">
                                         <div class="header">
                                             <ul class="d-flex p-0 justify-content-between">
                                                 <li>
@@ -199,7 +202,7 @@
                                                 </li>
                                                 <li>
                                                     <label>Par :</label>
-                                                    <span>Dr {{Auth::User()->name}} <i class="bi bi-chevron-down ms-2"></i></span>
+                                                    <span>Dr {{Auth::User()->name}}</span>
                                                 </li>
                                             </ul>
                                         </div>
@@ -240,7 +243,7 @@
                                         
                                         <hr class="divider mt-3" />
 
-                                        <table id="table-right" class="table table-striped mb-4" style="width: 100%;">
+                                        <table id="table-right" class="table table-striped mb-4 selvente" style="width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -248,7 +251,7 @@
                                                     <th>P.U</th>
                                                     <th>PPV</th>
                                                     <th>Total</th>
-                                                    <th>Quantité</th>
+                                                    <th style="    padding-left: 49px;">Quantité</th>
                                                     <th></th>
                                                 </tr>
                                             </thead>
@@ -266,7 +269,7 @@
                                                  data-bs-target="#collapseOne" aria-expanded="true"
                                                   aria-controls="collapseOne">
                                                     <td>  
-                                                    <input type="checkbox"  
+                                                    <input type="checkbox"   hidden
                                                     @if ((in_array($pr->id, $ids)))
                                                     checked
                                                     {{$produitsdejaselected[array_search($pr->id, array_values($ids))]->prix_AU}}
@@ -286,7 +289,7 @@
                                                     
                                                     </td>
                                                     <td  id='tableproduitselectPPV'>{{$pr->PPV}}</td>
-                                                    <td  id='tableproduitselectTotal{{$pr->id}}'  > </td>
+                                                    <td   id='tableproduitselectTotal{{$pr->id}}'  > </td>
                                                     <td>
                                                         <input type="number" 
                                                         name="qty[]" 
@@ -331,7 +334,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <table id="listeproduitvente" class="table table-striped mb-4" style="width: 100%;">
+                                <table id="listeproduitvente" class="table table-striped mb-4 selvente" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th></th>
@@ -534,7 +537,7 @@
     
                                                 <div class="status-vente mt-5">
                                                     <div class="row">
-                                                        <div class="col-md-6">
+                                                        <div class="col-md-8">
                                                             <input type="text" hidden  id="mode_payment" name="mode_payment" value="1">
                                                           
                                                             <div class="mb-3 row">
@@ -592,7 +595,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Vente(s) crée(s) avec succés</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <h5 class="modal-title">Sortie confrère(s) Modifiée(s) avec succés</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                         
                             <div class="modal-body">
@@ -787,7 +790,7 @@ axios.post(rout, {
   .then(function (response) {
     console.log(response.data);
 if(response.data["codeEr"]==200){
-toastr.success("bien ajouter");
+toastr.success("Bien Modifié");
 
     $('#vente-cree').modal("show");
     document.getElementById("attent").hidden=true

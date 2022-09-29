@@ -8,12 +8,12 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="title">
-                                    <h1>Sorte confrer</h1>
+                                    <h1>Sortie confrère</h1>
                                 </div>
                             </div>
                             <div class="col-md-6 text-end">
                                 <div class="buttons">
-                                    <a href="#" class="btn-hover color-white" data-bs-toggle="modal" data-bs-target="#annuler-facture">Annuler</a>
+                                    {{-- <a href="#" class="btn-hover color-white" data-bs-toggle="modal" data-bs-target="#annuler-facture">Annuler</a> --}}
                                     <a href="modifier-entrerconfrre{{$facture[0]->sortie_confreres_id}}" class="btn-hover color-white">Modifier</a>
                                     <a href="bon_livraison{{$facture[0]->sortie_confreres_id}}" class="btn-hover color-blue" 
                                     {{-- data-bs-toggle="modal" data-bs-target="#search-prodcut" --}}
@@ -59,25 +59,34 @@
                                             <h5>BC-{{$facture[0]->sortie_confreres_id}}</h5>
                                         </div>
                                         <div class="section-subtitle mb-4">
-                                            <h5>Informations de sorte confrere</h5>
+                                            <h5>Informations de sortie confrère</h5>
                                         </div>
                                         <ul class="d-flex mb-5">
                                             <li>
                                                 <label>Gestionnaire</label>
-                                                <span>Dr {{Auth::User()->name}}</span>
+                                                <span>Dr {{$creer_par->name}}   &nbsp
+                                                    &nbsp  &nbsp
+                                                    &nbsp</span>
                                             </li>
+                                          
+
                                             <li>
                                                 <label>Date de vente</label>
                                                 <span>{{$facture[0]->created_at}}</span>
                                             </li>
-                                            {{-- <li>
-                                                <label>Avec prescription</label>
-                                                <span class="text-red">Non</span>
-                                            </li> --}}
+                                          
                                         </ul>
+                                        {{-- <ul class="d-flex mb-5">
+                                           
+                                           
+                                          
+                                        </ul> --}}
+
+
+                                       
                                     </div>
 
-                                    <table id="tableproduitsortie" class="table table-striped mb-4" style="width: 100%;">
+                                    <table id="tableproduitsortie" class="table table-striped mb-4 selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Produit</th>
@@ -116,14 +125,14 @@
                                     <div class="row">
                                         <div class="col-md-6 offset-6">
                                             <div class="card-total">
-                                                <div class="d-flex mb-2">
+                                                {{-- <div class="d-flex mb-2">
                                                     <div class="flex-shrink-0 flex-label">
                                                         Sous-total HT :
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
                                                         160,09
                                                     </div>
-                                                </div>
+                                                </div> --}}
 
                                                 {{-- <div class="d-flex mb-2">
                                                     <div class="flex-shrink-0 flex-label">
@@ -145,7 +154,7 @@
 
                                                 <div class="d-flex mb-2 h5">
                                                     <div class="flex-shrink-0 flex-label">
-                                                        Total  (TTC)
+                                                        Total  :
                                                     </div>
                                                     <div class="flex-grow-1 ms-3">
                                                        {{$facture[0]->total}} Dhs
@@ -177,17 +186,16 @@
                                         </div>
                                     </div> --}}
 
-                                    <table id="table" class="table table-striped mb-4 dataTable" style="width: 100%;">
+                                    <table id="table" class="table table-striped mb-4 dataTable selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Methode</th>
                                                 {{-- <th>Organisme</th> --}}
                                                 <th>Montant</th>
-                                                <th>Moyens de paiement</th>
+                                                {{-- <th>Moyens de paiement</th> --}}
                                                 <th>Date</th>
                                                 {{-- <th>Référence</th> --}}
-                                                <th>Note</th>
-                                                <th></th>
+                                                {{-- <th>Note</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -202,11 +210,20 @@
 
                                                 {{-- <td>organisme</td> --}}
 
-                                                <td>{{$facture[0]->total}}</td>
+                                                <td>{{$facture[0]->total}} DH</td>
                                                 {{-- <td>{{$facture[0]->mode_payment}}</td> --}}
-                                                <td>{{$facture[0]->created_at}}</td>
+
+                                                <td>{{
+                                                    substr($facture[0]->created_at, 8,3) ."-".substr($facture[0]->created_at, 5, 2)."-".substr($facture[0]->created_at, 0, 4)." "
+ .substr($facture[0]->created_at, 11, 8)
+                                                 
+                                                    }}
+
+
+                                                </td>
+                                                {{-- <td>{{$facture[0]->created_at}}</td> --}}
                                                 {{-- <td>{{$facture[0]->reference}}</td> --}}
-                                                <td>note</td>
+                                                {{-- <td>note</td> --}}
                                                 {{-- <td>
                                                     <div class="status">
                                                         <a href="#" class="telechargement"> <i class="bi bi-arrow-down"></i> PDF</a>
@@ -266,9 +283,9 @@
                                     <div class="block-information">
                                         <h5>Informations de traçabilité</h5>
                                         <ul>
-                                            <li class="bg-color"><span>Créer par</span> <span>Dr {{Auth::user()->name}}</span></li>
+                                            <li class="bg-color"><span>Créer par</span> <span>Dr {{$creer_par->name}}</span></li>
                                             <li><span>Créer le</span> <span>{{$facture[0]->created_at}}</span></li>
-                                            <li class="bg-color"><span>Mise à jour par</span> <span>Dr {{Auth::user()->name}}</span></li>
+                                            <li class="bg-color"><span>Mise à jour par</span> <span>Dr {{$creer_par->name}}</span></li>
                                             <li><span>Mise à jour le </span> <span>{{$facture[0]->updated_at}}</span></li>
                                         </ul>
                                     </div>
@@ -276,7 +293,7 @@
                                         <div class="support">
                                             <a href="tel:05 30 500 500" role="button" class="d-flex align-items-center">
                                                 <div class="icon"><img src="/assets/icons/telephone.svg" alt="" /></div>
-                                                <span>{{Auth::user()->tele}}</span>
+                                                <span>{{$creer_par->tele}}</span>
                                             </a>
                                         </div>
                                         <div class="aide">
@@ -306,7 +323,7 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <table id="table-poduct" class="table table-striped mb-4 dataTable" style="width: 100%;">
+                                            <table id="table-poduct" class="table table-striped mb-4 dataTable selvente" style="width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>Produit</th>

@@ -1,77 +1,165 @@
 @extends('layouts.app')
 
-@section('content')     
-                <!-- partial -->
-                <div class="page-content">
-                    @include('layouts.navparam')
-<br>
-<br>
-<br>
+@section('content')
 
+{{-- @include('layouts.navparam') --}}
+<div class="page-content">
                     <section class="section-client mt-3 pb-5">
-                        <form action="">
+                        <form action="AjouterGardeView" method="get">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="title">
-                                        <h1>Créer nouvelle journée de garde</h1>
+                                        <h1>journée de Garde</h1>
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-end">
                                     <div class="buttons">
-                                        <a href="#" class="btn-hover color-green">Sauvegarder</a>
+                                        <button type="submit" class="btn-hover color-green">Crée une garde</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="section-form-client mt-4">
+
+
+
+
                                 <div class="block-form bg-white p-4 mb-4">
-                                    <div class="section-subtitle pb-1 mb-3">
-                                        <h5>Informations générales</h5>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <label class="form-label">Nom *</label>
-                                            <input type="text" class="form-control" name="nom" required />
-                                        </div>
-                                    </div>
-                                    <div class="row mt-3">
-                                        <div class="section-subtitle pb-1 mb-3">
-                                            <h5>Période</h5>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Date début 1 *</label>
-                                            <input type="date" class="form-control" name="" required />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Date fin 1 *</label>
-                                            <input type="date" class="form-control" name="" required />
-                                        </div>
-                                    </div>
+                                    <table id="table" class="table table-striped" style="width: 100%;">
+                                        <th>Nom</th>
+                                        <th>Date debut</th>
+                                        <th>Date fin</th>
+                                        <th>Horaires d'ouverture</th>
+                                        <th>Action</th>
+                                    @foreach ($gardes as $garde)
+                                        <tr>
+                                            <td>{{$garde->Nom}}</td>
+                                            <td>{{$garde->Date_debut}}</td>
 
-                                    <div class="row mt-3">
-                                        <div class="section-subtitle pb-1 mb-3">
-                                            <h5>Heures d'ouverture (Toute la journée)</h5>
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Début 1 *</label>
-                                            <input type="date" class="form-control" name="" required />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Fin 1 *</label>
-                                            <input type="date" class="form-control" name="" required />
-                                        </div>
+                                            <td> {{$garde->Date_fin}}</td>
+                                            @if ($garde->debut1==null && $garde->fin1==null & $garde->debut2==null && $garde->fin2==null)
+                                            <td>Toute la journée</td>
 
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Début 2</label>
-                                            <input type="date" class="form-control" name="" />
-                                        </div>
-                                        <div class="col-md-6 mb-3">
-                                            <label class="form-label">Fin 2</label>
-                                            <input type="date" class="form-control" name="" />
-                                        </div>
-                                    </div>
+                                            @else
+                                            <td> {{$garde->debut1}}/{{$garde->fin1}}_
+                                                {{$garde->debut2}}/{{$garde->fin2}}</td>
+                                            @endif
+
+
+
+
+
+
+                                            <td>
+                                                <div class="dropdown section-action">
+                                                    <a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a>
+                                                    <ul class="dropdown-menu">
+
+                                                      <li>
+                                                            <a class="dropdown-garde" href=""     data-bs-toggle="modal" data-bs-target="#modelsupprimer"
+
+                                                            onclick="Remplaisage('{{$garde->id}}','{{$garde->Nom}}')" >Supprimer</a>
+
+                                                         </li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+
+
+
+
+
+                                </tr>
+                                    @endforeach
+
+
+                                    </table>
                                 </div>
-                            </div>
+
                         </form>
                     </section>
+
+                    <div class="modal fade" id="modelsupprimerdscsf" tabindex="-1" role="dialog" aria-labelledby="modelsupprimer" aria-hidden="true">
+
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <form   action="DeleteGarde" method="POST" >
+                                    @csrf
+                                    <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">  supprimer ce garde </h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <input type="text" id="NomGarde"  class="form-control" >
+
+
+                                     </div>
+
+                                     {{-- <div class="modal-body"> --}}
+
+                                        <input type="text" id="IdGarde"  name="id"  class="form-control" hidden  >
+                                     {{-- </div> --}}
+                                     <div class="row section-footer">
+                                        <div class="buttons" style="margin-top:60px"> 
+                                            <a href="#" class="btn btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+            
+                                            <button class="btn btn-hover color-blue spacecenter" >Supprimer</button>
+    
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                    </div>
+                   </div>
+
+
+
+                   <div class="modal fade vente-succes search-client" id="modelsupprimer" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Supprimer cette garde</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div>
+                                <p class="text text-center mt-4">
+                                   
+                                </p>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                       </div>
+                                </div>
+                                <form id="form1" action="DeleteGarde" method="post">
+                                    {{-- @method('delete') --}}
+                                    @csrf
+                                    <input type="text" id="NomGarde"  hidden class="form-control" >
+
+                                    <input type="text" id="IdGarde"  name="id"  class="form-control" hidden  >
+                                    <div class="row section-footer">
+                                    <div class="buttons" style="margin-top:60px"> 
+                                        <a href="#" class="btn btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+        
+                                        <button class="btn btn-hover color-blue spacecenter" >Supprimer</button>
+
+                                    </div>
+                                </div>
+                            </form>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-           @endsection
+<script>
+// function RemplaisageNom(Nom){
+
+// document.getElementById("NomGarde").value=Nom;
+
+// }
+function Remplaisage(id,Nom){
+document.getElementById("IdGarde").value=id;
+
+document.getElementById("NomGarde").value=Nom;
+
+}
+</script>
+    @endsection

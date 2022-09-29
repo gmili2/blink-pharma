@@ -18,7 +18,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="section-form-fornisseur mt-4">
+                            <div class="section-form-fornisseur ">
                                 <div class="block-form bg-white p-4 mb-4">
                                     <div class="section-subtitle pb-1 mb-3">
                                         <h5>Informations générales</h5>
@@ -43,7 +43,11 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Téléphone</label>
-                                            <input type="text" class="form-control" required name="telephone" />
+                                            <input  class="form-control" 
+                                            type="tel"
+                                            pattern="(05|06|07)[0-9]{8}"
+                                            required
+                                            required name="telephone" />
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Fax</label>

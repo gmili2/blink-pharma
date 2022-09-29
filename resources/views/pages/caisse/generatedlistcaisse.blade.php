@@ -1,54 +1,51 @@
 @extends('layouts.app')
 @section('content')
                 <!-- partial -->
+                <form action="{{url('addcaisse')}}" method="post">
+                    @csrf
+
                 <div class="page-content">
                     <section class="section-accueil mt-3">
-                    <form action="{{url('addcaisse')}}" method="post">
-                        @csrf
-                                <div class="row">
-             
+                    {{-- <form action="{{url('addcaisse')}}" method="post"> --}}
+                                    <div class="row">
                                     <div class="col-md-12">
                                     <div class="row ">
-
-                                    <div class="col-md-6">
-                                
-                                  {{-- <b>Inventaire : </b> {{$invent->nom}}  <br/>
-                                  <b>Date : </b>  {{$invent->created_at}} <br/>
-                                  <b>Commentaire : </b>  {{$invent->commentaire}}  --}}
-                                 
-                                   
+                                    <div class="col-md-6">                                    
 </div>
                             <div class="col-md-6">
                             <div class="row text-end"  >
                                 <div class="buttons"
                                 >
                                
-                                <button type='submit'
+                                <button 
                                 @if (sizeof($ventes)==0)
                                 disabled
+                                @else
+                                disabled
+                                data-bs-toggle="modal" data-bs-target="#search-client"
                                 @endif
-
-                               
-                                
                                 class="btn-hover color-blue">
                                 <a 
                                 @if (sizeof($ventes)==0)
                                 onclick="afficher_message()"
+                                
                                 @endif
-                                > Cloture la caisse</a>
-                               </button></div>
+                                > clôture la caisse</a>
+                               </button>
+                               {{-- <a href="#"  data-bs-toggle="modal" data-bs-target="#search-client" class="btn-hover color-white">Régularisation du solde</a> --}}
+
+                            </div>
                                     
                                 </div>
                             </div>
                             </div>
                             <div class="col-md-6">
                                 
-                                {{-- <b>caisse : </b>0D  <br/> --}}
                                 <b>montant de systeme : </b> {{$summventes}} <br/>
                                 <div class="row" >
                                     <span  style="margin-top: 18px;">   <b>montant de la caisse  : </b>
                                     </span> <span style="margin-left: 164px;
-                                    margin-top: -30px;"> <input type='number' class="form-control" 
+                                            margin-top: -30px;"> <input type='number' min="0" class="form-control" 
                                             id="montant_caisse" name="montant_caisse" style="width:150px"
                                         required
                                         oninput="calculateecart()"
@@ -60,11 +57,6 @@
                                     </span> <span style="margin-left: 164px;
                                     margin-top: -30px;"> 
                                     <textarea name="commentaire"  class="form-control"  id="" cols="20" rows="2"></textarea>
-                                    {{-- <input type='number' class="form-control" 
-                                            id="montant_caisse" name="montant_caisse" style="width:150px"
-                                        required
-                                        oninput="calculateecart()"
-                                        /> --}}
                                         </span>
                                 </div>
                                        
@@ -90,7 +82,6 @@
                                name="montant_sys"
                                  id="montant_sys" style="width:150px" hidden
                                 required value="{{$summventes}}"
-                               {{-- oninput="calculateecart()" --}}
                                />
                                <div id="ecart">
                                 <b >ecart : </b> 0dh <br/>
@@ -130,12 +121,11 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                {{-- <br> --}}
                                               
                                          
                                             </div>
-                                            {{-- <table id="taabledetailcaisse" class="tablesecour" style="width: 100%;"> --}}
-                                            <table id="taabledetailcaisse" class="table table-striped" style="width: 100%;">
+                                                <br/>                                                  
+                                            <table id="taabledetailcaisse" class="table table-striped selvente" style="width: 100%;">
 
                                                 <thead>
                                                     <tr>
@@ -168,49 +158,44 @@
 
                                                         @if ($pro->livree==1 || $pro->livree=="1")
 
-                                                    <div class="status"><span class="on"><i class="bi bi-circle-fill"></i> </span></div>';
+                                                    <div class="status"><span class="on"><i class="bi bi-circle-fill"></i> </span></div>
                                                             
                                                         @else
 
 
                                                      
-                                                    <div class="status"><span class="off"><i class="bi bi-circle-fill"></i> </span></div>';
+                                                    <div class="status"><span class="off"><i class="bi bi-circle-fill"></i> </span></div>
                                                             
                                                         @endif
                                                     </td>
 
 
-                                                        {{-- <td id="qtesys{{$count}}">{{$pro->livree}}</td> --}}
-                                                        <td>
+                                                    <td>
 
-                                                            @if ($pro->status==1 || $pro->status=="1")
-    
-                                                        <div class="status"><span class="on"><i class="bi bi-circle-fill"></i> </span></div>';
-                                                                
-                                                            @else
-                                                            @if (($pro->status==2 || $pro->status=="2"))
-                 <div class="status">            <span class="ongoing"><i class="bi bi-circle-fill"></i> </span>
-                </div>
+                                                        @if ($pro->status==1 || $pro->status=="1")
+
+                                                           <div class="status"><span class="on"><i class="bi bi-circle-fill"></i> </span></div>
+                                                        @endif
                                                             
-                                                            @endif
-                                                        <div class="status"><span class="off"><i class="bi bi-circle-fill"></i> </span></div>';
-                                                                
-                                                            @endif
-                                                        </td>
-                                                        {{-- <td id="qtesys{{$count}}">{{$pro->status}}</td> --}}
+                            
+                                                        @if (($pro->status==2 || $pro->status=="2"))
+                                                        <div class="status">   
+                                                                    <span class="ongoing"><i class="bi bi-circle-fill"></i> </span>
+                                                        </div>
+                                                        @endif
+                                                        @if (($pro->status==0 || $pro->status=="0"  || $pro->status==null))
+                                                        <div class="status">   
+                                                                    <span class="off"><i class="bi bi-circle-fill"></i> </span>
+                                                        </div>
+                                                        @endif
 
-                                                        {{-- <td id="qtesys{{$count}}">{{$pro->mode_payment}}</td> --}}
 
-                                                                                                        
+                                                    </td>
+                                                      
                                                     </tr>
-                                                    {{-- <input type="hidden" name="produit_{{$count}}" value='{{$pro->id}}'/>
-                                                    <input type="hidden" name="nom_{{$count}}" value='{{$pro->name}}'/>
-                                                    <input type="hidden" name="qtesys_{{$count}}" value='{{$pro->quantite_disponible}}'/>
-                                                    <input type="hidden" name="ppv_{{$count}}" value='{{$pro->PPV_prix}}'/>
-                                                   --}}
+                                                 
                                                     @php $count+=1; @endphp
                                                     @endforeach
-                                                    {{-- <input type="" hidden name="invent_id" value='{{$invent->id}}'/> --}}
                                                     <input type=""  hidden name="counter" value='{{$count}}'/>
                                                 </tbody>
                                             </table>
@@ -220,10 +205,63 @@
                             </div>
                        
                         </div>
-</form>
                     </section>
                 </div>
+
+                <div class="modal fade vente-succes search-client" id="search-client" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Saisir votre code de sécurité</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            {{-- <form id="form1" action="credit_client" method="post">
+                                @csrf --}}
+                            <div class="montant-vente">
+                                <div class="detail-price">
+                                    <div class="shadow-block mt-4 p-4">
+                                        {{-- <div class="status-vente mt-5"> --}}
+                                            {{-- <div class="row"> --}}
+                                                {{-- <div class="col-md-6"> --}}
+                                                    {{-- <input type="text" hidden  id="mode_payment" name="mode_payment" value="1"> --}}
+                                                 
+                                                   
+                    
+                                                    </h5>          
+                                                    <input type="password" id="codesecurite"  min="1" style="width: 600px;
+                                                    margin-left: 41px;"
+                                                    required 
+                                                    name="codesecurite" placeholder="code de sécurité" class="form-control" >
+                                                    <br>
+                                                    <br>
+                                           <a style="padding-left: 43px;" 
+                                           href="codesecuritechage">j'ai oublié mon code de sécurité</a>
+                                                    
+                                            
+                                    </div>
+                                    
+                                </div>
+
+                        </div>
+                        <div class="row section-footer">
+                            <div class="buttons" style="padding-left: 554px">
+                                <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+
+                                <button class="btn btn-hover color-green mx-1" 
+                                
+                             >Valider</button>
+
+                            </div>
+                        </div>
+                        <br>
+                       {{-- </form> --}}
+                    </div>
+                        </div>
+                    </div>
+</form>
+
                 <script>
+
 
 function calculateecart(){
     // alert("kk")
@@ -246,7 +284,7 @@ document.getElementById('ecart').innerHTML= "<b >ecart : </b><b  style='color:gr
 
 }
 function afficher_message(){
-    toastr.error("aucun vente trouver");
+    toastr.error("Aucune vente trouvée");
     
 }
                     function calculate(count){

@@ -33,7 +33,7 @@
                                                 </div>
                                          
                                             </div>
-                            <table id="taabledetail" class="table table-striped" style="width: 100%;">
+                            <table id="taabledetail" class="table table-striped selvente" style="width: 100%;">
 
                                                 <thead>
                                                     <tr>

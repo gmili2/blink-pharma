@@ -6,7 +6,7 @@
                
                 <!-- partial -->
                 <div class="page-content">
-                    <section class="section-stock mt-3 pb-5">
+                    <section class="section-stock ">
                         <form action="">
                             <div class="row">
                                 <div class="col-md-6">
@@ -20,7 +20,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="section-information bg-white block-form mt-4 p-3">
+                            <div class="section-information bg-white block-form mt-2 p-3">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="title-p pt-1"><h5>Charger le fichier à importer</h5></div>

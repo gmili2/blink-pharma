@@ -5,7 +5,7 @@
                 
                 <div class="page-content">
 
-                    <section class="section-stock mt-3 pb-5">
+                    <section class="section-stock ">
                         <form action="Ajouter" method="POST"   enctype="multipart/form-data">
                             <div class="row text-end">
 
@@ -47,100 +47,58 @@
                                     <div class="col-md-3 mb-3">
                                         <label class="form-label">Exemple CSV</label>
 
-                                        {{-- <a href="/exemple-csv/client-Exemple.csv"
-   download="Pacman_Kiwi.csv">Télécharger csv</a> --}}
-                                <a id="lien" href=" "> telecherger un exemple  </a>
+                                <a id="lien" href=" "> Télécharger un exemple  </a>
                                                    </div>
                             </div>
                         </form>
                         <div class="row filtre-product pb-1">
                             <div class="col-md-6">
-                                <div class="title-p pt-1"><h5>Liste des produits</h5></div>
+                                <div class="title-p pt-1"><h5>Liste des historiques d'impotation</h5></div>
                             </div>
 
-                            {{-- <div class="col-md-6">
-                                <div class="status-actif">
-                                    <div class="status">
-                                        <span class="on"><i class="bi bi-circle-fill"></i> Oui</span>
-                                    </div>
-                                    <div class="status">
-                                        <span class="off"><i class="bi bi-circle-fill"></i> Non</span>
-                                    </div>
-                                </div>
-                            </div> --}}
+                           
                         </div>
-                        <div class="col-md-6 mb-3">
-                            <div class="form-group d-flex align-items-center">
-                                <i class="bi bi-search"></i>
-                                <input type="text" style="    width: 205px;
-                                margin: 17px" class="form-control" placeholder="Search" id=recherch_produit
-                                onkeyup="recherche_produit()"
-                                name="search" />                                                </div>
-                        </div>
-                        <div id="table2">
-                        <table id="tabletrace" class="table table-striped" style="width: 100%;">
-                            {{-- <table id="tabletrace" class="table table-striped"   style="width: 100%;"> --}}
-                                <th>File_name</th>
-                            <th>Date_creation</th>
-                            <th>lien_telech</th>
-                        @foreach ($file as $item)
+              
+
+                            <table id="example44" class="table table-striped" style="width: 100%;">
+
+                                <thead>
+                                    <tr>
+                                        <th>Nom </th>
+                                        <th>Date creation</th>
+                                        <th>Lien de Telech</th>
+                                    </tr>
+                                </thead>
+                             <tbody>
+                                              
+                                @foreach ($file as $item)
                             <tr>
                                 <td>{{$item->file_name}}</td>
                                 <td>{{$item->created_at}}</td>
-                                <td>    <a id="lienn" href="Files CSV/{{$item->file_name}}" > telecherger ici  </a>  </td>
+                                <td>   
+                                     <a id="lienn" href="Files CSV/{{$item->file_name}}" > Télécharger  </a>  
+                                </td>
                             </tr>
                         @endforeach
+                         </tbody>
                         </table>
-                        {{-- {{ $produits->links() }} --}}
-</div>
-
-                  
                     </section>
-                    {{-- <div class="buttons"  id="buttontraceaffiche">
-                        <button class="btn-hover color-green" id="trace"
-                         onclick="afficherTrace()"
-                         
-                         >Affiche Trace</button>
-                    </div>
-                    <div class="buttons" hidden id="buttontrace">
-                        <button class="btn-hover color-green" id="trace"
-                         onclick="haddentrace()"
-                         
-                         >hidden la trace</button>
-                    </div> --}}
-                  
                 <script>
-                  
 function afficherTrace(){
-    // alert("tabletrace")
     document.getElementById("tabletrace").hidden=false;
     document.getElementById("buttontraceaffiche").hidden=true;
     document.getElementById("buttontrace").hidden=false;
-
-
-    
-
 }
 function haddentrace(){
-    // alert("tabletrace")
     document.getElementById("tabletrace").hidden=true;
     document.getElementById("buttontraceaffiche").hidden=false;
     document.getElementById("buttontrace").hidden=true;
-
-
-
 }
-
-
-
                     function slecttfile(){
-
-
            var file= document.getElementById("fileselected").value;
            console.log(file);
            document.getElementById("lien").href="exemple-csv/"+file;
                             }
-
-
                   </script>
+                          
           @endsection

@@ -6,13 +6,18 @@ use Illuminate\Http\Request;
 use App\Client;
 use App\Vente;
 use App\Venteproduit;
+use App\Models\Organisme;
 
 use App\Produit;
 use App\Retoursurvente;
 use App\Retoursurventeproduit;
+use App\User;
 
+use App\Tva;
+use App\Remise;
 
- 
+ use App\Caisse;
+
 
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -65,6 +70,9 @@ class VenteController extends Controller
      public function index()
     {
     $this->afficherheader();
+    echo( '
+    <script>localStorage.setItem("sousselect", "toutevente");</script>
+    ');
 
     $ventes= DB::table('ventes')
     ->select('ventes.*','clients.name as nom_client')
@@ -75,12 +83,29 @@ class VenteController extends Controller
     return view('pages.vente.liste',compact('ventes'));
     }
 
+    
 
+    public function gettableventeorganismeajax()
+    {
+    $gettableventeajax= DB::table('ventes')
+    ->select('ventes.*','clients.name as nom_client','organismes.nom as organisme_nom')
+    ->join('clients', 'ventes.client_id', '=', 'clients.id')
+    ->join('organismes', 'ventes.organisme', '=', 'organismes.id')
+    ->orderBy('created_at', 'desc')
+
+    ->whereNull('ventes.deleted_at')
+    ->whereNotNull('ventes.organisme')
+    ->get();
+    return datatables( $gettableventeajax)->make(true) ;
+    }
     public function gettableventeajax()
     {
+        // dd("d");
     $gettableventeajax= DB::table('ventes')
     ->select('ventes.*','clients.name as nom_client')
     ->join('clients', 'ventes.client_id', '=', 'clients.id')
+        ->orderBy('id', 'desc')
+
     ->whereNull('ventes.deleted_at')
     ->get();
     return datatables( $gettableventeajax)->make(true) ;
@@ -112,6 +137,7 @@ class VenteController extends Controller
               ->join('clients', 'ventes.client_id', '=', 'clients.id')
             //   ->where('ventes.creer_par',Auth::User()->id)
               ->whereNull('ventes.deleted_at')
+              
               ->paginate(10);
               $paginate=0;
                       return view('pages.vente.table-vente',compact('ventes'),
@@ -154,9 +180,6 @@ public function modifier_produit_client(Request $req){
     $remise = $req->input("remise");
     $type_remise = $req->input("type_remise");
     $qtyinitiale = $req->input("qtyinitiale");
-// return  $quatite_produit;
-
-    
     $i=0;
     $vente = Vente::find($req->id);
     $prd= DB::table('venteproduits')
@@ -166,24 +189,40 @@ public function modifier_produit_client(Request $req){
     ->get();
     foreach($prd as $a)    
     {
-
       $p1 = Venteproduit::find($a->id);
       $p1 ->delete();
     }
+    $client = Client::find($req->client_idsuivant);
+    $org = Organisme::find($req->organisme);
+
     $vente->client_id = $req->client_idsuivant;
     $vente->status= $req->status;
     $vente->reference= $req->references;
     $vente->livree= $req->livree;
+    $vente->organisme= $req->organisme;
     if(intval($req->montant_credit)<0 && $req->status=="1")
     $vente->status ="2";
     else
     $vente->status = $req->status;
     $vente->montant_recu = $req->montant_recu;
     $vente->montant_rendre = $req->montant_rendre;
-    if($req->status=="0")
-    $vente->montant_credit = $req->montant_PU;
-    else
-    $vente->montant_credit = -$req->montant_credit;
+    if($req->status=="0"){
+    $ecart=($vente->montant_credit-($req->montant_PU));
+    $vente->montant_credit = $req->montant_PU;}
+    else{
+        $ecart=$vente->montant_credit-(-$req->montant_credit);
+        $vente->montant_credit = -$req->montant_credit;
+    }
+    
+    $client->credit= $client->credit-$ecart;
+    $client->update();
+    if($req->organisme!=null)
+  {  $org->credit= $org->credit-$ecart;
+    $org->update();}
+    // return  $ecart;
+    // return $req->roganisme;
+
+
     $vente->montant_PPV = $req->montant_PPV;
     $vente->montant_PU = $req->montant_PU;
     if( $vente->client_id==null){
@@ -246,16 +285,26 @@ public function ajouterretoursurvente_produit_client(Request $req){
     $p_unitaire = $req->input("p_unitaire");
     $remboursement = $req->input("remboursement");
     $remise = $req->input("remise");
+
+
     $type_remise = $req->input("type_remise");
     $i=0;
     $vente=new Retoursurvente ();
     $vente->client_id= $req->client_idsuivant;
+
+    
     $vente->montant_restitue = $req->montant_restitue;
     if( $vente->client_id==null){
         $vente->client_id=1000;
     }
     $vente->creer_par= Auth::User()->id;
     $vente->mode_payment= $req->mode_payment;
+    $qte_total=	0;
+    foreach ($req->input("qty") as $qt){
+        $qte_total=$qte_total+ $qt;
+    }
+    $vente->qte_total= $qte_total;
+    // $vente->save();
     $vente->save();
     foreach ($req->input("pr_select") as $pr_id){
         $produit =  Produit::find( $pr_id);
@@ -297,11 +346,14 @@ public function ajoutervente_produit_client(Request $req){
 
     $vente=new Vente();
     $client =  Client::find($req->client_idsuivant);
+    $org =  Organisme::find($req->organisme);
   
     $vente->client_id= $req->client_idsuivant;
     $vente->status= $req->status;
     $vente->reference= $req->references;
     $vente->livree= $req->livree;
+    $vente->organisme=$req->organisme;
+
     if(intval($req->montant_credit)<0 && $req->status=="1")
     $vente->status ="2";
     else
@@ -322,10 +374,17 @@ public function ajoutervente_produit_client(Request $req){
     $vente->mode_payment=null;
     else
     $vente->mode_payment= $req->mode_payment;
+    $qte_total=	0;
+    foreach ($req->input("qty") as $qt){
+        $qte_total=$qte_total+ $qt;
+    }
+    $vente->qte_total= $qte_total;
     $vente->save();
     $client->credit=$client->credit+intval($vente->montant_credit);
-    // return $client;
     $client->update();
+    if($req->organisme!=null)
+   { $org->credit=$org->credit+intval($vente->montant_credit);
+    $org->update();}
     foreach ($req->input("pr_select") as $pr_id){
         $produit =  Produit::find( $pr_id);
         // $produit->quantite_disponible= $produit->quantite_disponible-$quatite_produit[$i];
@@ -404,6 +463,7 @@ public function delete(Request $req){
     try{
     $vente = Vente::find($id);
     $vente->delete();
+    Venteproduit::where('ventes_id', $id)->delete();
     DB::commit();
     session()->flash('success','vente  supprimé avec succés');	
     return redirect('vente');}
@@ -417,24 +477,64 @@ public function delete(Request $req){
 }
 public function facturepage( $id){
     $this->afficherheader();
+$caisse=Caisse::orderBy('created_at', 'desc')->first();
+$caisse_id=$caisse->dernier_vente_id;
 
+// dd($caisse->dernier_vente_id,$id);
     $type_payment = DB::table('typepayments')
     ->select('typepayments.*')
     ->get(); 
-// dd($type_payment);
+
+    $v=Vente::find($id);
+// dd($v);
+if($v->organisme==null){
     $facture = DB::table('venteproduits')
     ->join('ventes', 'venteproduits.ventes_id', '=', 'ventes.id')
     ->join('produits', 'venteproduits.produits_id', '=', 'produits.id')
     ->join('clients', 'ventes.client_id', '=', 'clients.id')
+    // ->join('clients', 'ventes.client_id', '=', 'clients.id')
+    // ->join('organismes', 'ventes.organisme', '=', 'organismes.id')
     ->where('ventes.id', $id)
     ->whereNull('ventes.deleted_at')
     ->whereNull('venteproduits.deleted_at')
+    // ->whereNotNull('ventes.organisme')
 
-    ->select('ventes.*',"produits.*","venteproduits.*",'clients.name as nom_client')
+    ->select('ventes.*',"produits.*","venteproduits.*",'clients.name as nom_client','ventes.organisme as org_name')
+
     ->get(); 
+}
+    else{
+        $facture = DB::table('venteproduits')
+    ->join('ventes', 'venteproduits.ventes_id', '=', 'ventes.id')
+    ->join('produits', 'venteproduits.produits_id', '=', 'produits.id')
+    ->join('clients', 'ventes.client_id', '=', 'clients.id')
+    // ->join('clients', 'ventes.client_id', '=', 'clients.id')
+    ->join('organismes', 'ventes.organisme', '=', 'organismes.id')
+    ->where('ventes.id', $id)
+    ->whereNull('ventes.deleted_at')
+    ->whereNull('venteproduits.deleted_at')
+    ->whereNotNull('ventes.organisme')
+
+    ->select('ventes.*',"produits.*","venteproduits.*",'clients.name as nom_client','organismes.nom as org_name')
+
+    ->get(); 
+    }
 
 // dd( $facture);
-    return view('pages.vente.facture',compact('facture'),compact('type_payment'));
+
+    $creer_par=User::find( $facture[0]->creer_par);
+// dd( $creer_par);
+    return view('pages.vente.facture',
+    [
+        'type_payment' => $type_payment,
+    'facture' => $facture,
+    'creer_par' => $creer_par,
+     'caisse_id'=>$caisse_id,'id'=>$id
+
+    ]
+    );
+    
+    // compact('facture'),compact('type_payment'));
 }
 public function factureretursurvente( $id){
     $this->afficherheader();
@@ -467,7 +567,7 @@ public function produit_table($nom){
     ,'dcis.name as namedci')
     ->where('produits.name', 'like', '%'.$nom.'%')
         // ->where('creer_par',Auth::User()->id)
-
+ ->where('produits.active',1)
     ->whereNull('produits.deleted_at')
     ->get();
     return view('pages.vente.tableproduit',compact('produits'));
@@ -484,7 +584,7 @@ public function produit_ttable(){
     ->select('produits.*','classes.name as nameclasse','types.name as nametype','forms.name as nameform'
     ,'dcis.name as namedci')
     // ->where('creer_par',Auth::User()->id)
-
+ ->where('produits.active',1)
     ->whereNull('produits.deleted_at')
     ->get();
     return view('pages.vente.tableproduit',compact('produits'));
@@ -494,7 +594,9 @@ public function produit_ttable(){
 public function addventepage()
 {
     $this->afficherheader();
-
+    echo( '
+    <script>localStorage.setItem("sousselect", "addventes");</script>
+    ');
     $clients= DB::table('clients')
     ->select('clients.*')
     // ->where('clients.creer_par',Auth::User()->id)
@@ -511,17 +613,29 @@ public function addventepage()
         ->where('produits.active',1)
         ->whereNull('produits.deleted_at')
         ->get();
-    return view('pages.vente.add-vente',compact('clients'),compact('produits'));
+
+        $TVA=Tva::where("Type","Vente");
+        $Remise=Remise  ::all();
+        $organismes=Organisme  ::all();
+
+    return view('pages.vente.add-vente', ['clients'=>$clients,'produits'=>$produits
+    ,'TVA'=>$TVA
+    ,'Remise'=>$Remise
+    ,'organismes'=>$organismes
+
+    ]
+    
+);
 }
 
 
 public function modifierventepage($id)
 {
     $this->afficherheader();
-
+    $organismes=Organisme  ::all();
+    
         $clients= DB::table('clients')
         ->select('clients.*')
-        // ->where('clients.creer_par',Auth::User()->id)
         ->whereNull('clients.deleted_at')
         ->get(); 
          $produits= DB::table('produits')
@@ -531,7 +645,7 @@ public function modifierventepage($id)
         ->join('dcis', 'produits.dcis_id', '=', 'dcis.id')
         ->select('produits.*','classes.name as nameclasse','types.name as nametype','forms.name as nameform'
         ,'dcis.name as namedci')
-        // ->where('creer_par',Auth::User()->id)
+        ->where('produits.active',1)
         ->whereNull('produits.deleted_at')
         ->get();
 
@@ -569,6 +683,8 @@ public function modifierventepage($id)
         }
         return view('pages.vente.modifier-vente', ['produits'=>$produits,'ids'=>$ids,'clients'=>$clients,
         'ventes'=>$ventes,
+ 'organismes'=>$organismes
+,
         'produitsdejaselected'=>$produitsdejaselected]);
 
 }

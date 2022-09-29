@@ -1,32 +1,19 @@
-﻿<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
-<html xmlns='https://www.w3.org/1999/xhtml'>
-<head>
-<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-<body style='font-family:Tahoma;font-size:12px;color: #333333;background-color:#FFFFFF;'>
-<table align='center' border='0' cellpadding='0' cellspacing='0' style='height:842px; width:595px;font-size:12px;'>
-  <tr>
-    <td valign='top'><table width='100%' cellspacing='0' cellpadding='0'>
-        <tr>
-          <td valign='bottom' width='50%' height='50'>
-            <div align='left'>
-            
-            {{-- <img src='https://www.inv24.com/components/Users/pics/58cd70c222196/thumbs/0.jpg' /> --}}
-            {{-- <div class="sidebar-header">
-              <a href="/home" class="sidebar-brand logo-default">
-                   <img src="/assets/img/logo.png" alt="" /> </a>
-              <a href="/home" class="sidebar-brand logo-closed"> 
-                  <img src="/assets/icons/icone-logo.svg" alt="" /> </a>
-          </div> --}}
-          
-          </div><br /></td>
 
-          <td width='50%'>&nbsp;</td>
-        </tr>
-      </table>Destinataire: <br/><br/>
-      <table width='100%' cellspacing='0' cellpadding='0'>
+<div class="row">
+
+
+
+              <img src="{{ public_path() ."/assets/img/logo.png"}}" style=" height: 2cm;width:3cm">
+
+</div>
+
+ <table width='100%' cellspacing='0' cellpadding='0'>
       <tr>
         <td valign='top' width='35%' style='font-size:12px;'> <strong >   {{$facture[0]->nom_client}} </strong><br /> 
-Adresse {{$facture[0]->adressclient}}  <br/>SIRET: [SIRET du client]<br />No de TVA: [Numéro de TVA du client]<br />
+Adresse : {{$facture[0]->adressclient}}  <br/>
+<!--SIRET: [SIRET du client]-->
+<!--<br /-->
+<!-->No de TVA: [Numéro de TVA du client]<br />-->
 
 </td>
         <td valign='top' width='35%'>
@@ -44,6 +31,7 @@ Adresse {{$facture[0]->adressclient}}  <br/>SIRET: [SIRET du client]<br />No de 
         <td><div align='center' style='font-size: 14px;font-weight: bold;'>Facture №  553 </div></td>
       </tr>
     </table>
+
 <table width='100%' cellspacing='0' cellpadding='2' border='1' bordercolor='#CCCCCC'>
       <tr>
 
@@ -74,7 +62,13 @@ Adresse {{$facture[0]->adressclient}}  <br/>SIRET: [SIRET du client]<br />No de 
                 <td valign='top' style='font-size:12px;'>
                     {{$f->PPV_prix}}
                 </td>
-                <td valign='top' style='font-size:12px;'>{{$f->remise}}%</td>
+                <td valign='top' style='font-size:12px;'>
+                  @if ($f->remise==null)
+                      0%
+                  @else
+                  {{$f->remise}}%
+                  @endif
+                 </td>
                 <td valign='top' style='font-size:12px;'>{{$f->prix_unitaire}}</td>
                 <td valign='top' style='font-size:12px;'>{{$f->quantite}}</td>
                 <td valign='top' style='font-size:12px;'>{{$f->TVA}}</td>
@@ -85,42 +79,44 @@ Adresse {{$facture[0]->adressclient}}  <br/>SIRET: [SIRET du client]<br />No de 
 
 </td></tr>
     </table>
-<table width='100%' cellspacing='0' cellpadding='2' border='0'>
+    
+    <table width='100%' cellspacing='0' cellpadding='2' border='0'>
       <tr>
         <td style='font-size:12px;width:50%;'><strong> </strong></td>
         <td><table width='100%' cellspacing='0' cellpadding='2' border='0'>
+<!--  <tr>-->
+<!--<td align='right' style='font-size:12px;' >Total</td>-->
+<!--    <td  align='right' style='font-size:12px;'>   {{$facture[0]->montant_PU}} Dhs<td>-->
+<!--  </tr>-->
   <tr>
-<td align='right' style='font-size:12px;' >Total</td>
-    <td  align='right' style='font-size:12px;'>   {{$facture[0]->montant_PU}} Dhs<td>
-  </tr>
-  <tr>
-    <td  align='right' style='font-size:12px;'><b>TVA</b></td>
-    {{-- <td  align='right' style='font-size:12px;'><b>   {{$facture[0]->montant_PU}} Dhs </b></td> --}}
+   
     <td  align='right' style='font-size:12px;'><b>Total TTC</b></td>
     <td  align='right' style='font-size:12px;'><b>   {{$facture[0]->montant_PU}} Dhs </b></td>
-  </tr></table>
+  </tr>
+  <tr>
+   
+    <td  align='right' style='font-size:12px;'><b>Total TTC</b></td>
+    <td  align='right' style='font-size:12px;'><b>   {{$facture[0]->montant_PU}} Dhs </b></td>
+  </tr>
+  </table>
 </td>
       </tr>
 </table> 
-   
-   {{-- <table width='100%' height='50'><tr><td style='font-size:12px;text-align:justify;'>TVA non applicable, article 293B du code général des impôts</td></tr></table>
-    <table  width='100%' cellspacing='0' cellpadding='2'>
+  <table  width='100%' cellspacing='0' cellpadding='2'>
       <tr>
-        <td width='33%' style='border-top:double medium #CCCCCC;font-size:12px;' valign='top' ><b>[Nom de l'entreprise]</b><br/>
+        {{-- <td width='33%' style='border-top:double medium #CCCCCC;font-size:12px;' valign='top' ><b>{{Auth::User()->name}}</b><br/>
 SIRET:  [SIRET]<br/>
 
-</td>
+</td> --}}
         <td width='33%' style='border-top:double medium #CCCCCC; font-size:12px;' align='center' valign='top'>
-[Adresse] <br/>
-Tél: [Téléphone]<br/>
-</td>
+          {{Auth::User()->adresse}} <br/>
+{{Auth::User()->tele}}<br/>
+{{-- </td>
 
-        <td valign='top' width='34%' style='border-top:double medium #CCCCCC;font-size:12px;' align='right'>[Nom de la banque]<br/> [Compte bancaire (IBAN)]  <br/>SWIFT/BIC: [SWIFT/BIC] <br/>     
- </td>
+        <td valign='top' width='34%' style='border-top:double medium #CCCCCC;font-size:12px;' align='right'>[Nom de la banque]<br/> [Compte bancaire (IBAN)] {{Auth::User()->pied_pdf}} <br/>SWIFT/BIC: [SWIFT/BIC] <br/>     
+ </td> --}}
       </tr>
-    </table> --}}
-</td>
-  </tr>
-</table>
-</body>
-</html>
+    </table>
+    
+
+    

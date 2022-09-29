@@ -9,13 +9,29 @@ use Exception;
 class DciController extends Controller
 {
 
+
     public function __construct()
     {
         $this->middleware('auth');
-        echo( '
+        echo('
+        <script>localStorage.setItem("sousselect", "vdci");</script>
+        ');
+          echo('
+        <script>localStorage.setItem("select2", "DCI");</script>
+        ');
+        echo('
         <script>localStorage.setItem("select", "produitv");</script>
         ');
+        
     }
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    //     echo( '
+    //     <script>localStorage.setItem("select", "produitv");</script>
+    //     ');
+    // }
     public function AfficherDci(){
         $Dcis=Dci::all();
 

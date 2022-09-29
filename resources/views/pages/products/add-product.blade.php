@@ -16,12 +16,12 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-end">
-                                    <div class="buttons">
+                                    <div class="buttons" style="margin-top:5px">
                                         <button type="submit" class="btn-hover color-green btn-fixed"> Sauvegarder</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="section-form-product mt-4">
+                            <div class="section-form-product ">
                                 <div class="block-form bg-white p-4 mb-4">
                                     <div class="section-subtitle pb-1 mb-3">
                                         <h5>Informations générales</h5>
@@ -29,27 +29,27 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <div class="wrap upload-image d-flex gap-3">
-                                                <div class="thumb"><img id="img" class="img" src="/assets/img/default.jpg" /></div>
+                                                <div class="thumb"><img id="img" class="img" src="images/medicament.jpg" /></div>
                                                 <div class="form-upload mt-5">
                                                     <input type="file" id="upload"  required name="image" class="upload form-control custom-file-input" />
                                                     <span>Votre fichier ne doit pas dépasser 15 MG</span>
                                                     @error('image')
-                                        
+
                                                     <span>
-                                                        <strong style="color: red">a remplir</strong>
+                                                        <strong style="color: red">Champ obligatoire</strong>
                                                     </span>
                                                 @enderror
                                                 </div>
                                             </div>
                                         </div>
-                                     
+                                    
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Nom*</label>
                                             <input type="text" class="form-control"  value="{{old('nom')}}" required name="nom" />
                                             @error('nom')
-                                        
+
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
@@ -58,7 +58,7 @@
                                             <input type="text" class="form-control"  required value="{{old('codebarre')}}"  name="codebarre" />
                                             @error('codebarre')
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
@@ -69,72 +69,72 @@
 
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Catégorie</label>
-                                            <select  class="chosen-select form-select " ()  name="categorie" required>
-                                                <option  value="" selected>...</option>
+                                            <select class="chosen-select form-select "  name="categorie" required>
                                                 @foreach($types as $type)
                                                 <option  value="{{$type->id}}"  @if (old('categorie') == $type->id) {{ 'selected' }} @endif>{{$type->name}}</option>
                                                 @endforeach
                                              
                                             </select>
                                             @error('categorie')
-                                        
+
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
-    
+
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Classe thérapeutique</label>
-                                            <select class="chosen-select form-select "   required name="classe">
-                                                <option value=""  selected>...</option>
+                                            <select class="chosen-select form-select " name="classe" >
+                                                <option value=""  >...</option>
                                                 @foreach($classes as $classe)
                                                 <option  value="{{$classe->id}}"  @if (old('classe') == $classe->id) {{ 'selected' }} @endif >{{$classe->name}}</option>
                                                 @endforeach
-                                             
+                                            
+
                                             </select>
                                             @error('classe')
-                                        
+
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Forme galénique</label>
                                             <select  class="chosen-select form-select "   required name="fgalenique">
-                                                <option   value="" selected>...</option>
                                                 @foreach($forms as $form)
                                                 <option  value="{{$form->id}}"  @if (old('fgalenique') == $form->id) {{ 'selected' }} @endif >{{$form->name}}</option>
                                                 @endforeach
-                                         x
+                                           
                                             </select>
                                             @error('fgalenique')
-                                        
+
                                             <span>
-                                                <strong style="color: red" >a remplir</strong>
+                                                <strong style="color: red" >Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">DCI</label>
                                             <select class="chosen-select form-select "   value="{{old('dci')}}" required name="dci">
-                                                <option  value=""  selected>...</option>
                                                 @foreach($dcis as $dci)
                                                 <option  value="{{$dci->id}}"   @if (old('dci') == $dci->id) {{ 'selected' }} @endif>{{$dci->name}}</option>
                                                 @endforeach
-                                            
+                                                {{-- <option value="1">One</option>
+                                                <option value="2">Two</option>
+                                                <option value="3">Three</option> --}}
                                             </select>
                                             @error('dci')
-                                        
+
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Laboratoire</label>
-                                            <input type="text" class="form-control"required   value="{{old('laboratoire')}}" name="laboratoire" />
+                                            <input type="text" class="form-control"   value="{{old('laboratoire')}}" name="laboratoire" />
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Gamme</label>
@@ -174,69 +174,109 @@
                                             <label class="form-label">PPH*</label>
                                             <input type="number" class="form-control"required  value="{{old('pph')}}"  name="pph" />
                                             @error('pph')
-                                        
+
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
-                                        
+
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">PPV*</label>
                                             <input type="number" class="form-control"  value="{{old('ppv')}}" required name="ppv" />
                                             @error('ppv')
-                                        
+
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">quantite</label>
-                                            <input type="number" class="form-control"  value="{{old('quantite')}}" required 
+                                            <input type="number" class="form-control"  value="{{old('quantite')}}" required
                                             name="quantite" />
 
                                             @error('quantite')
-                                        
+
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
-                                  
+                                        {{-- <div class="col-md-4 mb-3">
+                                            <label class="form-label">Stock</label>
+                                            <select class="chosen-select form-select "  name="stock_id" >
+                                                <option  value="" selected>...</option>
+                                                @foreach($stocks as $type)
+                                                <option  value="{{$type->id}}"  @if (old('categorie') == $type->id) {{ 'selected' }} @endif>{{$type->nom}}</option>
+                                                @endforeach
+
+                                            </select>
+                                            @error('categorie')
+
+                                            <span>
+                                                <strong style="color: red">Champ obligatoire</strong>
+                                            </span>
+                                        @enderror
+                                        </div> --}}
+
+{{-- <input list="europe-countries" placeholder="Start typing...">
+<datalist id="europe-countries">
+    <option value="" selected>...</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+</datalist> --}}
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">TVA sur achat</label>
-                                            <select class="chosen-select form-select "  required value="{{old('tva_achat')}}" name="tva_achat">
-                                                <option value="" selected>...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                            <select class="chosen-select form-select "  required  name="tva_achat">
+                                                @foreach ($TvaAchat as $item)
+                                                  <option value="{{$item->Valeur}}">{{$item->Nom_Tva}} : {{$item->Valeur}}%</option>
+                                                @endforeach
+
                                             </select>
                                             @error('tva_achat')
-                                        
+
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">TVA sur vente</label>
-                                            <select class="chosen-select form-select "   required value="{{old('tva_vente')}}"name="tva_vente">
-                                                <option  value="" selected>...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+
+                                            <select class="chosen-select form-select "   required  name="tva_vente">
+                                                @foreach ($TvaVente as $item)
+                                                  <option value="{{$item->Valeur}}">{{$item->Nom_Tva}} :  {{$item->Valeur}}%</option>
+                                                @endforeach
+
                                             </select>
+
                                             @error('tva_vente')
-                                        
+
                                             <span>
-                                                <strong style="color: red">a remplir</strong>
+                                                <strong style="color: red">Champ obligatoire</strong>
                                             </span>
                                         @enderror
                                         </div>
+                                        	
+                                        <div class="col-md-4 mb-3">
+                                            <label class="form-label">Zone</label>
+                                            <select class="chosen-select form-select "   required  name="zone">
+                                           
+                                                @foreach ($Zone as $item)
+                                                  <option value="{{$item->id}}">{{$item->Nom_zone}} :  {{$item->Ref_zone}}</option>
+                                                @endforeach
+
+                                            </select>
+
+                                        </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Est remboursable</label>
-                                            <select class="chosen-select form-select "   value="{{old('remboursable')}}" name="remboursable">
+                                            <input list="europe-countries"class="chosen-select form-select "  placeholder="Start typing...">
+
+                                            <datalist id="europe-countries"  >
+                                            {{-- <select class="chosen-select form-select "   value="{{old('remboursable')}}" name="remboursable"> --}}
                                                 <option selected>...</option>
                                                 <option value="1">One</option>
                                                 <option value="2">Two</option>
@@ -276,29 +316,38 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Contre-indication conduit</label>
-                                            <select class="chosen-select form-select "   value="{{old('ci_conduit')}}" name="ci_conduit">
+                                            <select class="chosen-select form-select"    name="ci_conduit">
                                                 <option selected>...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                                @foreach ($conduit as $item)
+                                                  <option >{{$item->Nom}}</option>
+                                                @endforeach
+
                                             </select>
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Contre-indication monograph</label>
-                                            <select class="chosen-select form-select "   value="{{old('ci_monograph')}}" name="ci_monograph">
+                                            <select class="chosen-select form-select"    name="ci_monograph">
                                                 <option selected>...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                                @foreach ($monograph as $item)
+                                                  <option value="{{$item->Nom}}">{{$item->Nom}}</option>
+                                                @endforeach
+
                                             </select>
+                                            {{-- <select class="chosen-select form-select"    name="ci_monograph">
+                                                <option selected>...</option>
+                                                @foreach ($monograph as $item)
+                                                  <option >{{$item->Nom}}</option>
+                                                @endforeach
+                                            </select> --}}
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Contre-indication grossesse</label>
-                                            <select class="chosen-select form-select "  value="{{old('ci_grossesse')}}"name="ci_grossesse">
-                                                <option selected>...</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
+                                            <select class="chosen-select form-select"    name="ci_grossesse">
+
+                                                    <option selected>...</option>
+                                                    @foreach ($grossesse as $item)
+                                                      <option >{{$item->Nom}}</option>
+                                                    @endforeach
                                             </select>
                                         </div>
                                         <div class="col-md-4 mb-3">

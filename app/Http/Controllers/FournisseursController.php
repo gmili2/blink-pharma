@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Fournisseur;
 use App\Pays;
+use App\User;
 
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -12,7 +13,11 @@ use Auth;
 class FournisseursController extends Controller
 {
     //
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
 
 // public function index()
 // {
@@ -32,9 +37,38 @@ public  function afficherheader()
     ');
 }
 
+
+
+
+
+
+public function getVillesselect($id,$ville){
+
+    $this->afficherheader();
+   
+    
+
+    $villes=DB::table('villes')
+     ->join('pays', 'pays.id', '=','villes.pays_id')
+     ->where('villes.pays_id','=',$id)
+     ->whereNull('villes.deleted_at')
+     ->select('villes.*')
+
+
+
+
+    ->get();
+
+
+
+
+    return view('pages/fournisseur/AllVillesselected',['villes'=>$villes,'id'=>$id,'ville'=>$ville]);
+}
 public function getvilles($id){
 
     $this->afficherheader();
+   
+    
 
     $villes=DB::table('villes')
      ->join('pays', 'pays.id', '=','villes.pays_id')
@@ -55,6 +89,9 @@ public function getvilles($id){
 public function index()
 {
 $this->afficherheader();
+echo( '
+<script>localStorage.setItem("sousselect", "tousfourn");</script>
+');
 
     $fournisseurs = Fournisseur::all();
 
@@ -100,9 +137,13 @@ $this->afficherheader();
 }
 public function  addfornisseurView(){
 $this->afficherheader();
-
+echo( '
+<script>localStorage.setItem("sousselect", "addfourn");</script>
+');
     $Pays=Pays::all();
-      return view('pages/fournisseur/addfornisseur',['Pays'=>$Pays]);
+    
+          return view('pages/fournisseur/addfornisseur',['Pays'=>$Pays]);
+
 }
 
 
@@ -238,9 +279,10 @@ public function update(Request $req,$id)
 public function showfournisseur($id)
 {
 $this->afficherheader();
-
     $fournisseurs = Fournisseur::find($id);
-    return view('pages/fournisseur/informationfournisseur',compact('fournisseurs'));
+    $creer_par=User::find( $fournisseurs->creer_par);
+
+    return view('pages/fournisseur/informationfournisseur',['fournisseurs'=>$fournisseurs]);
 }
 
 

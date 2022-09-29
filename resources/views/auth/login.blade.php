@@ -51,14 +51,18 @@
                 <div class="buttons d-block">
                     <button type="submit" class="btn-hover color-blue">Se connecter</button>
 
-                    <br/><br/>
+                   </div>
                     @if (Route::has('password.request'))
-                    
-                    <a class="btn btn-hover color-blue" href="{{ route('password.request') }}">
-                        {{ __('Mot de passe oublié?') }}
-                    </a>
-                @endif
+                    </br>
+                    <div class="buttons d-block">
+                        
+                   <button class="btn-hover color-blue" onclick="location.href='{{ route('password.request') }}'" type="button">
+         
+                        {{ __('Mot de passe oublié ?') }}
+                    </button>
+                
                 </div>
+                @endif
             </form>
 
         </section>

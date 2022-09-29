@@ -12,8 +12,14 @@ class FormController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        echo( '
+        echo('
         <script>localStorage.setItem("select", "produitv");</script>
+        ');
+          echo('
+        <script>localStorage.setItem("select", "Forms");</script>
+        ');
+        echo( '
+        <script>localStorage.setItem("sousselect", "vForms");</script>
         ');
     }
   

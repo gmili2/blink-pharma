@@ -8,7 +8,21 @@ use Exception;
 
 class ClasseController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
     public function AfficherClasse(){
+
+        echo( '
+        <script>localStorage.setItem("sousselect", "vgroupe");</script>
+        ');
+        
+           echo( '
+        <script>localStorage.setItem("select2", "Groupe");</script>
+        ');
         $Classes=Classe::all();
 
          return view('pages.parameters.Classes.AfficherClasse',["Classes"=>$Classes]);

@@ -15,6 +15,8 @@ class TermeController extends Controller
       $this->middleware('auth');
      
   }
+
+  
     public function TermeDevis(){
       echo( '
       <script>localStorage.setItem("select", "TermeDevis");</script>

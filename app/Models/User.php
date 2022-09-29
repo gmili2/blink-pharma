@@ -7,10 +7,24 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Calendar;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+    
+       use HasFactory;
+
+   
+          public function calendarsNow(){
+        return $this->hasMany(Calendar::class)->whereDate('calendars.date', Carbon::today())->orderBy('calendars.date');
+    }
+    
+             public function calendarsfutur(){
+        return $this->hasMany(Calendar::class)->whereDate('calendars.date','>', Carbon::today())->orderBy('calendars.date');
+    }
+
 
     /**
      * The attributes that are mass assignable.

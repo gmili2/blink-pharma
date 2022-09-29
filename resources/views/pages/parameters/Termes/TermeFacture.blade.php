@@ -1,7 +1,7 @@
 {{-- @extends('layouts.app')
 
 @section('content')                <div class="page-content">
-    @include('layouts.navparam')
+    <!--@include('layouts.navparam')-->
 
     <section class="section-stock mt-3 pb-5">
         <form action="ModifierTermeFacture" method="POST" >
@@ -80,7 +80,7 @@ alert (text);
 
 
  
-@extends('layouts.apppar')
+@extends('layouts.app')
 
 @section('content')  
                 <!-- partial -->

@@ -10,7 +10,7 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="title">
-                                        <h1>Créer un nouveau clients</h1>
+                                        <h1>Modifier</h1>
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-end">
@@ -25,17 +25,17 @@
                                         <h5>Informations générales</h5>
                                     </div>
                                     <div class="row">
-                                        <div class="col-md-12 mb-3">
-                                            <div class="wrap upload-image d-flex gap-3">
-                                                <div class="thumb"><img id="img" class="img" src="/images/{{$clients->image}}" 
+                                        <!--<div class="col-md-12 mb-3">-->
+                                        <!--    <div class="wrap upload-image d-flex gap-3">-->
+                                        <!--        <div class="thumb"><img id="img" class="img" src="/images/{{$clients->image}}" -->
                                                     
-                                                    /></div>
-                                                <div class="form-upload mt-5">
-                                                    <input type="file" id="upload"  name="image" class="upload form-control custom-file-input" />
-                                                    <span>Votre fichier ne doit pas dépasser 15 MG</span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        <!--            /></div>-->
+                                        <!--        <div class="form-upload mt-5">-->
+                                        <!--            <input type="file" id="upload"  name="image" class="upload form-control custom-file-input" />-->
+                                        <!--            <span>Votre fichier ne doit pas dépasser 15 MG</span>-->
+                                        <!--        </div>-->
+                                        <!--    </div>-->
+                                        <!--</div>-->
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Nom*</label>
                                             <input type="text" class="form-control" name="nom" value="{{$clients->name}}"/>

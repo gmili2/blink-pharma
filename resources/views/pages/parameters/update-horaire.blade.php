@@ -4,11 +4,7 @@
 
 
 <div class="page-content">
-    @include('layouts.navparam')
-<br>
-<br>
-<br>
-<br>
+
                     <section class="section-client mt-3 pb-5">
                         <form action="updateEmploi" method="POST">
                             @csrf

@@ -9,14 +9,29 @@ use App\Produit;
 use Illuminate\Support\Facades\DB;
 use Auth;
 Use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+use Redirect;
+
 
 class InventaireController extends Controller
 {
     //
+    public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
 
     public function index()
     {
         // $invents = Inventaire::all();
+// dd('lkj');
+        echo( '
+        <script>localStorage.setItem("select", "stock");</script>
+        ');
+        echo( '
+        <script>localStorage.setItem("sousselect", "istocks");</script>
+        ');
         $invents= DB::table('inventaires')
         ->select('inventaires.*','users.name as name_user')
         ->join('users', 'inventaires.creer_par', '=', 'users.id')
@@ -97,7 +112,9 @@ public function addinvent()
     ->whereNull('produits.deleted_at')
     ->get();
 
-    return view('pages/inventaire/addinvent',compact(['produits']));
+        $code_securite=Auth::User()->code;
+       
+    return view('pages/inventaire/addinvent',compact(['produits','code_securite']));
 }
 
 
@@ -106,27 +123,44 @@ public function addinvent()
 public function add(Request $req)
 {
     // dd($req->input());
-    $idprodui_select= $req->input("idprodui_select");
-    $qtesysprodui_selected = $req->input("qtesysprodui_selected");
-    $qtephprodui_selected = $req->input("qtephprodui_selected");
-    $ppv_produi_selected = $req->input("ppv_produi_selected");
-    $nomprodui_selected = $req->input("nomprodui_selected");
-    $commentaire = $req->input("commentaire");
+    echo( '
+    <script>localStorage.setItem("select", "stock");</script>
+    ');
+    echo( '
+    <script>localStorage.setItem("sousselect", "istocks");</script>
+    ');
 
-    $counter=sizeof($nomprodui_selected);
-    $client = new Inventaire();
-   
-    $client->nom=$req->nom;
-    $client->commentaire=$req->commentairei;
-    $client->users_id=Auth::user()->id;
-    $client->creer_par=Auth::user()->id;
-    $client->statut = 1;
-    $client->date_inventaire = Carbon::now();
-    $client->save();
+    
     // DB::commit();
     DB::beginTransaction();
     try{
-    // dd($counter);
+
+
+        if(Hash::check($req->codesecurite, Auth::User()->code)!=true){
+            session()->flash('warning', "Votre code de sécurité est incorrecte.");
+            return Redirect::back();
+            // return redirect('addinvent');
+            }
+    else{
+        $idprodui_select= $req->input("idprodui_select");
+        $qtesysprodui_selected = $req->input("qtesysprodui_selected");
+        $qtephprodui_selected = $req->input("qtephprodui_selected");
+        $ppv_produi_selected = $req->input("ppv_produi_selected");
+        $nomprodui_selected = $req->input("nomprodui_selected");
+        $commentaire = $req->input("commentaire");
+    
+        $counter=sizeof($nomprodui_selected);
+        $client = new Inventaire();
+       
+        $client->nom=$req->nom;
+        $client->commentaire=$req->commentairei;
+        $client->users_id=Auth::user()->id;
+        $client->creer_par=Auth::user()->id;
+        $client->statut = 1;
+        $client->date_inventaire = Carbon::now();
+        $client->save();
+    
+    }
 
     for($i=0;$i<$counter;$i++)
     {     
@@ -157,7 +191,7 @@ public function add(Request $req)
         
         DB::rollBack();
         session()->flash('warning', 'erreur base donnée');
-        return redirect('invent');
+        return redirect('addinvent');
     }
 }
 

@@ -42,7 +42,7 @@
                                                 </div>
                                          
                                             </div>
-                                            <table id="table" class="table table-striped mt-3" style="width: 100%;">
+                                            <table id="table" class="table table-striped mt-3 selvente"  style="width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>N°</th>

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<br/>
+
 <div class="page-content">
                     <section class="section-client mt-3 pb-5">
                         <div class="row text-end">
@@ -17,7 +17,8 @@
                                     <div class="title-p pt-1"><h5>Liste des Inventaires</h5></div>
                                 </div>
                             </div>
-                            <table id="tableinventaire" class="table table-striped" style="width: 100%;">
+                                <br/>                                                  
+                            <table id="tableinventaire" class="table table-striped selvente" style="width: 100%;">
 
                                 <thead>
                                     <tr>
@@ -98,12 +99,12 @@
                                     @csrf
                                    <input type="text"  id="fr_id" name="fr_id">
                                 <div class="row section-footer">
-                                    <div class="buttons">
-                                        <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+                                    <div class="buttons" style="margin-top:60px">
+                                        <a href="#" class="btn btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
         
-                                        <button class="btn btn-hover color-green mx-1" data-bs-dismiss="modal" 
+                                        <a class="btn btn-hover color-blue spacecenter" data-bs-dismiss="modal" 
                                         
-                                        aria-label="Close">Supprimer</button>
+                                        aria-label="Close">Supprimer</a>
 
                                     </div>
                                 </div>

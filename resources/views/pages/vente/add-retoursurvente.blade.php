@@ -53,7 +53,7 @@
                                             </div>
                                         </div>
                                     <hr class="divider" />
-                                    <table id="table" class="table table-striped mb-4" style="width: 100%;">
+                                    <table id="table" class="table table-striped mb-4 selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Nom</th>
@@ -208,7 +208,7 @@
                                         
                                         <hr class="divider mt-3" />
 
-                                        <table id="table-right" class="table table-striped mb-4" style="width: 100%;">
+                                        <table id="table-right" class="table table-striped mb-4 selvente" style="width: 100%;">
                                             <thead>
                                                 <tr>
                                                     <th></th>
@@ -274,7 +274,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-12">
-                                <table id="table-client" class="table table-striped mb-4" style="width: 100%;">
+                                <table id="table-client" class="table table-striped mb-4 selvente" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th></th>

@@ -23,6 +23,9 @@ class SequenceCentroller extends Controller
          return view('pages.parameters.Sequence.AfficherSequence',["Sequence"=>$Sequence]);
     }
     public function ModifierRemiseparCategorie(){
+        echo( '
+        <script>localStorage.setItem("sousselect", "vremise");</script>
+        ');
         return view('pages.parameters.Sequence.ModifierRemiseparCategorie');
     }
 

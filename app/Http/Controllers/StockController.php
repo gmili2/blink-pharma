@@ -14,9 +14,20 @@ class StockController extends Controller
 {
     //
 
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
 public function index()
 {
+    echo( '
+<script>localStorage.setItem("select", "stock");</script>
+');
+echo( '
+<script>localStorage.setItem("sousselect", "stocks");</script>
+');
+
    
     $produits= DB::table('produits')
     ->join('classes','produits.classes_id','=','classes.id')

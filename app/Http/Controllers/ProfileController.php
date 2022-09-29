@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\User;
 use App\Pays;
+use App\Models\Favori;
 
 use Illuminate\Support\Facades\Hash;
 
@@ -18,15 +19,134 @@ class ProfileController extends Controller
   public function __construct()
   {
       $this->middleware('auth');
-    //   echo( '
-    //   <script>localStorage.setItem("select", "mespar");</script>
-    //   ');
+   
   }
 
+
+public function testcode($code){
+    if(Hash::check($code, Auth::User()->password)!=true){
+        // session()->flash('warning', "votre ancien mot de passe n 'est pas correcte");
+        $rep["code"]=300;
+    }
+    else 
+    $rep["code"]=200;
+    return $rep;
+
+
+}
+
+  public function updatefavoris(Request $request)
+
+  { 
+ 
+
+
+    $fav = Favori::where('url','organisme')->first();
+    $fav->favoris=$request->organisme;
+    $fav->update(); $fav = Favori::where('url','addorg')->first();
+    $fav->favoris=$request->addorg;
+    $fav->update();
+
+    $fav = Favori::where('url','addvente')->first();
+    $fav->favoris=$request->addvente;
+    $fav->update(); 
+
+
+
+
+
+     $fav = Favori::where('url','addproduit')->first();
+    $fav->favoris=$request->addproduit;
+    $fav->update(); 
+    
+    $fav = Favori::where('url','addfour')->first();
+    $fav->favoris=$request->addfour;
+    $fav->update(); 
+    
+    $fav = Favori::where('url','addsortie')->first();
+    $fav->favoris=$request->addsortie;
+
+    $fav->update(); 
+    
+    $fav = Favori::where('url','addentrer')->first();
+    $fav->favoris=$request->addentrer;
+    $fav->update();
+    
+
+    $fav = Favori::where('url','addcloturecaisse')->first();
+    $fav->favoris=$request->addcloturecaisse;
+    $fav->update();
+
+
+
+    $fav = Favori::where('url','inventaire')->first();
+    $fav->favoris=$request->inventaire;
+    $fav->update();
+
+
+    
+    // $fav = Favori::where('url','addentrer')->first();
+    // $fav->favoris=$request->addentrer;
+    // $fav->update();
+
+
+    
+
+
+
+    ///
+
+    $fav = Favori::where('url','home')->first();
+    $fav->favoris=$request->home;
+    $fav->update();
+      $fav = Favori::where('url','profile')->first();
+    $fav->favoris=$request->profile; 
+    $fav->update();
+    $fav = Favori::where('url','stock')->first();
+    $fav->favoris=$request->input("1stock"); 
+    $fav->update();
+    $fav = Favori::where('url','caisse')->first();
+    $fav->favoris=$request->caisse; 
+    $fav->update();
+    $fav = Favori::where('url','achat')->first();
+    $fav->favoris=$request->achat; 
+    $fav->update();
+    $fav = Favori::where('url','vente')->first();
+    $fav->favoris=$request->vente; 
+    $fav->update();
+    $fav = Favori::where('url','confrere')->first();
+    $fav->favoris=$request->confrere; 
+    $fav->update();
+    $fav = Favori::where('url','fournisseurs')->first();
+    $fav->favoris=$request->input("1fournisseurs");
+    $fav->update();
+    $fav = Favori::where('url','client')->first();
+    $fav->favoris=$request->input("1clients");
+    $fav->update();
+
+
+    
+    $fav = Favori::where('url','produit')->first();
+    $fav->favoris=$request->produit ;
+    $fav->update();
+    session()->flash('success', 'Favoris bien modifié');
+
+   return redirect("home");
+
+ 
+  }
+  
     public function index()
     {
-        echo( '
+     echo( '
         <script>localStorage.setItem("select", "mespar");</script>
+        ');
+    
+        echo( '
+        <script>localStorage.setItem("select2", "Profil");</script>
+        ');
+        echo( '
+        <script>localStorage.setItem("sousselect", "vprofil");</script>
         ');
         $villes=DB::table('villes')
         ->join('pays', 'pays.id', '=','villes.pays_id')
@@ -54,7 +174,7 @@ class ProfileController extends Controller
 
                 if($request->logo!=null)
                 {
-                $logo = time() . '-logo' . $request->logo->extension();
+                $logo = time() . '-logo.' . $request->logo->extension();
                 $request->logo->move(public_path('images'), $logo);
                 $user->logo = $logo;
                 } 
@@ -82,6 +202,10 @@ class ProfileController extends Controller
     public function changecode(Request $request)
 
     { 
+
+        echo( '
+        <script>localStorage.setItem("sousselect", "vcodesecuritechage");</script>
+        ');
             DB::beginTransaction();
             $user =  User::find(Auth::User()->id); 
             try{
@@ -125,7 +249,7 @@ class ProfileController extends Controller
 
                 if($request->pied!=null)
                 {
-                $pied = time() . '-logo' . $request->pied->extension();
+                $pied = time() . '-logo.' . $request->pied->extension();
                 $request->pied->move(public_path('images'), $pied);
                 $user->pied_pdf = $pied;
                 } 
@@ -205,6 +329,13 @@ class ProfileController extends Controller
         DB::beginTransaction();
         try{
         $user =  User::find(Auth::User()->id); 
+// dd()
+        if($request->image!=null)
+        {
+        $image = time() . '-' . $request->nom . '.' . $request->image->extension();
+        $request->image->move(public_path('images'), $image);
+        $user->imageprofil = $image;
+        } 
         $user->name= $request->nom;
         $user->firstname=$request->prenom;
         $user->date_naissance=$request->date_naissance;

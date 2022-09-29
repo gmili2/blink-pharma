@@ -1,4 +1,4 @@
-@extends('layouts.apppar')
+@extends('layouts.app')
 
 @section('content')  
 
@@ -30,8 +30,8 @@
                                     <div class="row">
                                         <div class="col-md-12 mb-3">
                                             <div class="wrap upload-image d-flex gap-3">
-                                                <div class="thumb"><img id="img" class="img" src="/images/{{AUth::User()->logo}}" /></div>
-                                                <div class="form-upload mt-5">
+                                                <div class="thumb"><img id="img" class="img" style="object-fit: contain;" src="/images/{{AUth::User()->logo}}" /></div>
+                                                <div class="form-upload mt-4">
                                                     <input type="file" id="upload" name="logo" class="upload form-control custom-file-input" />
                                                     <span>Votre fichier ne doit pas dépasser 15 MG</span>
                                                 </div>
@@ -39,6 +39,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                
                             </div>
                         </form>
                     </section>

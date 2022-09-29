@@ -1,5 +1,5 @@
 
-@extends('layouts.apppar')
+@extends('layouts.app')
 
 @section('content')             
 
@@ -17,28 +17,28 @@
 
                 <div class="col-md-12">
                     <div class="buttons">
-                        <button type="submit" class="btn btn-hover color-green" >Ajouter</button>
+                        <button type="submit" class="btn btn-hover color-green" >Sauvgarder</button>
                     </div>
                 </div>
             </div>
             <div class="section-information bg-white block-form mt-4 p-3">
                 <div class="row">
                     <div class="col-md-12">
-                        <div class="title-p pt-1"><h5>Créer un nouvel User</h5></div>
+                        <div class="title-p pt-1"><h5>Créer un nouveau Utilisateur</h5></div>
                     </div>
                 </div>
                <div class="row mt-4 mb-4">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Nom*</label>
-                        <input type="text" class="form-control" placeholder="Nom_user" required name="Nom_user" />
+                        <input type="text" class="form-control" placeholder="Nom" required name="Nom_user" />
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Prenom*</label>
-                        <input type="text" class="form-control" placeholder="First_user" required name="First_user" />
+                        <input type="text" class="form-control" placeholder="First_user" required name="Prenom" />
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Email*</label>
-                        <input type="email" class="form-control" placeholder="Email"required  name="Email_user" />
+                        <input type="email" class="form-control" placeholder="Email"required  name="Email" />
                     </div>
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Password*</label>
@@ -48,24 +48,17 @@
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Role*</label>
                         <select class="form-select" onchange="slectRole()" id="Roleselect" name="Role">
-                            <option value="Admins">Admins</option>
-                            <option value="NormalUser">utilisateur normale</option>
 
-
+                            @foreach ($roles as $r)
+                            <option value="{{$r->id}}">{{$r->nom}}</option>
+                            @endforeach
                         </select>
                     </div>
+                    <a style="padding-left: 19px;" 
+                    href="role">Ajouter un role</a>
 
         </form>
-
-
-            {{-- <button class="form-control" placeholder="text" name="commentaire"  accept=".csv">AfficherTarce</button> --}}
-
-
     </section>
-    {{-- <div class="col-md-6">
-        <div class="title-p pt-1"><h5>Liste des  utilisateurs</h5></div>
-    </div> --}}
-
       <div id="Zones"  >
         <div class="tab"  >
 

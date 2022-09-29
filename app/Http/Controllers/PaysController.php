@@ -11,8 +11,15 @@ class PaysController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        echo( '
+
+        echo('
         <script>localStorage.setItem("select", "produitv");</script>
+        ');
+         echo('
+        <script>localStorage.setItem("select2", "Pays");</script>
+        ');
+        echo( '
+        <script>localStorage.setItem("sousselect", "vpays");</script>
         ');
     }
     public function index(){

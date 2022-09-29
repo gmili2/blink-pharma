@@ -38,9 +38,31 @@
                                                         <h5>Liste des ventes de la caisse</h5>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="status-actif">
+                                                        <div class="status">
+                                                            <span class="on"><i class="bi bi-circle-fill"></i> Livré</span>
+                                                        </div>
+                                                        <div class="status">
+                                                            <span class="off"><i class="bi bi-circle-fill"></i> Non livré</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="status-actif">
+                                                        <div class="status">
+                                                            <span class="on"><i class="bi bi-circle-fill"></i> Payé totalement</span>
+                                                        </div>
+                                                        <div class="status">
+                                                            <span class="ongoing"><i class="bi bi-circle-fill"></i> Payé partiellement</span>
+                                                        </div>
+                                                        <div class="status">
+                                                            <span class="off"><i class="bi bi-circle-fill"></i> crédit</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                          
                                             </div>
-                                            <table id="taabledetailcaisse" class="table table-striped" style="width: 100%;">
+                                                <br/>                                                  
+                                            <table id="taabledetailcaisse" class="table table-striped selvente" style="width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>N°</th>
@@ -50,6 +72,8 @@
                                                         <th>montant recue</th>
                                                         <th>type paymenet</th>
                                                         <th>livre</th>
+                                                        <th>status</th>
+
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -62,8 +86,47 @@
                                                         <td><strong id="ppv{{$count}}">{{$pro->montant_PU}}</strong> DH</td>
                                                         <td id="qtesys{{$count}}">{{$pro->montant_recu}}</td>
                                                         
-                                                        <td id="qtesys{{$count}}">{{$pro->status}}</td>
-                                                        <td id="qtesys{{$count}}">{{$pro->mode_payment}}</td>
+                                                        @if ($pro->mode_payment!=0)
+                                                        <td>{{$type_payment[$pro->mode_payment-1]->nom}}</td>
+                                                        @else
+                                                        <td>non payee</td>
+                                                        @endif 
+                                                        <td>
+
+                                                            @if ($pro->livree==1 || $pro->livree=="1")
+    
+                                                        <div class="status"><span class="on"><i class="bi bi-circle-fill"></i> </span></div>
+                                                                
+                                                            @else
+    
+    
+                                                         
+                                                        <div class="status"><span class="off"><i class="bi bi-circle-fill"></i> </span></div>
+                                                                
+                                                            @endif
+                                                        </td>
+                                                        <td>
+
+                                                            @if ($pro->status==1 || $pro->status=="1")
+    
+                                                               <div class="status"><span class="on"><i class="bi bi-circle-fill"></i> </span></div>
+                                                            @endif
+                                                                
+                                
+                                                            @if (($pro->status==2 || $pro->status=="2"))
+                                                            <div class="status">   
+                                                                        <span class="ongoing"><i class="bi bi-circle-fill"></i> </span>
+                                                            </div>
+                                                            @endif
+                                                            @if (($pro->status==0 || $pro->status=="0"  || $pro->status==null))
+                                                            <div class="status">   
+                                                                        <span class="off"><i class="bi bi-circle-fill"></i> </span>
+                                                            </div>
+                                                            @endif
+
+
+                                                        </td>
+
                                                         {{-- <td id="qtesys{{$count}}">{{$pro->mode_payment}}</td> --}}
 
 

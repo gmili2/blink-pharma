@@ -14,6 +14,9 @@ class GardeController extends Controller
         echo( '
         <script>localStorage.setItem("select", "Horaire");</script>
         ');
+             echo( '
+        <script>localStorage.setItem("select2", "Garde");</script>
+        ');
     }
   public function AjouterGardeView(){
     return view('pages.parameters.Garde.AjouterGarde');
@@ -38,6 +41,10 @@ class GardeController extends Controller
 
 }
   public function AfficherGarde(){
+
+    echo( '
+    <script>localStorage.setItem("sousselect", "vgarde");</script>
+    ');
     $gardes=Garde::all();
     return view('pages.parameters.Garde.AfficherGarde',['gardes'=>$gardes]);
   }

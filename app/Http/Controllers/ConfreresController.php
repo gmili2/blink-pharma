@@ -12,6 +12,12 @@ use Auth;
 class ConfreresController extends Controller
 {
     //
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
     public  function afficherheader()
     {
       $nom="d'accueil";
@@ -23,6 +29,9 @@ class ConfreresController extends Controller
     
     public function index()
     {
+        echo( '
+<script>localStorage.setItem("sousselect", "confrere");</script>
+');
         $this->afficherheader();
         $confreres= DB::table('confreres')
             ->select('confreres.*')
@@ -112,7 +121,22 @@ public function modifyConfrere($id)
 
 public function delete(Request $req)
 {
+
+
+
+
     $id=$req->cfr_id;
+
+    
+    
+    $count = DB::table('sortieconfreres')
+    ->where('sortieconfreres.confreres_id' ,$id)
+    ->whereNull('sortieconfreres.deleted_at')
+    ->count();
+    if(( $count )!=0){
+session()->flash('warning', 'Vous pouvez pas supprimer ce confère, car il a déja des ventes');
+return redirect('confrere');
+        }
     DB::beginTransaction();
     try{
     $client = Confrere::find($id);
@@ -120,7 +144,7 @@ public function delete(Request $req)
     DB::commit();
     session()->flash('success','Confrere supprimé avec succés');	
     return redirect('confrere');
-}catch(QueryException $ex){
+}catch(\Illuminate\Database\QueryException $ex){
         DB::rollBack();
         session()->flash('warning', 'erreur base donnée');
         return redirect('confrere');
@@ -155,9 +179,15 @@ public function store(Request $req)
     DB::commit();
     
     session()->flash('success','Confrere Confrere avec succés');	
-    return redirect('confrere');}catch(QueryException $ex){
+    return redirect('confrere');}
+    
+    catch(\Illuminate\Database\QueryException $ex){
+        if($ex->getCode()==23000 || $ex->getCode()=='23000') 
+        $req->session()->flash('warning', 'Ce confrère est déja existe');
+  else
+$req->session()->flash('warning', 'erreur base donnée');
         DB::rollBack();
-        session()->flash('warning', 'erreur base donnée');
+        // session()->flash('warning', 'erreur base donnée');
         return redirect('confrere');
     }  
     
@@ -190,7 +220,7 @@ public function update(Request $req,$id)
     
     session()->flash('success','Confrere modifié avec succés');	
     return redirect('confrere');
-}catch(QueryException $ex){
+}catch(\Illuminate\Database\QueryException $ex){
     DB::rollBack();
     session()->flash('warning', 'erreur base donnée');
     return redirect('confrere');

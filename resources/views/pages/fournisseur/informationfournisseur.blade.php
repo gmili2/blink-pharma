@@ -101,25 +101,40 @@
                                                 <div class="text mt-2">Lorem Ipsum est simplement un faux texte de l'industrie de l'impression et de la composition.</div>
                                             </div>
                                         </div>
-                                        <div class="section-aide d-flex">
-                                            <div class="support">
-                                                <a href="tel:05 30 500 500" role="button" class="d-flex align-items-center">
-                                                    <div class="icon"><img src="/assets/icons/telephone.svg" alt="" /></div>
-                                                    <span>05 30 500 500</span>
-                                                </a>
-                                            </div>
-                                            <div class="aide">
-                                                <a href="" role="button" class="d-flex align-items-center">
-                                                    <div class="icon"><img src="/assets/icons/aide.svg" alt="" /></div>
-                                                    <span>Aide</span>
-                                                </a>
-                                            </div>
-                                            <div class="retour">
-                                                <a href="" role="button" class="d-flex align-items-center">
-                                                    <div class="icon"><img src="/assets/icons/retour.svg" alt="" /></div>
-                                                </a>
-                                            </div>
-                                        </div>
+                                           <section class="section-aide d-flex ">
+                                    <div class="support">
+                                        <a href="tel:05 30 500 500" role="button" class="d-flex align-items-center">
+                                            <div class="icon"><img src="/assets/icons/telephone.svg" alt="" /></div>
+                                            <span>05 30 500 500</span>
+                                        </a>
+                                    </div>
+                                    <div class="aide" >
+                                        <button 
+                                            type="button"
+                                            id="help-popup"
+                                            role="button"
+                                            class="d-flex align-items-center"
+                                            data-bs-toggle="popover"
+                                            title="Comment pouvons-nous aider ?"
+                                            data-bs-content="Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page,
+                                             le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum. Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum"
+                                        >
+                                            <div class="icon" style="padding-top:8px"><img src="/assets/icons/aide.svg" alt="" /></div>
+                                            <span>Aide</span>
+                                        </button>
+                                      
+                                    </div>
+
+                                    <div class="retour" style="width: 1;">
+                                        <a class="d-flex align-items-center" 
+                                        style="    width: 36px;
+                                      "
+                                        {{-- data-bs-toggle="modal" --}}
+                                         data-bs-target="#raccourcis">
+                                            <div class="icon"><img src="/assets/icons/retour.svg" alt="" /></div>
+                                        </a>
+                                    </div>
+                                </section>
                                     </div>
                                 </div>
                             </div>

@@ -8,6 +8,8 @@ use App\Inventdetail;
 use App\Produit;
 use App\Caisse;
 use App\Vente;
+use Illuminate\Support\Facades\Hash;
+
 use App\User;
 
 use Illuminate\Support\Facades\DB;
@@ -18,7 +20,11 @@ class CaisseController extends Controller
 {
     //
 
-
+    public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
     public  function afficherheader()
     {
       $nom="d'accueil";
@@ -31,6 +37,11 @@ class CaisseController extends Controller
     public function index()
     {
         $this->afficherheader();
+
+      
+        echo( '
+        <script>localStorage.setItem("sousselect", "vcaisse");</script>
+        ');
         // $caisse = Caisse::all();
         $caisse= DB::table('caisses')
         ->select('caisses.*','users.name as username')
@@ -95,6 +106,9 @@ public function delete($id)
 public function generate()
 {
     // dd("kjh");
+    echo( '
+    <script>localStorage.setItem("sousselect", "ccaisse");</script>
+    ');
     $this->afficherheader();
 
     $dernierscaisse= DB::table('caisses')->latest('id')->first();
@@ -129,22 +143,32 @@ public function add(Request $req)
 {
     DB::beginTransaction();
     try{
-  
-       $det = new Caisse();
-       $det->premier_vente_id=$req->vente_id_first;
-       $det->dernier_vente_id=$req->input('vente_id_last');
-       $det->montant_sys=$req->input('montant_sys');
-       $det->montant_caisse=$req->input('montant_caisse');
-       $det->commentaire=$req->input('commentaire');
-       $det->creer_par=Auth::User()->id;
+        // dd(Auth::User()->code,$req->codesecurite);
+        if(Hash::check($req->codesecurite, Auth::User()->code)!=true){
+        session()->flash('warning', "Votre code de sécurité est incorrecte.");
+        return redirect('generatecaisse');
+        }
+else{
 
-       $det->gane=0;
-       $det->save();
-    // } 
-    DB::commit();
+    $det = new Caisse();
+    $det->premier_vente_id=$req->vente_id_first;
+    $det->dernier_vente_id=$req->input('vente_id_last');
+    $det->montant_sys=$req->input('montant_sys');
+    $det->montant_caisse=$req->input('montant_caisse');
+    $det->commentaire=$req->input('commentaire');
+    $det->creer_par=Auth::User()->id;
 
-    session()->flash('success','caisse Validé avec succés');	
-    return redirect('caisse');}
+    $det->gane=0;
+    $det->save();
+ // } 
+ DB::commit();
+
+ session()->flash('success','caisse Validé avec succés');	
+ return redirect('caisse');
+}
+
+
+}
     catch(QueryException $ex){
         
         DB::rollBack();
@@ -172,7 +196,11 @@ public function detail($id)
     ->select('typepayments.*')
     ->get(); 
     // dd($ventes,$caisse);
-    return view('pages/caisse/detailcaisse',compact(['ventes','caisse','user']));
+    return view('pages/caisse/detailcaisse',
+    ['ventes'=>$ventes,'caisse'=>$caisse,'user'=>$user,
+        'type_payment'=>$type_payment]);
+
+    // compact(['ventes','caisse','user']));
 }
 
 

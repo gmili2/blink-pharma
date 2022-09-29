@@ -2,7 +2,7 @@
 
 @section('content')         
     <div class="page-content">
-    @include('layouts.navparam')
+    <!--@include('layouts.navparam')-->
 
     <section class="section-stock mt-3 pb-5">
         <form action="ModifierTermeDevis" method="POST" >
@@ -80,7 +80,7 @@ alert (text);
 </script> --}}
 
  
-@extends('layouts.apppar')
+@extends('layouts.app')
 
 @section('content')  
                 <!-- partial -->

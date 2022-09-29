@@ -3,7 +3,7 @@
 
 
  
-@extends('layouts.apppar')
+@extends('layouts.app')
 
 @section('content')  
                 <!-- partial -->

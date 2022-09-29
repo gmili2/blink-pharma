@@ -1,4 +1,4 @@
-<table id="table" class="table table-striped mb-4" style="width: 100%;">
+<table id="table" class="table table-striped mb-4 selvente" style="width: 100%;">
     <thead>
         <tr>
             <th>Nom</th>

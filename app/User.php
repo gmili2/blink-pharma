@@ -5,12 +5,19 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Calendar;
 
 class User extends Authenticatable
 {
     use Notifiable;
 
-    
+   use HasFactory;
+
+   
+          public function calendars(){
+        return $this->hasMany(Calendar::class);
+    }
 
     /**
      * The attributes that are mass assignable.

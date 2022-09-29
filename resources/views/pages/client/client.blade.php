@@ -4,7 +4,7 @@
 
                 @section('content')
                 <!-- partial -->
-                <br/>
+               
                 <div class="page-content">
                     <section class="section-client mt-3 pb-5">
                         <div class="row text-end">
@@ -21,9 +21,9 @@
                                                         </span>
                                     </div> --}}
                                 <div class="buttons">
-                                    <a href="#" class="btn-hover color-white">Ajouter aux favoris</a>
+                                    {{-- <a href="#" class="btn-hover color-white">Ajouter aux favoris</a> --}}
 
-                                    <a href="{{url('addclients')}}" class="btn-hover color-blue">Créer</a>
+                                    <a href="{{url('addclients')}}" class="btn-hover color-blue">Créer un nouveau client</a>
                                 </div>
                                
                             </div>
@@ -34,15 +34,8 @@
                                     <div class="title-p pt-1"><h5>Liste des clients</h5></div>
                                 </div>
                             </div>
-                            {{-- <div class="col-md-6 mb-3">
-                                <div class="form-group d-flex align-items-center">
-                                    <i class="bi bi-search"></i>
-                                    <input type="text" style="    width: 205px;
-                                    margin: 17px" class="form-control" placeholder="Search" id=recherch_produit
-                                    onkeyup="recherche_produit()"
-                                    name="search" />                                                </div>
-                            </div> --}}
-                            <table id="tableclient" class="table table-striped" style="width: 100%;">
+                            <br/>                                                  
+                            <table id="tableclient" class="table table-striped selvente" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>id</th>
@@ -56,30 +49,6 @@
                                 </thead>
                                 <tbody>
                                   
-                                    {{-- @foreach($clients as $clt)
-                                    <tr>
-                                        <td>{{$clt->name}}</td>
-                                        <td>{{$clt->type}}</td>
-                                        <td>{{$clt->email}}</td>
-                                        <td>{{$clt->tele}}</td>
-                                        <td>{{$clt->cin}}</td>
-                                        <td>
-                                            <div class="dropdown section-action">
-                                                <a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="{{url('showclient'.$clt->id)}}">Afficher</a></li>
-                                                    <li><a class="dropdown-item" href="{{url('modifyclient'.$clt->id)}}">Modifier</a></li>
-                                               
-                                                    <li>
-                                                        <a class="dropdown-item" 
-                                                        onclick="charger_id_produit({{$clt->id}})"
-                                                        href="" data-bs-toggle="modal" data-bs-target="#search-client" >Supprimer</a>
-                                                     </li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    @endforeach --}}
                                 </tbody>
                             </table>
                             {{-- {{ $clients->links() }} --}}
@@ -109,12 +78,12 @@
                                     @csrf
                                    <input type="text"  hidden id="client_id" name="client_id">
                                 <div class="row section-footer">
-                                    <div class="buttons">
-                                        <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+                                    <div class="buttons" style="margin-top:60px">
+                                        <a href="#" class="btn btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
         
-                                        <button class="btn btn-hover color-green mx-1" data-bs-dismiss="modal" 
+                                        <button class="btn btn-hover color-blue spacecenter" 
                                         
-                                        aria-label="Close">Supprimer</button>
+                                      >Supprimer</button>
 
                                     </div>
                                 </div>
@@ -483,6 +452,18 @@ if(headers[data[0]]!="Actions"){
            }                    function charger_id_produit(id){
                         document.getElementById("client_id").value=id;
                     }
+                    
+                    
+                    
+                    $(document).ready(function() {
+    $('#example').dataTable();
+    $('#tableclient_filter input').addClass('form-control'); // <-- add this line
+    
+} );
+
+
+                    
+                    
                 </script>
                 @endsection
    

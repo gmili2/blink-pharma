@@ -9,6 +9,13 @@ use Illuminate\Http\Request;
 
 class PointController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+     
+    }
+
       public function index(){
         $Points=Fidelites::all();
         $produits=Produit::all();

@@ -2,6 +2,60 @@
 @section('content')
     <form action="{{url('addinvent')}}" method="post">
 @csrf
+<div class="modal fade vente-succes search-client" id="search-client" tabindex="-1" aria-labelledby="" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Saisir votre code de sécurité</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            {{-- <form id="form1" action="credit_client" method="post">
+                @csrf --}}
+            <div class="montant-vente">
+                <div class="detail-price">
+                    <div class="shadow-block mt-4 p-4">
+                        {{-- <div class="status-vente mt-5"> --}}
+                            {{-- <div class="row"> --}}
+                                {{-- <div class="col-md-6"> --}}
+                                    {{-- <input type="text" hidden  id="mode_payment" name="mode_payment" value="1"> --}}
+                                 
+                                   
+    
+                                    </h5>          
+                                    <input type="password" id="codesecurite" 
+                                    onchange=""
+                                    min="1" style="width: 600px;
+                                    margin-left: 41px;"
+                                    required 
+                                    name="codesecurite"
+                                    
+                                    onkeyup="testcode()" placeholder="code de sécurité" class="form-control" >
+                                    <br>
+                                    <br>
+                           <a style="padding-left: 43px;" 
+                           href="codesecuritechage">j'ai oublié mon code de sécurité</a>
+                                    
+                            
+                    </div>
+                    
+                </div>
+
+        </div>
+        <div class="row section-footer">
+            <div class="buttons" style="padding-left: 554px">
+                <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+
+                <button class="btn btn-hover color-green mx-1" 
+                
+             >Valider</button>
+
+            </div>
+        </div>
+        <br>
+       {{-- </form> --}}
+    </div>
+        </div>
+    </div>
    <div id="commentaire_invet">
                 <div class="page-content">
 
@@ -19,11 +73,11 @@
                                     <div class="buttons">
                                     <button type="button" 
                                     onclick="afficher_vente()"
-                                     class="btn-hover color-green btn-fixed" >Suivant</button>
+                                     class="btn-hover color-green btn-fixed" style="margin-top:2px" >Suivant</button>
                                     </div>
                                 </div>
                             </div>
-                            <div class="section-form-fornisseur mt-4">
+                            <div class="section-form-fornisseur  ">
                                 <div class="block-form bg-white p-4 mb-4">
                                     <div class="section-subtitle pb-1 mb-3">
                                         <h5>Informations générales</h5>
@@ -34,7 +88,7 @@
                                         {{-- </div!> --}}
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Nom*</label>
-                                            <input type="text" class="form-control"  id="nom" name="nom" />
+                                            <input type="text" class="form-control" value="{{old('nom')}}"  id="nom" name="nom" />
                                         </div>
                                         <div class="col-md-6 mb-3">
                                             <label class="form-label">Commentaire</label>
@@ -54,9 +108,18 @@
                             <div class="row">
                                 <div class="col-md-12 text-end">
                                     <div class="buttons" >
-                                        <button type="submit" 
+
+
+                                        <button 
+                                        disabled
+                                        data-bs-toggle="modal" data-bs-target="#search-client"
+                                        class="btn-hover color-green">
+                                        <a 
                                         onclick="test()"
-                                          class="btn-hover color-green">Sauvgarder</button>
+                                        
+                                        > Sauvgarder</a>
+                                       </button>
+                                      
                                     </div>
                                 </div>
                             </div>
@@ -169,7 +232,7 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
-                                                                    <div class="row mt-3">
+                                                                    <div class="row ">
                                                                         <div class="buttons d-flex justify-content-end">
     
                                                                             <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
@@ -225,7 +288,7 @@
                                                     @foreach ($produits as $pr)
                                                     <tr  hidden data-bs-toggle="collapse"  id="tr_produit{{$pr->id}}" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                                         <td>  
-                                                        <input type="checkbox"   name="pr_select[]" value="{{$pr->id}}"
+                                                        <input type="checkbox"  hidden name="pr_select[]" value="{{$pr->id}}"
                                                          id="pr_select{{$pr->id}}">
                                                         </td>
                                                         <td id='tableproduitselectname'>{{$pr->name}}</td>
@@ -355,7 +418,7 @@
                                               
                                             </div>
                                         </div>
-                                        <div class="row mt-3">
+                                        <div class="row ">
                                             <div class="buttons d-flex justify-content-end">
                                                 <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
                                                 <a  class="btn btn-hover color-green mx-1" data-bs-dismiss="modal" onclick="calcule_total()" aria-label="Close">Sauvegarder</a>
@@ -409,6 +472,26 @@
 
 
 <script>
+
+
+
+function testcode(){
+    var code=document.getElementById('codesecurite').value
+    var rout="testcode"+code;
+    // alert(rout);     
+    axios.get(rout)
+     .then(function (response) {
+        console.log(response.data)
+        // document.getElementById("table").disabel= false;
+
+       
+     })
+     .catch(function (error) {
+         console.log(error);
+     });
+   
+           }  
+
     function test(){
         if(
         document.getElementById("testpr").value==""

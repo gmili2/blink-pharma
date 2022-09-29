@@ -15,8 +15,14 @@ class VillesController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        echo( '
+        echo('
         <script>localStorage.setItem("select", "produitv");</script>
+        ');
+         echo('
+        <script>localStorage.setItem("select2", "Ville");</script>
+        ');
+        echo( '
+        <script>localStorage.setItem("sousselect", "vville");</script>
         ');
     }
    public function index(){
@@ -45,7 +51,7 @@ try {
    }
    public function ModifierVille(Request $req){
 try {
-    $ville=Villes::find($req->id);
+    $ville=Ville::find($req->id);
     $ville->Nom=$req->Nom_ville;
     $ville->pays_id=$req->Pays;
     $ville->save();

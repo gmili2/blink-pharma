@@ -9,7 +9,7 @@
                 <div class="row text-end">
                     <div class="col-md-12">
                         <div class="buttons">
-                            <a href="#" class="btn-hover color-yellow">Remise à zéro</a>
+                            <a href="#" data-bs-toggle="modal"  data-bs-target="#search-remise" class="btn-hover color-yellow">Remise à zéro</a>
                             <a href="#" class="btn-hover color-white">Ajouter aux favoris</a>
                             <a href="#" class="btn-hover color-white">Liste des imports</a>
                             <a href="invent" class="btn-hover color-white">Liste des inventaires</a>
@@ -17,7 +17,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal fade vente-succes" id="add-inventaire" tabindex="-1" aria-labelledby="" aria-hidden="true">
+                <div class="modal fade vente-succes" id="add-inventaire" 
+                
+                tabindex="-1" aria-labelledby="" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header flex-column">
@@ -81,7 +83,8 @@
                             </div>
                         </div>
                     </div>
-                    <table id="stocktable" class="table table-striped mb-4" style="width: 100%;">
+                        <br/>                                                  
+                    <table id="stocktable" class="table table-striped mb-4 selvente" style="width: 100%;">
                         <thead>
                             <tr>
                                 <th>Est actif</th>
@@ -125,9 +128,9 @@
                                             <li><a class="dropdown-item" href="informationproduct{{$produit->id}}">Afficher</a></li>
                                             <li><a class="dropdown-item" href="modifierproduitformule{{$produit->id}}">Modifier</a></li>
                                             @if ($produit->active==1)
-                                            <li><a class="dropdown-item" href="desactiverproduit{{$produit->id}}">Désactiver</a></li>
+                                            <li><a class="dropdown-item" href="desactiverproduit{{$produit->id}}/1">Désactiver</a></li>
                                                 @else
-                                            <li><a class="dropdown-item" href="avtiverproduit{{$produit->id}}">Activer</a></li>
+                                            <li><a class="dropdown-item" href="avtiverproduit{{$produit->id}}/1">Activer</a></li>
                                             @endif
                                             <li>
                                                 <a class="dropdown-item" 
@@ -148,13 +151,97 @@
                 </div>
             </section>
         </div>
+
+
+        <div class="modal fade vente-succes search-client" id="search-client" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Supprimer ce produit</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div>
+                        <p class="text text-center mt-4">
+                           
+                        </p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                               </div>
+                        </div>
+                        <form id="form1" action="supprimerproduit" method="post">
+                            @method('delete')
+                            @csrf
+                           <input type="text" hidden id="produit_id" name="produit_id">
+                           <input type="text" hidden id="stock" value="1" name="etat">
+
+                        <div class="row section-footer">
+                            <div class="buttons" style="margin-top:60px">
+                                <a href="#" class="btn btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+
+                                <a class="btn btn-hover color-blue spacecenter" data-bs-dismiss="modal" 
+                                
+                                aria-label="Close">Supprimer</a>
+
+                            </div>
+                        </div>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="modal fade vente-succes search-client" id="search-remise" tabindex="-1" aria-labelledby="" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">vouler vous remiser le stock a zero</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div>
+                        <p class="text text-center mt-4">
+                           
+                        </p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                               </div>
+                        </div>
+                        <form id="form1" action="#" method="post">
+                            @method('delete')
+                            @csrf
+                           <input type="text" hidden id="produit_id" name="produit_id">
+                           {{-- <input type="text" hidden id="stock" value="1" name="etat"> --}}
+
+                        <div class="row section-footer">
+                            <div class="buttons">
+                                <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+
+                                <button class="btn btn-hover color-green mx-1" data-bs-dismiss="modal" 
+                                
+                                aria-label="Close">Valider</button>
+
+                            </div>
+                        </div>
+                    </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
       @endsection
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 
       <script>
-      
+        function charger_id_produit(id){
+                        document.getElementById("produit_id").value=id;
+                    }
       function goo(id){
-        window.location.replace("/detailcaisse"+id)    }
+        window.location.replace("/informationproduct"+id)    }
       $(document).ready(function () {
         $('#listeproduitvente').DataTable({
             dom: 'Bfrtip',

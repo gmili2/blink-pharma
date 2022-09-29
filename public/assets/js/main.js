@@ -1,7 +1,20 @@
 
 $(document).ready(function(){
+
+    
     $(document).ready( function () {
+        
+// $(document).ready(function() {
+    // $('#example').dataTable();
+    // $('#example input').addClass('form-control'); 
+    
+    // <-- add this line
+    
+// } );
+
       var mydattable =  $('#example').DataTable({
+        "bDestroy": true,
+
             dom: 'Bfrtip',
             columnDefs: [
                 {
@@ -18,7 +31,9 @@ $(document).ready(function(){
                    }
                ],
                language: {
-                search: '', searchPlaceholder: "Recherche...",
+                search: '', 
+                searchclass:"totot",
+                searchPlaceholder: "Recherche...",
                  "emptyTable": "Aucune donnée disponible dans le tableau",
                  "loadingRecords": "Chargement...",
                  "processing": "Traitement...",
@@ -283,6 +298,9 @@ $(document).ready(function(){
                 { "data": "id" },
                 { "data": "nom_client" },
                 { "data": "created_at" },
+                { "data": "montant_PPV" },
+                { "data": "qte_total" },
+
                 { "data": "status" },
                 { "data": "id" },
                
@@ -302,7 +320,30 @@ $(document).ready(function(){
                         return '<td><div class="dropdown section-action"><a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a><ul class="dropdown-menu"><li><a class="dropdown-item" href="facture'+data+'">Afficher</a></li><li><a class="dropdown-item" href="modifiervante'+data+'">Modifier</a></li><li><a class="dropdown-item" onclick="charger_id_produit('+
                         data+')"href="" data-bs-toggle="modal" data-bs-target="#search-client" >Supprimer</a></li></ul></div></td>'
                     },
-                    "targets": 4       
+                    "targets": 6       
+                
+                },
+                // 2022-09-23 09:22:37
+                {
+         
+                    "render": function ( data, type, row ) {
+                        let datefinale;
+                        datefinale=data.substring(8,10)+"-"+data.substring(5,7)+'-'+data.substring(0,4)+"  "+data.substring(11,16)
+                        return datefinale;
+                        // console.log(anyString.substring(0, 10))+;
+
+                    },
+                    "targets": 2       
+                
+                },
+
+
+                // DD-MM-YYYY HH:mm
+                {
+         
+                    "render": function ( data, type, row ) {
+                        return data +"DH"},
+                    "targets": 3       
                 
                 },
                 {
@@ -324,7 +365,7 @@ $(document).ready(function(){
 
                        
                     },
-                    "targets": 3         
+                    "targets": 5         
                 
                 },
                 // {
@@ -340,9 +381,11 @@ $(document).ready(function(){
             ]
         });
 
-
-        $('#example tbody').on( 'click', 'tr','td', function () {
-        var data= mydattable.column( this ) ;
+        // $('#example').dataTable();
+        // $('#example input').addClass('form-control'); 
+        // alert("kjh")
+        $('#example tbody').on( 'click','td','tr', function () {
+        var data= mydattable.column( this )  ;
         var id= mydattable.row( this ).data()["id"] ;
 var headers = [];
 
@@ -350,6 +393,7 @@ var headers = [];
 for (var i = 0; i< dataTableHeaderElements.length; i++) {
 headers.push($(dataTableHeaderElements[i]).text())    
 }    
+
 if(headers[data[0]]!="Actions"){
      window.location.replace("/facture"+id)
 }

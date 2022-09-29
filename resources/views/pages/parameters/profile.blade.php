@@ -1,20 +1,20 @@
 
             <!-- partial:partials/_sidebar.html -->
 
-            @extends('layouts.apppar')
+            @extends('layouts.app')
 
             @section('content')
 
                 <div class="page-content">
                     <section class="section-client mt-3 pb-5">
-                        <form method="POST" action="modifierprofile">
+                        <form method="POST" action="modifierprofile"  enctype="multipart/form-data">
                             @csrf
 
                         {{-- <form action="modifierprofile" method="post"> --}}
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="title">
-                                        <h1>Profile</h1>
+                                        <h1>Profil</h1>
                                     </div>
                                 </div>
                                 <div class="col-md-6 text-end">
@@ -31,6 +31,27 @@
                                         <h5>Informations personnelles</h5>
                                     </div>
                                     <div class="row">
+                                        <div class="col-md-12 mb-3">
+                                            <div class="wrap upload-image d-flex gap-3">
+                                                <div class="thumb"><img id="img" class="img"
+                                                    @if(Auth::User()->imageprofil==null)
+                                                    src="/assets/img/default.jpg"
+                                                    @else
+                                                    src="/images/{{Auth::User()->imageprofil}}"
+                                                    @endif
+                                                    /></div>
+                                                <div class="form-upload mt-5">
+                                                    <input type="file" id="upload"   name="image" class="upload form-control custom-file-input" />
+                                                    <span>Votre fichier ne doit pas dépasser 15 MG</span>
+                                                    @error('image')
+                                        
+                                                    <span>
+                                                        <strong style="color: red">a remplir</strong>
+                                                    </span>
+                                                @enderror
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">E-mail</label>
                                             <input type="text" class="form-control" name="email" disabled value="{{Auth::User()->email}}" required/>
@@ -82,7 +103,12 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Téléphone</label>
-                                            <input type="tel" class="form-control" name="telephone"  maxlength="10" minlength="10"  value="{{Auth::User()->tele}}" required />
+                                            <input  class="form-control"
+                                            
+                                            type="tel"
+                                            pattern="(05|06|07)[0-9]{8}"
+                                            required
+                                            name="telephone"  maxlength="10" minlength="10"  value="{{Auth::User()->tele}}" required />
                                             @error('telephone')
                                       <span>
                                                 <strong style="color: red">number de taile 100</strong>
@@ -102,7 +128,12 @@
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Fax</label>
 
-                                            <input type="tel" class="form-control" name="fax"  value="{{Auth::User()->fax}}"/>
+                                            <input  class="form-control" name="fax" 
+                                            
+                                               type="tel"
+                                            pattern="(05)[0-9]{8}"
+                                            required
+                                            value="{{Auth::User()->fax}}"/>
                                             @error('fax')
 
                                             <span>
@@ -138,7 +169,8 @@
                                         </div>
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Pays</label>
-                                            <select required class="form-select" name="Pays"
+                                            <select required class="chosen-select form-select"
+                                            name="Pays"
                                              onchange="getVilles()"
                                               id="paysselect"
                                                value="{{Auth::User()->pays}}">
@@ -165,7 +197,7 @@
 
                                         <div class="col-md-4 mb-3"  id='villes'>
                                             <label class="form-label">Ville</label>
-                                            <select required class="form-select" name="ville">
+                                            <select required class="form-select chosen-select" name="ville">
                                                 @foreach ($villes as $ville)
                                                 @if (Auth::User()->ville == $ville->id )
 

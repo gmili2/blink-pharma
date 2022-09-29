@@ -19,7 +19,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="section-form-client mt-4">
+                            <div class="section-form-client ">
                                 <div class="block-form bg-white p-4 mb-4">
                                     <div class="section-subtitle pb-1 mb-3">
                                         <h5>Informations générales</h5>
@@ -47,7 +47,13 @@
                                      
                                         <div class="col-md-4 mb-3">
                                             <label class="form-label">Télephone</label>
-                                            <input type="text"  required class="form-control" name="tel" />
+                                            <input
+                                            
+                                            type="tel"
+       pattern="(05|06|07)[0-9]{8}"
+       required
+                                            
+                                            required class="form-control" name="tel" />
                                         </div>
                                       
                                         <div class="col-md-4 mb-3">

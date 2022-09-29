@@ -22,6 +22,8 @@ class ImportationController extends Controller
      */
     public function __construct()
     {
+        $this->middleware('auth');
+     
     }
 
     /**
@@ -36,6 +38,9 @@ class ImportationController extends Controller
       $nom="d'accueil";
         echo( '
         <script>localStorage.setItem("select", "importation");</script>
+        ');
+        echo( '
+        <script>localStorage.setItem("select2", "importation");</script>
         ');
     }
 

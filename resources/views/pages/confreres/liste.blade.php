@@ -3,7 +3,7 @@
 
                 @section('content')
                 <!-- partial -->
-                <br/>
+               
                 <div class="page-content">
                     <section class="section-client mt-3 pb-5">
                         <div class="row text-end">
@@ -20,8 +20,8 @@
                                                     </span>
                                 </div> --}}
                                 <div class="buttons">
-                                    <a href="#" class="btn-hover color-white">Ajouter aux favoris</a>
-                                    <a href="{{url('addconfrere')}}" class="btn-hover color-blue">Créer</a>
+                                    {{-- <a href="#" class="btn-hover color-white">Ajouter aux favoris</a> --}}
+                                    <a href="{{url('addconfrere')}}" class="btn-hover color-blue">Créer un confrère</a>
                                 </div>
                             </div>
                         </div>
@@ -42,9 +42,9 @@
                             </div> --}}
 
 
-                            <hr class="divider" />
+                                <br/>                                                  
  
-                            <table  id="examplec" class="table table-striped" style="width: 100%;">
+                            <table  id="examplec" class="table table-striped selvente" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>Nom</th>
@@ -68,7 +68,7 @@
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title">Supprimer ce confrere</h5>
+                                <h5 class="modal-title">Supprimer ce confrère</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div>
@@ -86,12 +86,10 @@
                                     @csrf
                                    <input type="text"  hidden id="cfr_id" name="cfr_id">
                                 <div class="row section-footer">
-                                    <div class="buttons">
-                                        <a href="#" class="btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
+                                    <div class="buttons" style="margin-top:60px"> 
+                                        <a href="#" class="btn btn-hover color-red" class="btn-close" data-bs-dismiss="modal" aria-label="Close">Annuler</a>
         
-                                        <button class="btn btn-hover color-green mx-1" data-bs-dismiss="modal" 
-                                        
-                                        aria-label="Close">Supprimer</button>
+                                        <button class="btn btn-hover color-blue spacecenter" >Supprimer</button>
 
                                     </div>
                                 </div>
@@ -426,7 +424,7 @@
            
                       "render": function ( data, type, row ) {
                           // if(row.active==1)
-                          return  ' <td><div class="dropdown section-action"><a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a><ul class="dropdown-menu"><li><a class="dropdown-item" href="showconfrere'+row.id+'">Afficher</a></li><li><a class="dropdown-item" href="updateconfrere'+row.id+'}">Modifier</a></li><li><a class="dropdown-item" onclick="charger_id_produit('+row.id+')"href="" data-bs-toggle="modal" data-bs-target="#search-client" >Supprimer</a></li></ul></div></td>'
+                          return  ' <td><div class="dropdown section-action"><a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a><ul class="dropdown-menu"><li><a class="dropdown-item" href="showconfrere'+row.id+'">Afficher</a></li><li><a class="dropdown-item" href="showconfrere'+row.id+'}">Modifier</a></li><li><a class="dropdown-item" onclick="charger_id_produit('+row.id+')"href="" data-bs-toggle="modal" data-bs-target="#search-client" >Supprimer</a></li></ul></div></td>'
                       },
                       "targets": 4     
                   

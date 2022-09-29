@@ -14,7 +14,12 @@
                             <div class="col-md-6 text-end">
                                 <div class="buttons">
                                     <a href="#" class="btn-hover color-white" data-bs-toggle="modal" data-bs-target="#annuler-facture">Annuler</a>
+                                  
+                                  @if($id>$caisse_id)
                                     <a href="modifiervante{{$facture[0]->ventes_id}}" class="btn-hover color-white">Modifier</a>
+                                    @endif
+                                    
+                                    
                                     <a href="facture_vente{{$facture[0]->ventes_id}}" class="btn-hover color-blue" 
                                     
                                     >Imprimer</a>
@@ -66,17 +71,21 @@
                                         <ul class="d-flex mb-5">
                                             <li>
                                                 <label>Gestionnaire</label>
-                                                <span>Dr {{Auth::User()->name}}</span>
-                                            </li>
-                                            <li>
-                                                <label>Date de vente</label>
-                                                <span>{{$facture[0]->created_at}}</span>
+                                                <span>Dr {{$creer_par->name}} </span>
+                                           
+                                              &nbsp;  <label> Date de vente</label>
+                                                <span>
+                                                    
+                                                    {{$facture[0]->created_at}}
+                                                    {{-- data.substring(8,10)+"-"+data.substring(5,7)+'-'+data.substring(0,4)+"  "+data.substring(11,16) --}}
+                                                
+                                                </span>
                                             </li>
                                            
                                         </ul>
                                     </div>
 
-                                    <table id="table-bon-de-commande" class="table table-striped mb-4" style="width: 100%;">
+                                    <table id="table-bon-de-commande" class="table table-striped mb-4 selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Produit</th>
@@ -86,12 +95,27 @@
                                                 <th>Qté.</th>
                                                 <th>TVA</th>
                                                 <th>Total</th>
+                                                <th>Total avec TVA</th>
                                                 <th></th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
+
+                                            @php
+                                            $montanttva=0;
+                                            $ht=0;
+                                                foreach($facture as $fac){
+                                                $ht=$ht+($fac->prix_unitaire*$fac->quantite);
+                                                  $montanttva=  ($fac->prix_unitaire*$fac->quantite)+
+                                            (($fac->prix_unitaire*$fac->quantite)*(($fac->TVA) )
+                                                )/100 +  $montanttva;
+                                                }
+                                                
+                                            
+                                              
+                                            @endphp
                                             @foreach ($facture as $f)
                                                 
                                             <tr>
@@ -102,43 +126,59 @@
                                                 <td>{{$f->type_remise}}%</td>
                                                 <td>{{$f->prix_unitaire}}</td>
                                                 <td>{{$f->quantite}}</td>
-                                                <td>{{$f->TVA}}</td>
-                                                <td>{{$f->prix_unitaire*$f->quantite}}</td>
+                                                <td>{{$f->TVA}}%</td>
+                                                <td>{{$f->prix_unitaire*$f->quantite}}DH</td>
+                                                <td>{{
+                                            ($f->prix_unitaire*$f->quantite)+
+                                            (  ($f->prix_unitaire*$f->quantite)*(($f->TVA) )
+                                                )/100 
+                                                }} DH</td>
+
                                                
                                             </tr>
                                             @endforeach
 
                                          </tbody>
                                     </table>
-
+                                    
                                     <div class="row">
-                                        <div class="col-md-6 offset-6">
-                                            <div class="card-total">
-                                                
+<div class="col-md-6 offset-6">
+<div class="card-total">
 
-                                                <div class="d-flex mb-2">
-                                                    <div class="flex-shrink-0 flex-label">
-                                                        TVA :
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                        11.21
-                                                    </div>
-                                                </div>
+<!--<div class="d-flex mb-2">-->
+<!--<div class="flex-shrink-0 flex-label">-->
+<!--TVA :-->
+<!--</div>-->
+<!--<div class="flex-grow-1 ms-3">-->
+<!-- {{ $montanttva}}-->
+<!--</div>-->
+<!--</div>-->
 
-                                              
+<div class="d-flex mb-2 h5">
+<div class="flex-shrink-0 flex-label">
+Total à payer (HT) 
+</div>
+<div class="flex-grow-1 ms-3">
+  {{$ht}} Dhs
+</div>
+</div>
 
-                                                <div class="d-flex mb-2 h5">
-                                                    <div class="flex-shrink-0 flex-label">
-                                                        Total à payer (TTC)
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-3">
-                                                       {{$facture[0]->montant_PU}} Dhs
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+<div class="d-flex mb-2 h5">
+<div class="flex-shrink-0 flex-label">
+Total à payer (TTC)
+</div>
+<div class="flex-grow-1 ms-3">
+  {{ $montanttva}} Dhs
+</div>
+</div>
+</div>
+</div>
+</div>
+
+                                  
                                 </div>
+                                
+                                
 
                                 <div class="table-commande shadow-block mt-4 p-4">
                                     <div class="row filtre-product pb-1 mb-4">
@@ -161,7 +201,7 @@
                                         </div>
                                     </div>
 
-                                    <table id="table" class="table table-striped mb-4 dataTable" style="width: 100%;">
+                                    <table id="table" class="table table-striped mb-4 dataTable selvente" style="width: 100%;">
                                         <thead>
                                             <tr>
                                                 <th>Statut</th>
@@ -170,7 +210,6 @@
                                                 <th>Moyens de paiement</th>
                                                 <th>Date</th>
                                                 <th>Référence</th>
-                                                <th>Note</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -197,7 +236,15 @@
 
                                                     </div>
                                                 </td>
-                                                <td>organisme</td>
+                                                <td>
+                                                 @if ($facture[0]->org_name!=null)
+                                                    {{$facture[0]->org_name}}
+                                                     
+                                                 @else
+                                                     sans organisme
+                                                 @endif
+                                                    {{-- org_name --}}
+                                                </td>
 
                                                 <td>{{$facture[0]->montant_PU}}</td>
                                                 @if ($facture[0]->mode_payment!=0)
@@ -206,9 +253,15 @@
                                                 <td>non payee</td>
                                                 @endif
 
-                                                <td>{{$facture[0]->created_at}}</td>
+                                                <td>{{
+                                                    substr($facture[0]->created_at, 8,3) ."-".substr($facture[0]->created_at, 5, 2)."-".substr($facture[0]->created_at, 0, 4)." "
+ .substr($facture[0]->created_at, 11, 5)
+                                                 
+                                                    }}
+
+
+                                                </td>
                                                 <td>{{$facture[0]->reference}}</td>
-                                                <td>note</td>
                                                
                                             </tr>
                                         </tbody>
@@ -265,31 +318,54 @@
                                     <div class="block-information">
                                         <h5>Informations de traçabilité</h5>
                                         <ul>
-                                            <li class="bg-color"><span>Créer par</span> <span>Dr {{Auth::user()->name}}</span></li>
-                                            <li><span>Créer le</span> <span>{{$facture[0]->created_at}}</span></li>
-                                            <li class="bg-color"><span>Mise à jour par</span> <span>Dr {{Auth::user()->name}}</span></li>
-                                            <li><span>Mise à jour le </span> <span>{{$facture[0]->updated_at}}</span></li>
+                                            <li class="bg-color"><span>Créer par</span> <span>Dr {{$creer_par->name}}</span></li>
+                                            <li><span>Créer le</span> <span>{{
+                                                    substr($facture[0]->created_at, 8,3) ."-".substr($facture[0]->created_at, 5, 2)."-".substr($facture[0]->created_at, 0, 4)." "
+ .substr($facture[0]->created_at, 11, 8)
+                                                 
+                                                    }}</span></li>
+                                            <li class="bg-color"><span>Mise à jour par</span> <span>Dr {{$creer_par->name}}</span></li>
+                                            <li><span>Mise à jour le </span> <span>{{
+                                                    substr($facture[0]->updated_at, 8,3) ."-".substr($facture[0]->updated_at, 5, 2)."-".substr($facture[0]->updated_at, 0, 4)." "
+ .substr($facture[0]->updated_at, 11, 5)
+                                                 
+                                                    }}</span></li>
                                         </ul>
                                     </div>
-                                    <div class="section-aide d-flex">
-                                        <div class="support">
-                                            <a href="tel:05 30 500 500" role="button" class="d-flex align-items-center">
-                                                <div class="icon"><img src="/assets/icons/telephone.svg" alt="" /></div>
-                                                <span>{{Auth::user()->tele}}</span>
-                                            </a>
-                                        </div>
-                                        <div class="aide">
-                                            <a href="" role="button" class="d-flex align-items-center">
-                                                <div class="icon"><img src="/assets/icons/aide.svg" alt="" /></div>
-                                                <span>Aide</span>
-                                            </a>
-                                        </div>
-                                        <div class="retour">
-                                            <a href="" role="button" class="d-flex align-items-center">
-                                                <div class="icon"><img src="/assets/icons/retour.svg" alt="" /></div>
-                                            </a>
-                                        </div>
+                                      <section class="section-aide d-flex ">
+                                    <div class="support">
+                                        <a href="tel:05 30 500 500" role="button" class="d-flex align-items-center">
+                                            <div class="icon"><img src="/assets/icons/telephone.svg" alt="" /></div>
+                                            <span>05 30 500 500</span>
+                                        </a>
                                     </div>
+                                    <div class="aide" >
+                                        <button 
+                                            type="button"
+                                            id="help-popup"
+                                            role="button"
+                                            class="d-flex align-items-center"
+                                            data-bs-toggle="popover"
+                                            title="Comment pouvons-nous aider ?"
+                                            data-bs-content="Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page,
+                                             le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum. Le lorem ipsum est, en imprimerie, une suite de mots sans signification utilisée à titre provisoire pour calibrer une mise en page, le texte définitif venant remplacer le faux-texte dès qu'il est prêt ou que la mise en page est achevée. Généralement, on utilise un texte en faux latin, le Lorem ipsum ou Lipsum"
+                                        >
+                                            <div class="icon" style="padding-top:8px"><img src="/assets/icons/aide.svg" alt="" /></div>
+                                            <span>Aide</span>
+                                        </button>
+                                      
+                                    </div>
+
+                                    <div class="retour" style="width: 1;">
+                                        <a class="d-flex align-items-center" 
+                                        style="    width: 36px;
+                                      "
+                                        {{-- data-bs-toggle="modal" --}}
+                                         data-bs-target="#raccourcis">
+                                            <div class="icon"><img src="/assets/icons/retour.svg" alt="" /></div>
+                                        </a>
+                                    </div>
+                                </section>
                                 </div>
                             </div>
                         </div>
@@ -305,7 +381,7 @@
                                 <div class="modal-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <table id="table-poduct" class="table table-striped mb-4 dataTable" style="width: 100%;">
+                                            <table id="table-poduct" class="table table-striped mb-4 dataTable selvente" style="width: 100%;">
                                                 <thead>
                                                     <tr>
                                                         <th>Produit</th>

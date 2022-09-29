@@ -1,12 +1,12 @@
 @extends('layouts.app')
 @section('content')
-<br/>
+
 <div class="page-content">
                     <section class="section-client mt-3 pb-5">
                         <div class="row text-end">
                             <div class="col-md-12">
                                 <div class="buttons">
-                                    <a href="{{url('generatecaisse')}}" class="btn-hover color-blue"> cloture de la  caisse</a>
+                                    <a href="{{url('generatecaisse')}}" class="btn-hover color-blue"> Clôturer la caisse</a>
                                 </div>
                             </div>
                         </div>
@@ -14,10 +14,12 @@
                         <div class="section-table-client mt-4 pt-3">
                             <div class="row filtre-client pb-1">
                                 <div class="col-md-12">
-                                    <div class="title-p pt-1"><h5>Liste des Clotures</h5></div>
+                                    <div class="title-p pt-1"><h5>Liste des Clôtures</h5></div>
+                                    
                                 </div>
                             </div>
-                            <table id="listecaisse" class="table table-striped" style="width: 100%;">
+                                <br/>                                                  
+                            <table id="listecaisse" class="table table-striped selvente" style="width: 100%;">
                                 <thead>
                                     <tr>
                                         <th>id</th>
@@ -46,7 +48,7 @@
                                                 <a href="" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false"><i class="bi bi-three-dots-vertical"></i> </a>
                                                 <ul class="dropdown-menu">
                                                  
-                                                    <li><a class="dropdown-item" onclick="charger_id()">Supprimer</a></li>
+                                                    {{-- <li><a class="dropdown-item" onclick="charger_id()">Supprimer</a></li> --}}
                                                     <li><a class="dropdown-item" href="{{url('detailcaisse'.$frn->id)}}">afficher</a></li>
                                                 
                                                 </ul>

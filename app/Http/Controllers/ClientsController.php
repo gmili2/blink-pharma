@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Client;
 use App\Ville;
+use App\User    ;
 
 use Illuminate\Support\Facades\DB;
 use Auth;
@@ -89,6 +90,7 @@ public function store(Request $req)
     $client=new Client();
     DB::beginTransaction();
     try{
+        // dd("lkj");
         if($req->image!=null)
         {
         $image = time() . '-' . $req->nom . '.' . $req->image->extension();
@@ -115,9 +117,13 @@ public function store(Request $req)
         session()->flash('success','Client ajouté avec succés');	
         return redirect('clients');
     }
-        catch(QueryException $ex){
+        catch(\Illuminate\Database\QueryException $ex){
+            // dd($ex);
+            if($ex->getCode()==23000 || $ex->getCode()=='23000') 
+                  $req->session()->flash('warning', 'Ce client est déja existe');
+            else
+          $req->session()->flash('warning', 'erreur base donnée');
             DB::rollBack();
-        $req->session()->flash('warning', 'erreur base donnée');
             return redirect('clients');
         }  
 }
@@ -127,6 +133,18 @@ public function delete(Request $req)
 {
     DB::beginTransaction();
     $id= $req->client_id;
+
+    $count = DB::table('ventes')
+    ->where('ventes.client_id' ,$id)
+    ->whereNull('ventes.deleted_at')
+    ->count();
+    if(( $count )!=0){
+session()->flash('warning', 'Vous pouvez pas supprimer ce client, car il a déja des ventes');
+return redirect('clients');
+
+    }
+
+
     try{
     $client = Client::find($id);
     $client->delete();
@@ -134,7 +152,7 @@ public function delete(Request $req)
     session()->flash('success','Client supprimé avec succés');	
     return redirect('clients');
 }
-catch(QueryException $ex){
+catch(\Illuminate\Database\QueryException $ex){
     DB::rollBack();
 session()->flash('warning', 'erreur base donnée');
     return redirect('clients');
@@ -147,29 +165,38 @@ public function credit_client(Request $req)
 {
 
 
-    // dd($req->montantreg);
+    // dd($req->input());
     $id=$req->idclient;
     DB::beginTransaction();
     try{
-
-
-        
     $client = Client::find($id);
     $reg_solde = new Regularisationsolde();
     $reg_solde->clients_id=$id;
-    $reg_solde->montant_credit=$client->credit;
+    $reg_solde->mode_paiement=$req->mode_payment;
+    $reg_solde->commentaire=$req->commentaire;
+    $reg_solde->clients_id=$id;
+    $reg_solde->date_effectuer=$req->date_effectuer;
+
+    // dd($req->date_effectuer);
+    if($req->mode_payment!=1 && $req->mode_payment!="1"){
+    $reg_solde->montant_paye=$req->creditmontant;
+    $client->credit=$client->credit-$req->creditmontant;
+    }
+    else{
     $reg_solde->montant_paye=$req->montantreg;
     $client->credit=$client->credit-$req->montantreg;
+    }
+    $reg_solde->montant_credit=$client->credit;
     $client->update();
     $reg_solde->save();
     DB::commit();
     session()->flash('success','Regularisation de solde avec succés');	
     return redirect('showclient'.$id);}
-catch(QueryException $ex){
-    DB::rollBack();
-session()->flash('warning', 'erreur base donnée');
-return redirect('showclient'.$id);;
-}  
+    catch(\Illuminate\Database\QueryException $ex){
+        DB::rollBack();
+        session()->flash('warning', 'erreur base donnée');
+        return redirect('showclient'.$id);;
+    }  
 }
 
 public function update(Request $req,$id)
@@ -202,7 +229,7 @@ public function update(Request $req,$id)
     DB::commit();
     session()->flash('success','Client modifié avec succés');	
     return redirect('clients');}
-catch(QueryException $ex){
+catch(\Illuminate\Database\QueryException $ex){
     DB::rollBack();
 session()->flash('warning', 'erreur base donnée');
     return redirect('clients');
@@ -248,14 +275,23 @@ public function showclient($id)
     ->where('regularisationsoldes.clients_id',$id)
     ->whereNull('regularisationsoldes.deleted_at')
     ->get();
+    $type_payment = DB::table('typepayments')
+    ->select('typepayments.*')
+    ->get(); 
     // dd($reg_solde);
-
+    // $produit=$produits[0];
+    $creer_par=User::find( $clients->creer_par);
+// dd( $creer_par);
     return view('pages/client/informationclient',
     ['produits' => $produits,
     'clients' => $clients,
     'ventes' => $ventes,
     'credit' => $credit,
-    'reg_solde' => $reg_solde
+    'reg_solde' => $reg_solde,
+    'type_payment' => $type_payment,
+    'creer_par' => $creer_par
+
+
 
     
     ]
